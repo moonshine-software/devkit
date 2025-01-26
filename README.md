@@ -1,0 +1,9 @@
+- Make dir /moonshine
+- Cd moonshine
+- git clone git@github.com:{fork} .
+- composer install --dev
+- npm install
+- cd ..
+- composer up
+- php artisan migrate:fresh --seed
+- Lets go
