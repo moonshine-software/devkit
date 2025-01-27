@@ -33,6 +33,13 @@ class PostResource extends ModelResource
 
     protected string $column = 'name';
 
+    protected array $with = [
+        'user',
+        'categories',
+        'image',
+        'tags',
+    ];
+
     /**
      * @return list<FieldContract>
      */
@@ -43,13 +50,8 @@ class PostResource extends ModelResource
             Text::make('Name'),
             BelongsTo::make('User'),
             Textarea::make('Text'),
-            MorphOne::make('Image'),
             BelongsToMany::make('Categories'),
             MorphToMany::make('Tags'),
-            HasMany::make('Comments'),
-            HasOne::make('Comment'),
-            MorphMany::make('PolyComments'),
-            MorphOne::make('PolyComment'),
         ];
     }
 

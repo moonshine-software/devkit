@@ -1,9 +1,26 @@
-- Make dir /moonshine
-- Cd moonshine
-- git clone git@github.com:{fork} .
-- composer install --dev
-- npm install
-- cd ..
-- composer up
-- php artisan migrate:fresh --seed
-- Lets go
+## Installation
+
+1. Comment MoonShineServiceProvider in `bootstrap/providers.php`:
+
+```php
+return [
+    App\Providers\AppServiceProvider::class,
+    //App\Providers\MoonShineServiceProvider::class,
+];
+```
+
+2. Installation command
+
+```shell 
+make install
+```
+
+3. Uncomment MoonShineServiceProvider in `bootstrap/providers.php`
+
+```php
+return [
+    App\Providers\AppServiceProvider::class,
+    App\Providers\MoonShineServiceProvider::class,
+];
+```
+4. Make MoonShine Great Again

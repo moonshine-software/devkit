@@ -10,5 +10,4 @@ install:
 	cd .. &&  \
 	[ ! -f .env ] && cp .env.example .env && \
 	composer update && \
-	sed -i '' 's/\/\///g' bootstrap/providers.php && \
 	php artisan migrate:fresh --seed
