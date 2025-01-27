@@ -3,6 +3,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/vendor/moonshine
 /storage/*.key
 /storage/pail
 /moonshine
@@ -18,7 +19,8 @@ npm-debug.log
 yarn-error.log
 /auth.json
 /.fleet
-/.idea
+.idea/*
+!.idea/icon.svg
 /.nova
 /.vscode
 /.zed
