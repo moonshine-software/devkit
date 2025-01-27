@@ -7,6 +7,7 @@ install:
 	cd ./moonshine && \
 	composer install --dev && \
 	npm install && \
+	[ ! -f phpunit.xml.dist ] && cp phpunit-example.xml.dist phpunit.xml.dist && \
 	cd .. &&  \
 	[ ! -f .env ] && cp .env.example .env && \
 	composer update && \
