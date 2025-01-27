@@ -2213,7 +2213,7 @@
             "dist": {
                 "type": "path",
                 "url": "moonshine",
-                "reference": "db1955538a5dcec78d8130808976d627b71af7da"
+                "reference": "03f433c8ca2ea957bb721fb924ee83f0800602fc"
             },
             "require": {
                 "ext-curl": "*",
