@@ -6,7 +6,7 @@ app := $(COMPOSE_PROJECT_NAME)-php
 app-npm := npm
 path := $(APP_PATH)
 
-.PHONY: install-local install-docker fork build up stop it it-app it-nginx npm-install npm-update npm-build npm-host
+.PHONY: install-local install-docker fork build up docker-up info stop it it-app it-nginx npm-install npm-update npm-build npm-host
 
 install-local: fork
 	cd ./moonshine && \
@@ -18,20 +18,20 @@ install-local: fork
 	composer update && \
 	php artisan migrate:fresh --seed
 
-install-docker: fork build
+install-docker: fork build info
+
+up: docker-up info
 
 fork:
 	@read -p "Fork (git@github.com:moonshine-software/moonshine.git): " ARG; \
 	mkdir -p ./moonshine; \
 	git clone $$ARG ./moonshine;
-
 #docker
 build:
 	docker-compose -f docker-compose.yml up --build -d $(c)
-	@echo "$(APP_URL)"
-up:
+	@echo "See installation logs: docker logs -f $(app)"
+docker-up:
 	docker-compose -f docker-compose.yml up -d $(c)
-	@echo "$(APP_URL)"
 stop:
 	docker-compose -f docker-compose.yml stop $(c)
 it:
@@ -40,6 +40,11 @@ it-app:
 	docker exec -it $(app) /bin/bash
 it-nginx:
 	docker exec -it $(nginx) /bin/bash
+
+info:
+	@echo "$(APP_URL)/admin"
+	@echo "User: dev@getmoonshine.app"
+	@echo "Pass: 12345"
 
 #npm
 npm-install:

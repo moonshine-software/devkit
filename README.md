@@ -11,8 +11,13 @@ return [
 
 2. Installation command
 
+Without docker:
 ```shell 
-make install
+make install-local
+```
+With docker:
+```shell 
+make install-docker
 ```
 
 3. Uncomment MoonShineServiceProvider in `bootstrap/providers.php`
