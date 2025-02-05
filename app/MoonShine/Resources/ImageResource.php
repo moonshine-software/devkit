@@ -16,6 +16,7 @@ use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\UI\Fields\Range;
 use MoonShine\UI\Fields\Url;
 
 /**
@@ -28,6 +29,8 @@ class ImageResource extends ModelResource
     protected string $title = 'Images';
 
     protected string $column = 'url';
+
+    protected bool $isAsync = false;
 
     /**
      * @return list<FieldContract>
@@ -71,6 +74,8 @@ class ImageResource extends ModelResource
      */
     protected function rules(mixed $item): array
     {
-        return [];
+        return [
+            'url' => 'required'
+        ];
     }
 }

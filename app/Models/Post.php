@@ -20,8 +20,16 @@ class Post extends Model
     protected $fillable = [
         'name',
         'text',
-        'user_id'
+        'data',
+        'user_id',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'data' => 'collection',
+        ];
+    }
 
     public function user(): BelongsTo
     {

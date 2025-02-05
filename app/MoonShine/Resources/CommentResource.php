@@ -13,6 +13,8 @@ use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\UI\Fields\Json;
+use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 
 /**
@@ -34,6 +36,10 @@ class CommentResource extends ModelResource
             BelongsTo::make('Post'),
             BelongsTo::make('User'),
             Textarea::make('Text'),
+            Json::make('Data')->fields([
+                Text::make('Title'),
+                Json::make('KV')->keyValue(),
+            ]),
         ];
     }
 

@@ -27,6 +27,7 @@ return new class extends Migration
                 ->cascadeOnUpdate();
 
             $table->text('text');
+            $table->json('data')->nullable();
 
             $table->timestamps();
         });

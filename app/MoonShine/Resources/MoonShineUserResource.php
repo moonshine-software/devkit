@@ -43,6 +43,8 @@ class MoonShineUserResource extends ModelResource
 
     protected bool $columnSelection = true;
 
+    protected bool $isAsync = false;
+
     public function getTitle(): string
     {
         return __('moonshine::ui.resource.admins_title');
@@ -104,8 +106,7 @@ class MoonShineUserResource extends ModelResource
                             ->valuesQuery(static fn (Builder $q) => $q->select(['id', 'name'])),
 
                         Flex::make([
-                            Text::make(__('moonshine::ui.resource.name'), 'name')
-                                ->required(),
+                            Text::make(__('moonshine::ui.resource.name'), 'name'),
 
                             Email::make(__('moonshine::ui.resource.email'), 'email')
                                 ->required(),

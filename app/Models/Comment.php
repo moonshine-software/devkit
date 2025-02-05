@@ -15,7 +15,15 @@ class Comment extends Model
         'text',
         'post_id',
         'user_id',
+        'data',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'data' => 'collection',
+        ];
+    }
 
     public function user(): BelongsTo
     {

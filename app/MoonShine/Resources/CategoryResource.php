@@ -7,6 +7,7 @@ namespace App\MoonShine\Resources;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Fields\Relationships\MorphOne;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
@@ -33,6 +34,7 @@ class CategoryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
+            BelongsTo::make('Category')->nullable(),
             Text::make('Name'),
             MorphOne::make('Image'),
         ];

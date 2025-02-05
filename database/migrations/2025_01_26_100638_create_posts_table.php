@@ -25,6 +25,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->text('text');
+            $table->json('data')->nullable();
 
             $table->timestamps();
         });
