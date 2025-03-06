@@ -1,0 +1,40 @@
+services:
+  nginx:
+    build:
+      args:
+        project_dir: ${APP_PATH}
+      context: .
+      dockerfile: ./docker/dockerfiles/nginx/Dockerfile
+      target: dev
+    container_name: ${COMPOSE_PROJECT_NAME}-nginx
+    ports:
+      - "${APP_WEB_PORT}:80"
+    volumes:
+      - ./:${APP_PATH}
+    depends_on:
+      - php
+
+  php:
+    build:
+      args:
+        user: ${DOCKER_USER}
+        uid: 1000
+        target: dev
+      context: .
+      dockerfile: ./docker/dockerfiles/php/Dockerfile
+      target: dev
+    container_name: ${COMPOSE_PROJECT_NAME}-php
+    volumes:
+      - ./:/var/www/app
+
+  npm:
+    image: node:23.6.1-alpine3.20
+    container_name: ${COMPOSE_PROJECT_NAME}-npm
+    volumes:
+      - ./:${APP_PATH}:cached
+      - ./.env:${APP_PATH}/.env
+    working_dir: ${APP_PATH}
+    profiles: ["npm"]
+    entrypoint: ['npm']
+    ports:
+      - "${APP_VITE_PORT}:5173"
