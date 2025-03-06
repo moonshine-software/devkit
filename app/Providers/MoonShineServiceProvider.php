@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\MoonShine\Pages\UI\Selects;
+use App\MoonShine\Resources\ShopResource;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\Contracts\Core\DependencyInjection\ConfiguratorContract;
 use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
@@ -55,11 +57,13 @@ class MoonShineServiceProvider extends ServiceProvider
                 ProjectResource::class,
                 TagResource::class,
                 UserResource::class,
+                ShopResource::class,
             ])
             ->pages([
                 ...$config->getPages(),
                 Fields::class,
                 Components::class,
+                Selects::class,
             ])
         ;
     }

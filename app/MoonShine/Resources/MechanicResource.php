@@ -7,6 +7,7 @@ namespace App\MoonShine\Resources;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Mechanic;
 
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Fields\Relationships\HasOneThrough;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
@@ -34,6 +35,7 @@ class MechanicResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Name'),
+            BelongsTo::make('Shop'),
             HasOneThrough::make('CarOwner', resource: OwnerResource::class),
         ];
     }

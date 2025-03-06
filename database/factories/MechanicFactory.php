@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Shop;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class MechanicFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'shop_id' => Shop::query()->inRandomOrder()->value('id'),
         ];
     }
 }

@@ -2,14 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Mechanic;
-use App\Models\Shop;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Car>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Shop>
  */
-class CarFactory extends Factory
+class ShopFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,7 +18,6 @@ class CarFactory extends Factory
     {
         return [
             'name' => ucfirst(fake()->words(2, true)),
-            'mechanic_id' => Mechanic::query()->inRandomOrder()->value('id'),
         ];
     }
 }

@@ -4,25 +4,21 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Models\Car;
-
-use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use App\Models\Shop;
+use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
-use MoonShine\Contracts\UI\FieldContract;
-use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Fields\Text;
 
 /**
- * @extends ModelResource<Car>
+ * @extends ModelResource<Shop>
  */
-class CarResource extends ModelResource
+class ShopResource extends ModelResource
 {
-    protected string $model = Car::class;
+    protected string $model = Shop::class;
 
-    protected string $title = 'Cars';
+    protected string $title = 'Shops';
 
     protected string $column = 'name';
 
@@ -34,13 +30,11 @@ class CarResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Name'),
-            BelongsTo::make('Shop')->asyncSearch(),
-            BelongsTo::make('Mechanic')->associatedWith('shop_id'),
         ];
     }
 
     /**
-     * @return list<ComponentContract|FieldContract>
+     * @return FieldContract
      */
     protected function formFields(): iterable
     {
@@ -58,7 +52,7 @@ class CarResource extends ModelResource
     }
 
     /**
-     * @param Car $item
+     * @param Shop $item
      *
      * @return array<string, string[]|string>
      * @see https://laravel.com/docs/validation#available-validation-rules

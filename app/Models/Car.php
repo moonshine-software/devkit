@@ -14,10 +14,16 @@ class Car extends Model
     protected $fillable = [
         'name',
         'mechanic_id',
+        'shop_id',
     ];
 
     public function mechanic(): BelongsTo
     {
         return $this->belongsTo(Mechanic::class);
+    }
+
+    public function shop(): BelongsTo
+    {
+        return $this->belongsTo(Shop::class);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Mechanic;
+use App\Models\Shop;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,13 @@ return new class extends Migration
             $table->string('name');
             $table
                 ->foreignIdFor(Mechanic::class)
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
+            $table
+                ->foreignIdFor(Shop::class)
+                ->nullable()
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();

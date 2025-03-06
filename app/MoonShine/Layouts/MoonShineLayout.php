@@ -6,6 +6,7 @@ namespace App\MoonShine\Layouts;
 
 use App\MoonShine\Pages\UI\Components;
 use App\MoonShine\Pages\UI\Fields;
+use App\MoonShine\Pages\UI\Selects;
 use App\MoonShine\Resources\CarResource;
 use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\CommentResource;
@@ -32,6 +33,7 @@ final class MoonShineLayout extends AppLayout
             MenuGroup::make('UI', [
                 MenuItem::make('Fields', Fields::class),
                 MenuItem::make('Components', Components::class),
+                MenuItem::make('Selects', Selects::class),
             ]),
             MenuItem::make('Users', UserResource::class),
             MenuItem::make('Tags', TagResource::class),

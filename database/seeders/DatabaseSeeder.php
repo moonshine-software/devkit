@@ -10,6 +10,7 @@ use App\Models\Mechanic;
 use App\Models\Owner;
 use App\Models\Post;
 use App\Models\Project;
+use App\Models\Shop;
 use App\Models\Tag;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -34,6 +35,7 @@ class DatabaseSeeder extends Seeder
         Category::factory(20)->create();
         Tag::factory(20)->create();
 
+        Shop::factory(20)->create();
         Mechanic::factory(20)->create();
         Car::factory(20)->create();
         Owner::factory(20)->create();
