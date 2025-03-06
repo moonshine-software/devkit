@@ -39,8 +39,8 @@ class ProjectResource extends ModelResource
             Text::make('Name'),
             HasManyThrough::make('Deployments'),
             MorphOne::make('Image'),
-            MorphToMany::make('Tags'),
-            MorphMany::make('PolyComments'),
+            MorphToMany::make('Tags')->creatable(),
+            MorphMany::make('PolyComments')->creatable(),
             MorphOne::make('PolyComment'),
         ];
     }
