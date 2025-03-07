@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\MoonShine\Pages\UI\Forms;
 use App\MoonShine\Pages\UI\Selects;
 use App\MoonShine\Resources\ShopResource;
 use Illuminate\Support\ServiceProvider;
@@ -64,6 +65,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 Fields::class,
                 Components::class,
                 Selects::class,
+                Forms::class,
             ])
         ;
     }

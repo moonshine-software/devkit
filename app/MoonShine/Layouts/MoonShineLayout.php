@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
+use App\MoonShine\Pages\UI\Forms;
 use App\MoonShine\Pages\UI\Components;
 use App\MoonShine\Pages\UI\Fields;
 use App\MoonShine\Pages\UI\Selects;
@@ -21,6 +22,7 @@ use App\MoonShine\Resources\ProjectResource;
 use App\MoonShine\Resources\TagResource;
 use App\MoonShine\Resources\UserResource;
 use MoonShine\Laravel\Layouts\AppLayout;
+use MoonShine\Laravel\Layouts\CompactLayout;
 use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
 
@@ -34,6 +36,7 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make('Fields', Fields::class),
                 MenuItem::make('Components', Components::class),
                 MenuItem::make('Selects', Selects::class),
+                MenuItem::make('Forms', Forms::class),
             ]),
             MenuItem::make('Users', UserResource::class),
             MenuItem::make('Tags', TagResource::class),
