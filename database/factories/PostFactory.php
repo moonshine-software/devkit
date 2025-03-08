@@ -20,6 +20,7 @@ class PostFactory extends Factory
         return [
             'user_id' => User::query()->inRandomOrder()->value('id'),
             'name' => ucfirst(fake()->words(2, true)),
+            'slug' => fake()->slug(),
             'text' => fake()->text(),
         ];
     }

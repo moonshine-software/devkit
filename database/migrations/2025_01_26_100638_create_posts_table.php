@@ -24,6 +24,7 @@ return new class extends Migration
                 ->cascadeOnUpdate();
 
             $table->string('name');
+            $table->string('slug');
             $table->text('text');
             $table->json('data')->nullable();
 

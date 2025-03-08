@@ -9,6 +9,7 @@ use App\Models\Post;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
 use MoonShine\Laravel\Fields\Relationships\MorphToMany;
+use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
@@ -43,7 +44,8 @@ class PostResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name'),
+            Text::make('Name')->reactive(),
+            Slug::make('Slug')->from('name')->live(),
             BelongsTo::make('User'),
             Textarea::make('Text'),
             BelongsToMany::make('Categories'),
@@ -58,7 +60,7 @@ class PostResource extends ModelResource
     {
         return [
             Box::make($this->indexFields()),
-            //...$this->reactiveSelects(),
+            ...$this->reactiveSelects(),
         ];
     }
 
