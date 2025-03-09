@@ -2008,25 +2008,25 @@
         },
         {
             "name": "lee-to/fast-attributes",
-            "version": "0.2.0",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lee-to/fast-attributes.git",
-                "reference": "54bd81eda105de7cd326f8ea87f43f947ce04f0c"
+                "reference": "fb0514bc370b84e3d13bc8339d96439216b15e56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lee-to/fast-attributes/zipball/54bd81eda105de7cd326f8ea87f43f947ce04f0c",
-                "reference": "54bd81eda105de7cd326f8ea87f43f947ce04f0c",
+                "url": "https://api.github.com/repos/lee-to/fast-attributes/zipball/fb0514bc370b84e3d13bc8339d96439216b15e56",
+                "reference": "fb0514bc370b84e3d13bc8339d96439216b15e56",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.0|^8.1|^8.2"
+                "php": "^8.0|^8.1|^8.2|^8.3|^8.4"
             },
             "require-dev": {
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^10.0",
-                "rector/rector": "^1.0"
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^12.0",
+                "rector/rector": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -2055,7 +2055,7 @@
                 "issues": "https://github.com/lee-to/fast-attributes/issues",
                 "source": "https://github.com/lee-to/fast-attributes"
             },
-            "time": "2024-11-27T08:09:54+00:00"
+            "time": "2025-02-28T15:13:13+00:00"
         },
         {
             "name": "lee-to/laravel-package-command",
@@ -2275,7 +2275,7 @@
             "dist": {
                 "type": "path",
                 "url": "moonshine",
-                "reference": "c0988d4665ae57243c326ecdbfc9cc53d1b6acb6"
+                "reference": "f155ba6e12232a72c638af6df0be2987e4279610"
             },
             "require": {
                 "ext-curl": "*",
@@ -2283,7 +2283,7 @@
                 "illuminate/contracts": "^10|^11|^12",
                 "illuminate/support": "^10|^11|^12",
                 "illuminate/view": "^10|^11|^12",
-                "lee-to/fast-attributes": "^0.2",
+                "lee-to/fast-attributes": "^0.3.0",
                 "lee-to/laravel-package-command": "^0.9",
                 "nyholm/psr7": "^1.8",
                 "php": "^8.2",
