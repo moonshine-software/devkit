@@ -29,6 +29,7 @@ use App\MoonShine\Resources\PolyCommentResource;
 use App\MoonShine\Resources\ProjectResource;
 use App\MoonShine\Resources\TagResource;
 use App\MoonShine\Resources\UserResource;
+use App\MoonShine\Pages\ThemeGeneratorPage;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -66,6 +67,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 Components::class,
                 Selects::class,
                 Forms::class,
+                ThemeGeneratorPage::class,
             ])
         ;
     }

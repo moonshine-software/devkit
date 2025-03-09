@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
+use App\MoonShine\Pages\ThemeGeneratorPage;
 use App\MoonShine\Pages\UI\Forms;
 use App\MoonShine\Pages\UI\Components;
 use App\MoonShine\Pages\UI\Fields;
@@ -37,6 +38,7 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make('Components', Components::class),
                 MenuItem::make('Selects', Selects::class),
                 MenuItem::make('Forms', Forms::class),
+                MenuItem::make('Themes', ThemeGeneratorPage::class),
             ]),
             MenuItem::make('Users', UserResource::class),
             MenuItem::make('Tags', TagResource::class),
