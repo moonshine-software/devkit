@@ -4,32 +4,32 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\MoonShine\Pages\UI\Components;
+use App\MoonShine\Pages\UI\Fields;
 use App\MoonShine\Pages\UI\Forms;
 use App\MoonShine\Pages\UI\Selects;
-use App\MoonShine\Resources\ShopResource;
-use Illuminate\Support\ServiceProvider;
-use MoonShine\Contracts\Core\DependencyInjection\ConfiguratorContract;
-use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
-use MoonShine\Laravel\DependencyInjection\MoonShine;
-use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
-use App\MoonShine\Resources\MoonShineUserResource;
-use App\MoonShine\Resources\MoonShineUserRoleResource;
-use App\MoonShine\Pages\UI\Fields;
-use App\MoonShine\Pages\UI\Components;
-use App\MoonShine\Resources\CategoryResource;
-use App\MoonShine\Resources\PostResource;
+use App\MoonShine\Pages\UI\ThemeGeneratorPage;
 use App\MoonShine\Resources\CarResource;
+use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\CommentResource;
 use App\MoonShine\Resources\DeploymentResource;
 use App\MoonShine\Resources\EnvironmentResource;
 use App\MoonShine\Resources\ImageResource;
 use App\MoonShine\Resources\MechanicResource;
+use App\MoonShine\Resources\MoonShineUserResource;
+use App\MoonShine\Resources\MoonShineUserRoleResource;
 use App\MoonShine\Resources\OwnerResource;
 use App\MoonShine\Resources\PolyCommentResource;
+use App\MoonShine\Resources\PostResource;
 use App\MoonShine\Resources\ProjectResource;
+use App\MoonShine\Resources\ShopResource;
 use App\MoonShine\Resources\TagResource;
 use App\MoonShine\Resources\UserResource;
-use App\MoonShine\Pages\ThemeGeneratorPage;
+use Illuminate\Support\ServiceProvider;
+use MoonShine\Contracts\Core\DependencyInjection\ConfiguratorContract;
+use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
+use MoonShine\Laravel\DependencyInjection\MoonShine;
+use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
