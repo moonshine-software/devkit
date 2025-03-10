@@ -129,6 +129,7 @@ class ThemeGeneratorPage extends Page
                             ActionButton::make('Success')->success(),
                             ActionButton::make('Warning')->warning(),
                             ActionButton::make('Error')->error(),
+                            ActionButton::make('Async', '/')->primary()->async(),
                         ], justifyAlign: 'start')->wrap(),
                     ]),
 
