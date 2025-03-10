@@ -7,6 +7,7 @@ namespace App\Providers;
 use App\MoonShine\Pages\UI\Components;
 use App\MoonShine\Pages\UI\Fields;
 use App\MoonShine\Pages\UI\Forms;
+use App\MoonShine\Pages\UI\JsonPage;
 use App\MoonShine\Pages\UI\Selects;
 use App\MoonShine\Pages\UI\ThemeGeneratorPage;
 use App\MoonShine\Resources\CarResource;
@@ -68,6 +69,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 Selects::class,
                 Forms::class,
                 ThemeGeneratorPage::class,
+                JsonPage::class,
             ])
         ;
     }

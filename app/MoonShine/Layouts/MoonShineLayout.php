@@ -7,6 +7,7 @@ namespace App\MoonShine\Layouts;
 use App\MoonShine\Pages\UI\Components;
 use App\MoonShine\Pages\UI\Fields;
 use App\MoonShine\Pages\UI\Forms;
+use App\MoonShine\Pages\UI\JsonPage;
 use App\MoonShine\Pages\UI\Selects;
 use App\MoonShine\Pages\UI\ThemeGeneratorPage;
 use App\MoonShine\Resources\CarResource;
@@ -38,6 +39,7 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make('Components', Components::class),
                 MenuItem::make('Selects', Selects::class),
                 MenuItem::make('Forms', Forms::class),
+                MenuItem::make('Json', JsonPage::class),
                 MenuItem::make('Themes', ThemeGeneratorPage::class),
             ]),
             MenuItem::make('Users', UserResource::class),
