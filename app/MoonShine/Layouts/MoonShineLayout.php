@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
-use App\MoonShine\Pages\ThemeGeneratorPage;
-use App\MoonShine\Pages\UI\Forms;
 use App\MoonShine\Pages\UI\Components;
 use App\MoonShine\Pages\UI\Fields;
+use App\MoonShine\Pages\UI\Forms;
 use App\MoonShine\Pages\UI\Selects;
+use App\MoonShine\Pages\UI\ThemeGeneratorPage;
 use App\MoonShine\Resources\CarResource;
 use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\CommentResource;
@@ -22,8 +22,8 @@ use App\MoonShine\Resources\PostResource;
 use App\MoonShine\Resources\ProjectResource;
 use App\MoonShine\Resources\TagResource;
 use App\MoonShine\Resources\UserResource;
+use MoonShine\Laravel\Components\Layout\Search;
 use MoonShine\Laravel\Layouts\AppLayout;
-use MoonShine\Laravel\Layouts\CompactLayout;
 use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
 

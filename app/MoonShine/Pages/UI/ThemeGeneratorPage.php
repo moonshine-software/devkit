@@ -2,12 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Pages;
+namespace App\MoonShine\Pages\UI;
 
 use App\MoonShine\Layouts\ThemeGeneratorLayout;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Core\Attributes\Layout;
+use MoonShine\Laravel\Components\Layout\Notifications;
 use MoonShine\Laravel\Components\Layout\Profile;
+use MoonShine\Laravel\Components\Layout\Search;
+use MoonShine\Laravel\Contracts\Notifications\MoonShineNotificationContract;
+use MoonShine\Laravel\Notifications\MoonShineNotification;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
@@ -47,8 +51,8 @@ use MoonShine\UI\Components\Tabs;
 use MoonShine\UI\Components\Thumbnails;
 use MoonShine\UI\Components\Title;
 use MoonShine\UI\Fields\Checkbox;
-use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\Color as ColorField;
+use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\DateRange;
 use MoonShine\UI\Fields\Email;
 use MoonShine\UI\Fields\File;
@@ -84,6 +88,12 @@ class ThemeGeneratorPage extends Page
      */
     protected function components(): iterable
     {
+        $notifications = $this->getCore()->getContainer(MoonShineNotificationContract::class);
+
+        if($notifications->getAll()->isEmpty()) {
+            MoonShineNotification::send('Hello world');
+        }
+
         return [
             Div::make([
                 Title::make('Make it your own.'),
@@ -103,7 +113,15 @@ class ThemeGeneratorPage extends Page
                             ActionButton::make('Success')->success(),
                             ActionButton::make('Warning')->warning(),
                             ActionButton::make('Error')->error(),
-                        ]),
+                        ])->wrap(),
+                    ]),
+
+                    Box::make('Search', [
+                        Search::make()->enabled(),
+                    ]),
+
+                    Box::make('Notifications', [
+                        Notifications::make(),
                     ]),
 
                     Box::make('Range', [
