@@ -103,7 +103,8 @@ class ThemeGeneratorPage extends Page
                             ActionButton::make('Success')->success(),
                             ActionButton::make('Warning')->warning(),
                             ActionButton::make('Error')->error(),
-                        ]),
+                        ], justifyAlign: 'start')
+                            ->class('flex-wrap'),
                     ]),
 
                     Box::make('Range', [
@@ -116,28 +117,22 @@ class ThemeGeneratorPage extends Page
                     ]),
 
                     Box::make('Alert', [
-                        Alert::make(type: ColorEnum::PRIMARY)->content('Alert'),
-                        Alert::make(type: ColorEnum::PURPLE)->content('Alert'),
-                        Alert::make(type: ColorEnum::SECONDARY)->content('Alert'),
-                        Alert::make(type: ColorEnum::SUCCESS)->content('Alert'),
-                        Alert::make(type: ColorEnum::INFO)->content('Alert'),
-                        Alert::make(type: ColorEnum::WARNING)->content('Alert'),
-                        Alert::make(type: ColorEnum::ERROR)->content('Alert'),
-                        Alert::make(type: ColorEnum::GREEN)->content('Alert'),
-                        Alert::make(type: ColorEnum::YELLOW)->content('Alert'),
-                        Alert::make(type: ColorEnum::PINK)->content('Alert'),
-                        Alert::make(type: ColorEnum::BLUE)->content('Alert'),
-                        Alert::make(type: ColorEnum::RED)->content('Alert'),
-                        Alert::make(type: ColorEnum::GRAY)->content('Alert'),
+                        Alert::make()->content('DEFAULT'),
+                        ...array_map(
+                            fn(ColorEnum $color) => Alert::make(type: $color)->content($color->name),
+                            ColorEnum::cases()
+                        ),
                     ]),
 
                     Box::make('Badge', [
-                        Badge::make('Primary', ColorEnum::PRIMARY),
-                        Badge::make('Secondary', ColorEnum::SECONDARY),
-                        Badge::make('Success', ColorEnum::SUCCESS),
-                        Badge::make('Info', ColorEnum::INFO),
-                        Badge::make('Warning', ColorEnum::WARNING),
-                        Badge::make('Error', ColorEnum::ERROR),
+                        Flex::make([
+                            Badge::make('default'),
+                            ...array_map(
+                                fn(ColorEnum $color) => Badge::make($color->value, color: $color),
+                                ColorEnum::cases()
+                            ),
+                        ], justifyAlign: 'start')
+                            ->class('flex-wrap'),
                     ]),
 
                     Box::make('Boolean', [
@@ -270,10 +265,38 @@ class ThemeGeneratorPage extends Page
                                 Icon::make('radio', color: ColorEnum::YELLOW),
                                 Link::make('/', 'Im link')->tooltip('Tooltip')->filled()->icon('home'),
                                 Loader::make(),
+
                                 ProgressBar::make(10),
-                                ProgressBar::make(10, color: ColorEnum::RED)->radial(),
+                                ...array_map(
+                                    fn(ColorEnum $color) => ProgressBar::make(10, color: $color),
+                                    ColorEnum::cases()
+                                ),
+
+                                Flex::make([
+                                    ProgressBar::make(10)->radial(),
+                                    ...array_map(
+                                        fn(ColorEnum $color) => ProgressBar::make(10, color: $color)->radial(),
+                                        ColorEnum::cases()
+                                    ),
+                                ], justifyAlign: 'start')
+                                    ->class('flex-wrap'),
                                 Rating::make(3, 1, 10),
-                                Spinner::make('xl', ColorEnum::BLUE)
+
+                                Flex::make([
+                                    Spinner::make(),
+                                    Spinner::make('md'),
+                                    Spinner::make('lg'),
+                                    Spinner::make('xl'),
+                                ], justifyAlign: 'start')
+                                    ->class('flex-wrap'),
+
+                                Flex::make([
+                                    ...array_map(
+                                        fn(ColorEnum $color) => Spinner::make( color: $color),
+                                        ColorEnum::cases()
+                                    ),
+                                ], justifyAlign: 'start')
+                                    ->class('flex-wrap'),
                             ]),
                         ])->columnSpan(6),
 
