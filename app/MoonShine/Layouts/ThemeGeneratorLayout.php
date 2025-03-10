@@ -223,7 +223,7 @@ final class ThemeGeneratorLayout extends AppLayout
                 $this->getHeadComponent(),
                 Body::make([
                     Wrapper::make([
-                        $this->getSidebarComponent(),
+                        $this->getSidebarComponent()->class($this->isCompact() ? '' : 'dark'),
 
                         Div::make([
                             Div::make([
