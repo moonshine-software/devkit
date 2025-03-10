@@ -11,6 +11,8 @@ use MoonShine\Laravel\Components\Layout\Notifications;
 use MoonShine\Laravel\Components\Layout\Profile;
 use MoonShine\Laravel\Components\Layout\Search;
 use MoonShine\Laravel\Contracts\Notifications\MoonShineNotificationContract;
+use MoonShine\Laravel\Http\Responses\MoonShineJsonResponse;
+use MoonShine\Laravel\MoonShineRequest;
 use MoonShine\Laravel\Notifications\MoonShineNotification;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\MenuManager\MenuGroup;
@@ -64,6 +66,7 @@ use MoonShine\UI\Fields\RangeSlider;
 use MoonShine\UI\Fields\Switcher;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 #[Layout(ThemeGeneratorLayout::class)]
 class ThemeGeneratorPage extends Page
@@ -81,6 +84,19 @@ class ThemeGeneratorPage extends Page
     public function getTitle(): string
     {
         return $this->title ?: 'ThemeGeneratorPage';
+    }
+
+    public function generateTheme(MoonShineRequest $request): RedirectResponse
+    {
+        foreach ($request->input('colors') as $name => $value) {
+            session()->put("colors.$name", $value);
+        }
+
+        foreach ($request->input('radius') as $name => $value) {
+            session()->put("radius.$name", $value);
+        }
+
+        return back();
     }
 
     /**
@@ -166,14 +182,6 @@ class ThemeGeneratorPage extends Page
                         Breadcrumbs::make([
                             '/articles' => 'Articles',
                         ])->prepend('/', '', 'home'),
-                    ]),
-
-                    Box::make('Menu', [
-                        Menu::make([
-                            MenuGroup::make('Menu group', [
-                                MenuItem::make('Menu item', '/')->icon('home'),
-                            ]),
-                        ]),
                     ]),
 
                     Box::make('Profile', [
