@@ -30,6 +30,7 @@ fork:
 build:
 	docker-compose -f docker-compose.yml up --build -d $(c)
 	@echo "See installation logs: docker logs -f $(app)"
+	@echo "Fill the database: make seed"
 docker-up:
 	docker-compose -f docker-compose.yml up -d $(c)
 stop:
@@ -40,6 +41,8 @@ it-app:
 	docker exec -it $(app) /bin/bash
 it-nginx:
 	docker exec -it $(nginx) /bin/bash
+seed:
+	docker exec -it $(app) php artisan db:seed
 
 info:
 	@echo "$(APP_URL)/admin"
