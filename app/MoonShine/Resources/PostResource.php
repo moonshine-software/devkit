@@ -8,6 +8,8 @@ use App\Models\Post;
 
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
+use MoonShine\Laravel\Fields\Relationships\HasMany;
+use MoonShine\Laravel\Fields\Relationships\HasOne;
 use MoonShine\Laravel\Fields\Relationships\MorphToMany;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Resources\ModelResource;
@@ -46,10 +48,22 @@ class PostResource extends ModelResource
             ID::make()->sortable(),
             Text::make('Name')->reactive(),
             Slug::make('Slug')->from('name')->live(),
-            BelongsTo::make('User'),
+            BelongsTo::make('User')->nullable(),
             Textarea::make('Text'),
             BelongsToMany::make('Categories'),
             MorphToMany::make('Tags'),
+
+
+            HasMany::make('Comments', 'comments', resource: CommentResource::class)
+                //->disableOutside()
+                //->modalMode()
+                ->tabMode()
+                ->creatable(),
+            HasOne::make('Comment')
+                //->disableOutside()
+                //->modalMode()
+                ->tabMode()
+            ,
         ];
     }
 
@@ -60,7 +74,7 @@ class PostResource extends ModelResource
     {
         return [
             Box::make($this->indexFields()),
-            ...$this->reactiveSelects(),
+            //...$this->reactiveSelects(),
         ];
     }
 

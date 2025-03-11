@@ -19,6 +19,7 @@ use MoonShine\UI\Components\Layout\Grid;
 use MoonShine\UI\Components\Layout\LineBreak;
 use MoonShine\UI\Fields\Hidden;
 use MoonShine\UI\Fields\Json;
+use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\Laravel\Collections\Fields;
 
@@ -320,6 +321,7 @@ class JsonPage extends Page
                     Json::make('Inner')->fields([
                         Text::make('One'),
                         Text::make('Two'),
+                        Select::make('Multiple')->options([1 => 1, 2 => 2, 3 => 3])->multiple(),
 
                         Json::make('KV')->keyValue(),
                     ])->object(),
