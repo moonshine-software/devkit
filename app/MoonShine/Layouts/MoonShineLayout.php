@@ -9,6 +9,7 @@ use App\MoonShine\Pages\UI\Fields;
 use App\MoonShine\Pages\UI\Forms;
 use App\MoonShine\Pages\UI\JsonPage;
 use App\MoonShine\Pages\UI\Selects;
+use App\MoonShine\Pages\UI\ShowWhen;
 use App\MoonShine\Pages\UI\ThemeGeneratorPage;
 use App\MoonShine\Resources\CarResource;
 use App\MoonShine\Resources\CategoryResource;
@@ -40,6 +41,7 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make('Selects', Selects::class),
                 MenuItem::make('Forms', Forms::class),
                 MenuItem::make('Json', JsonPage::class),
+                MenuItem::make('ShowWhen', ShowWhen::class),
                 MenuItem::make('Themes', ThemeGeneratorPage::class),
             ]),
             MenuItem::make('Users', UserResource::class),

@@ -9,6 +9,7 @@ use App\MoonShine\Pages\UI\Fields;
 use App\MoonShine\Pages\UI\Forms;
 use App\MoonShine\Pages\UI\JsonPage;
 use App\MoonShine\Pages\UI\Selects;
+use App\MoonShine\Pages\UI\ShowWhen;
 use App\MoonShine\Pages\UI\ThemeGeneratorPage;
 use App\MoonShine\Resources\CarResource;
 use App\MoonShine\Resources\CategoryResource;
@@ -70,6 +71,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 Forms::class,
                 ThemeGeneratorPage::class,
                 JsonPage::class,
+                ShowWhen::class,
             ])
         ;
     }
