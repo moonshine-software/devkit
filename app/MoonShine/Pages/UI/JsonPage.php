@@ -161,6 +161,16 @@ class JsonPage extends Page
                 ])->columnSpan(6),
 
                 Column::make([
+                    Box::make('Mixed Object (Preview)', [
+
+                        $this->mixedObjectFields()
+                            ->findByColumn('data')
+                            ?->previewMode()
+                            ?->fillData($this->mixedObjectFill())
+                    ]),
+                ])->columnSpan(12),
+
+                Column::make([
                     Box::make('Mixed Default', [
                         $this->form(
                             $this->mixedDefaultFields(),
@@ -170,6 +180,16 @@ class JsonPage extends Page
                             $this->mixedDefaultFields(),
                             $this->mixedDefaultFill(),
                         ),
+                    ]),
+                ])->columnSpan(12),
+
+                Column::make([
+                    Box::make('Mixed Default (Preview)', [
+
+                        $this->mixedDefaultFields()
+                            ->findByColumn('data')
+                            ?->previewMode()
+                            ?->fillData($this->mixedDefaultFill())
                     ]),
                 ])->columnSpan(12),
             ]),
@@ -253,7 +273,7 @@ class JsonPage extends Page
                     Text::make('Two'),
                     Number::make('Number')->step(0.1)->nullable(),
                     Switcher::make('Active')
-                ])->object()->stopFilterEmpty(),
+                ])->object(),
             ])->object(),
         ]);
     }
@@ -350,6 +370,22 @@ class JsonPage extends Page
                                 'key 1' => 'value 1',
                                 'key 2' => 'value 2',
                                 'key 3' => 'value 3',
+                            ]
+                        ]
+                    ]
+                ],
+                [
+                    'title' => 'Title 2',
+                    'object' => [
+                        'title' => 'Title 2',
+                        'value' => 'Value 2',
+                        'inner' => [
+                            'one' => 'One 2',
+                            'two' => 'Two 2',
+                            'kv' => [
+                                'key 1 2' => 'value 1 2',
+                                'key 2 2' => 'value 2 2',
+                                'key 3 2' => 'value 3 2',
                             ]
                         ]
                     ]
