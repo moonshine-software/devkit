@@ -184,6 +184,7 @@ final class ThemeGeneratorLayout extends AppLayout
         return [
             Search::make()->enabled(),
             FormBuilder::make()
+                ->xShow(fn() => '!minimizedMenu')
                 ->asyncMethod('generateTheme')
                 ->fields([
                     Collapse::make('Colors', [
