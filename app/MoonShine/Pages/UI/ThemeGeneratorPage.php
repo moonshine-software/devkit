@@ -122,14 +122,14 @@ class ThemeGeneratorPage extends Page
                 Column::make([
                     Box::make('Buttons', [
                         Flex::make([
-                            ActionButton::make('Default'),
-                            ActionButton::make('Primary')->primary(),
-                            ActionButton::make('Secondary')->secondary(),
-                            ActionButton::make('Info')->info(),
-                            ActionButton::make('Success')->success(),
-                            ActionButton::make('Warning')->warning(),
-                            ActionButton::make('Error')->error(),
-                            ActionButton::make('Async', '/')->primary()->async(),
+                            ActionButton::make('Default')->badge('1'),
+                            ActionButton::make('Primary')->primary()->badge('1'),
+                            ActionButton::make('Secondary')->secondary()->badge('1'),
+                            ActionButton::make('Info')->info()->badge('1'),
+                            ActionButton::make('Success')->success()->badge('1'),
+                            ActionButton::make('Warning')->warning()->badge('1'),
+                            ActionButton::make('Error')->error()->badge('1'),
+                            ActionButton::make('Async', '/')->primary()->async()->badge('1'),
                         ], justifyAlign: 'start')->wrap(),
                     ]),
 

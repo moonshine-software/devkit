@@ -98,6 +98,14 @@ final class Selects extends Page
                             ->multiple()
                             ->options($defaultOptions),
 
+                        Heading::make('Multiple (nullable)'),
+                        Select::make('Select')
+                            ->multiple()
+                            ->native()
+                            ->nullable()
+                            ->placeholder('Select something')
+                            ->options($defaultOptions),
+
                         Heading::make('Nullable'),
                         Select::make('Select')
                             ->placeholder('Select')

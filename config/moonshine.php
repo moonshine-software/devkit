@@ -29,6 +29,7 @@ return [
     'use_migrations' => true,
     'use_notifications' => true,
     'use_database_notifications' => true,
+    'use_routes' => true,
 
     // Routing
     'domain' => env('MOONSHINE_DOMAIN'),
@@ -92,6 +93,7 @@ return [
     // Localizations
     'locale' => 'en',
     'locales' => [
-        // en
+        'en',
+        'ru',
     ],
 ];
