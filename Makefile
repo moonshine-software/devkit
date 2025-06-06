@@ -1,6 +1,7 @@
 -include .env
 
 THIS_FILE := $(lastword $(MAKEFILE_LIST))
+DOCKER_COMPOSE := $(shell command -v docker-compose >/dev/null 2>&1 && echo "docker-compose" || echo "docker compose")
 
 app := $(COMPOSE_PROJECT_NAME)-php
 app-npm := npm
@@ -28,13 +29,13 @@ fork:
 	git clone $$ARG ./moonshine;
 #docker
 build:
-	docker-compose -f docker-compose.yml up --build -d $(c)
+	$(DOCKER_COMPOSE) -f docker-compose.yml up --build -d $(c)
 	@echo "See installation logs: docker logs -f $(app)"
 	@echo "Fill the database: make seed"
 docker-up:
-	docker-compose -f docker-compose.yml up -d $(c)
+	$(DOCKER_COMPOSE) -f docker-compose.yml up -d $(c)
 stop:
-	docker-compose -f docker-compose.yml stop $(c)
+	$(DOCKER_COMPOSE) -f docker-compose.yml stop $(c)
 it:
 	docker exec -it $(to) /bin/bash
 it-app:
@@ -51,10 +52,10 @@ info:
 
 #npm
 npm-install:
-	docker-compose run --rm --service-ports $(app-npm) install $(c)
+	$(DOCKER_COMPOSE) run --rm --service-ports $(app-npm) install $(c)
 npm-update:
-	docker-compose run --rm --service-ports $(app-npm) update $(c)
+	$(DOCKER_COMPOSE) run --rm --service-ports $(app-npm) update $(c)
 npm-build:
-	docker-compose run --rm --service-ports $(app-npm) run build $(c)
+	$(DOCKER_COMPOSE) run --rm --service-ports $(app-npm) run build $(c)
 npm-host:
-	docker-compose run --rm --service-ports $(app-npm) run dev --host $(c)
+	$(DOCKER_COMPOSE) run --rm --service-ports $(app-npm) run dev --host $(c)
