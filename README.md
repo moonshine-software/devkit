@@ -28,4 +28,9 @@ return [
     App\Providers\MoonShineServiceProvider::class,
 ];
 ```
+
+http://127.0.0.1:8000/admin/login
+username: dev@getmoonshine.app
+password: 12345
+
 4. Make MoonShine Great Again

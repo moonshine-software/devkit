@@ -36,36 +36,36 @@ final class MoonShineLayout extends AppLayout
         return [
             ...parent::menu(),
             MenuGroup::make('UI', [
-                MenuItem::make('Fields', Fields::class),
-                MenuItem::make('Components', Components::class),
-                MenuItem::make('Selects', Selects::class),
-                MenuItem::make('Forms', Forms::class),
-                MenuItem::make('Json', JsonPage::class),
-                MenuItem::make('ShowWhen', ShowWhen::class),
-                MenuItem::make('Themes', ThemeGeneratorPage::class),
+                MenuItem::make(Fields::class),
+                MenuItem::make(Components::class),
+                MenuItem::make(Selects::class),
+                MenuItem::make(Forms::class),
+                MenuItem::make(JsonPage::class),
+                MenuItem::make(ShowWhen::class),
+                MenuItem::make(ThemeGeneratorPage::class),
             ]),
-            MenuItem::make('Users', UserResource::class),
-            MenuItem::make('Tags', TagResource::class),
-            MenuItem::make('Images', ImageResource::class),
+            MenuItem::make(UserResource::class),
+            MenuItem::make(TagResource::class),
+            MenuItem::make(ImageResource::class),
             MenuGroup::make('Comments', [
-                MenuItem::make('Comments', CommentResource::class),
-                MenuItem::make('PolyComments', PolyCommentResource::class),
+                MenuItem::make(CommentResource::class),
+                MenuItem::make(PolyCommentResource::class),
             ]),
             MenuGroup::make('Posts', [
-                MenuItem::make('Categories', CategoryResource::class),
-                MenuItem::make('Posts', PostResource::class),
+                MenuItem::make(CategoryResource::class),
+                MenuItem::make(PostResource::class),
             ]),
 
             MenuGroup::make('Cars', [
-                MenuItem::make('Mechanics', MechanicResource::class),
-                MenuItem::make('Cars', CarResource::class),
-                MenuItem::make('Owners', OwnerResource::class),
+                MenuItem::make(MechanicResource::class),
+                MenuItem::make(CarResource::class),
+                MenuItem::make(OwnerResource::class),
             ]),
 
             MenuGroup::make('Projects', [
-                MenuItem::make('Projects', ProjectResource::class),
-                MenuItem::make('Deployments', DeploymentResource::class),
-                MenuItem::make('Environments', EnvironmentResource::class),
+                MenuItem::make(ProjectResource::class),
+                MenuItem::make(DeploymentResource::class),
+                MenuItem::make(EnvironmentResource::class),
             ]),
         ];
     }

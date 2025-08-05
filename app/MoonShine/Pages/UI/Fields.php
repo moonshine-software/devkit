@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages\UI;
 
 use App\Enums\ColorEnum;
-use MoonShine\Laravel\Http\Responses\MoonShineJsonResponse;
+use MoonShine\Crud\JsonResponse;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Support\Attributes\AsyncMethod;
 use MoonShine\Support\DTOs\Select\Option;
 use MoonShine\Support\DTOs\Select\OptionProperty;
 use MoonShine\Support\DTOs\Select\Options;
@@ -57,14 +58,15 @@ class Fields extends Page
         return $this->title ?: 'Fields';
     }
 
-    public function selectOptions(): MoonShineJsonResponse
+    #[AsyncMethod]
+    public function selectOptions(): JsonResponse
     {
         $options = new Options([
             new Option(label: 'Option 1', value: '1', selected: true, properties: new OptionProperty('https://cutcode.dev/images/platforms/youtube.png')),
             new Option(label: 'Option 2', value: '2', properties: new OptionProperty('https://cutcode.dev/images/platforms/youtube.png')),
         ]);
 
-        return MoonShineJsonResponse::make(data: $options->toArray());
+        return JsonResponse::make(data: $options->toArray());
     }
 
     /**

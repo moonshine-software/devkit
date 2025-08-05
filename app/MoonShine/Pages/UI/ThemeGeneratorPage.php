@@ -5,18 +5,20 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages\UI;
 
 use App\MoonShine\Layouts\ThemeGeneratorLayout;
+use MoonShine\Contracts\Core\DependencyInjection\CrudRequestContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Core\Attributes\Layout;
-use MoonShine\Laravel\Components\Layout\Notifications;
+use MoonShine\Crud\Components\Layout\Notifications;
 use MoonShine\Laravel\Components\Layout\Profile;
-use MoonShine\Laravel\Components\Layout\Search;
-use MoonShine\Laravel\Contracts\Notifications\MoonShineNotificationContract;
+use MoonShine\Crud\Components\Layout\Search;
+use MoonShine\Crud\Contracts\Notifications\MoonShineNotificationContract;
 use MoonShine\Laravel\Http\Responses\MoonShineJsonResponse;
 use MoonShine\Laravel\MoonShineRequest;
 use MoonShine\Laravel\Notifications\MoonShineNotification;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
+use MoonShine\Support\Attributes\AsyncMethod;
 use MoonShine\Support\Enums\Color as ColorEnum;
 use MoonShine\UI\Components\ActionButton;
 use MoonShine\UI\Components\Alert;
@@ -86,7 +88,8 @@ class ThemeGeneratorPage extends Page
         return $this->title ?: 'ThemeGeneratorPage';
     }
 
-    public function generateTheme(MoonShineRequest $request): RedirectResponse
+    #[AsyncMethod]
+    public function generateTheme(CrudRequestContract $request): RedirectResponse
     {
         foreach ($request->input('colors') as $name => $value) {
             session()->put("colors.$name", $value);
@@ -106,7 +109,7 @@ class ThemeGeneratorPage extends Page
     {
         $notifications = $this->getCore()->getContainer(MoonShineNotificationContract::class);
 
-        if($notifications->getAll()->isEmpty()) {
+        if ($notifications->getAll()->isEmpty()) {
             MoonShineNotification::send('Hello world');
         }
 
@@ -154,7 +157,7 @@ class ThemeGeneratorPage extends Page
                         Alert::make()->content('DEFAULT'),
                         ...array_map(
                             fn(ColorEnum $color) => Alert::make(type: $color)->content($color->name),
-                            ColorEnum::cases()
+                            ColorEnum::cases(),
                         ),
                     ]),
 
@@ -163,7 +166,7 @@ class ThemeGeneratorPage extends Page
                             Badge::make('default'),
                             ...array_map(
                                 fn(ColorEnum $color) => Badge::make($color->value, color: $color),
-                                ColorEnum::cases()
+                                ColorEnum::cases(),
                             ),
                         ], justifyAlign: 'start')
                             ->class('flex-wrap'),
@@ -202,13 +205,13 @@ class ThemeGeneratorPage extends Page
                     Box::make('Tabs', [
                         Tabs::make([
                             Tabs\Tab::make('Tab 1', [
-                                'Tab 1 content'
+                                'Tab 1 content',
                             ])->icon('home'),
 
                             Tabs\Tab::make('Tab 2', [
-                                'Tab 2 content'
+                                'Tab 2 content',
                             ]),
-                        ])
+                        ]),
                     ]),
                 ])->columnSpan(4),
 
@@ -295,14 +298,14 @@ class ThemeGeneratorPage extends Page
                                 ProgressBar::make(10),
                                 ...array_map(
                                     fn(ColorEnum $color) => ProgressBar::make(10, color: $color),
-                                    ColorEnum::cases()
+                                    ColorEnum::cases(),
                                 ),
 
                                 Flex::make([
                                     ProgressBar::make(10)->radial(),
                                     ...array_map(
                                         fn(ColorEnum $color) => ProgressBar::make(10, color: $color)->radial(),
-                                        ColorEnum::cases()
+                                        ColorEnum::cases(),
                                     ),
                                 ], justifyAlign: 'start')
                                     ->class('flex-wrap'),
@@ -318,8 +321,8 @@ class ThemeGeneratorPage extends Page
 
                                 Flex::make([
                                     ...array_map(
-                                        fn(ColorEnum $color) => Spinner::make( color: $color),
-                                        ColorEnum::cases()
+                                        fn(ColorEnum $color) => Spinner::make(color: $color),
+                                        ColorEnum::cases(),
                                     ),
                                 ], justifyAlign: 'start')
                                     ->class('flex-wrap'),
@@ -330,7 +333,7 @@ class ThemeGeneratorPage extends Page
                             Box::make('Metrics', [
                                 ValueMetric::make('Value metric')->value(20),
                                 ValueMetric::make('Value metric')->value(20)->progress(100),
-                            ])
+                            ]),
                         ])->columnSpan(6),
                     ]),
                 ])->columnSpan(8),

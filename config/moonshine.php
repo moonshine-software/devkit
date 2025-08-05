@@ -7,22 +7,22 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use MoonShine\Crud\Forms\FiltersForm;
+use MoonShine\Crud\Forms\LoginForm;
 use MoonShine\Laravel\Exceptions\MoonShineNotFoundException;
-use MoonShine\Laravel\Forms\FiltersForm;
-use MoonShine\Laravel\Forms\LoginForm;
 use MoonShine\Laravel\Http\Middleware\Authenticate;
 use MoonShine\Laravel\Http\Middleware\ChangeLocale;
-use MoonShine\Laravel\Layouts\AppLayout;
+use App\MoonShine\Layouts\MoonShineLayout;
 use MoonShine\Laravel\Models\MoonshineUser;
-use MoonShine\Laravel\Pages\Dashboard;
+use App\MoonShine\Pages\Dashboard;
 use MoonShine\Laravel\Pages\ErrorPage;
 use MoonShine\Laravel\Pages\LoginPage;
 use MoonShine\Laravel\Pages\ProfilePage;
 
 return [
     'title' => env('MOONSHINE_TITLE', 'MoonShine'),
-    'logo' => 'vendor/moonshine/logo.svg',
-    'logo_small' => 'vendor/moonshine/logo-small.svg',
+    'logo' => '/vendor/moonshine/logo-app.svg',
+    'logo_small' => '/vendor/moonshine/logo-app.svg',
 
 
     // Default flags
@@ -30,6 +30,7 @@ return [
     'use_notifications' => true,
     'use_database_notifications' => true,
     'use_routes' => true,
+    'use_profile' => true,
 
     // Routing
     'domain' => env('MOONSHINE_DOMAIN'),
@@ -63,7 +64,9 @@ return [
         'enabled' => true,
         'guard' => 'moonshine',
         'model' => MoonshineUser::class,
-        'middleware' => Authenticate::class,
+        'middleware' => [
+            Authenticate::class,
+        ],
         'pipelines' => [],
     ],
 
@@ -76,7 +79,7 @@ return [
     ],
 
     // Layout, pages, forms
-    'layout' => App\MoonShine\Layouts\MoonShineLayout::class,
+    'layout' => MoonShineLayout::class,
 
     'forms' => [
         'login' => LoginForm::class,
@@ -84,7 +87,7 @@ return [
     ],
 
     'pages' => [
-        'dashboard' => App\MoonShine\Pages\Dashboard::class,
+        'dashboard' => Dashboard::class,
         'profile' => ProfilePage::class,
         'login' => LoginPage::class,
         'error' => ErrorPage::class,
@@ -92,8 +95,8 @@ return [
 
     // Localizations
     'locale' => 'en',
+    'locale_key' => ChangeLocale::KEY,
     'locales' => [
-        'en',
-        'ru',
+        // en
     ],
 ];

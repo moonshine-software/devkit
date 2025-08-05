@@ -17,7 +17,9 @@ install-local: fork
 	cd .. &&  \
 	[ ! -f .env ] && cp .env.example .env && \
 	composer update && \
-	php artisan migrate:fresh --seed
+	touch database/database.sqlite && \
+	php artisan migrate:fresh --seed && \
+	php artisan serve
 
 install-docker: fork build info
 

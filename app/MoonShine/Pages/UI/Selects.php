@@ -6,16 +6,17 @@ namespace App\MoonShine\Pages\UI;
 
 use App\MoonShine\Resources\CarResource;
 use App\MoonShine\Resources\PostResource;
-use MoonShine\Laravel\Http\Responses\MoonShineJsonResponse;
+use MoonShine\Crud\JsonResponse;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\Support\AlpineJs;
+use MoonShine\Support\Attributes\AsyncMethod;
 use MoonShine\Support\DTOs\Select\Option;
 use MoonShine\Support\DTOs\Select\OptionGroup;
 use MoonShine\Support\DTOs\Select\OptionProperty;
 use MoonShine\Support\DTOs\Select\Options;
 use MoonShine\Support\Enums\JsEvent;
 use MoonShine\Support\Enums\ToastType;
-use MoonShine\Support\ToastEventParams;
+use MoonShine\Support\EventParams\ToastEventParams;
 use MoonShine\UI\Components\Collapse;
 use MoonShine\UI\Components\Heading;
 use MoonShine\UI\Components\Layout\Box;
@@ -34,13 +35,14 @@ final class Selects extends Page
     /**
      * @throws RandomException
      */
-    public function select(): MoonShineJsonResponse
+    #[AsyncMethod]
+    public function select(JsonResponse $response): JsonResponse
     {
         $options = random_int(0, 1) === 1
             ? $this->getDefaultGroupedOptions()->toArray()
             : $this->getDefaultOptions()->toArray();
 
-        return MoonShineJsonResponse::make($options);
+        return $response->setData($options);
     }
 
     private function getImage(): string

@@ -8,8 +8,8 @@ use MoonShine\AssetManager\InlineCss;
 use MoonShine\ColorManager\ColorManager;
 use MoonShine\Contracts\AssetManager\AssetElementContract;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
-use MoonShine\Laravel\Components\Layout\Notifications;
-use MoonShine\Laravel\Components\Layout\Search;
+use MoonShine\Crud\Components\Layout\Notifications;
+use MoonShine\Crud\Components\Layout\Search;
 use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\UI\Components\{Collapse,
     Components,

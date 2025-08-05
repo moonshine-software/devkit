@@ -7,8 +7,10 @@ namespace App\MoonShine\Pages\UI;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
 use MoonShine\Advanced\Fields\RadioGroup;
+use MoonShine\Contracts\Core\DependencyInjection\CrudRequestContract;
 use MoonShine\Laravel\MoonShineRequest;
 use MoonShine\Laravel\Pages\Page;
+use MoonShine\Support\Attributes\AsyncMethod;
 use MoonShine\Support\Enums\FormMethod;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Layout\Box;
@@ -42,7 +44,8 @@ class Forms extends Page
         return 'Forms';
     }
 
-    public function validate(MoonShineRequest $request)
+    #[AsyncMethod]
+    public function validate(CrudRequestContract $request): void
     {
         $validator = Validator::make($request->all(), [
             'checkbox_1' => 'accepted',

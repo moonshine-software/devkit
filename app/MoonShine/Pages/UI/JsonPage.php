@@ -6,10 +6,13 @@ namespace App\MoonShine\Pages\UI;
 
 use Closure;
 use Illuminate\Database\Eloquent\Model;
+use MoonShine\Contracts\Core\DependencyInjection\CrudRequestContract;
 use MoonShine\Contracts\UI\FieldContract;
+use MoonShine\Crud\JsonResponse;
 use MoonShine\Laravel\Http\Responses\MoonShineJsonResponse;
 use MoonShine\Laravel\MoonShineRequest;
 use MoonShine\Laravel\Pages\Page;
+use MoonShine\Support\Attributes\AsyncMethod;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Layout\Column;
@@ -54,7 +57,8 @@ class JsonPage extends Page
         };
     }
 
-    public function apply(MoonShineRequest $request): MoonShineJsonResponse
+    #[AsyncMethod]
+    public function apply(CrudRequestContract $request): JsonResponse
     {
         $fields = match ($request->input('_type')) {
             'default' => $this->defaultFields(),
@@ -80,7 +84,7 @@ class JsonPage extends Page
 
         debugbar()->info($data->getAttributes());
 
-        return MoonShineJsonResponse::make()
+        return JsonResponse::make()
             ->html([
                 '.after-apply-json' => "<code>" . json_encode($data->getAttributes(), JSON_THROW_ON_ERROR) . "</code>"
             ]);
