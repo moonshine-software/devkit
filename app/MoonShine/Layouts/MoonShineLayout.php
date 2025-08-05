@@ -26,6 +26,8 @@ use App\MoonShine\Resources\TagResource;
 use App\MoonShine\Resources\UserResource;
 use MoonShine\Laravel\Components\Layout\Search;
 use MoonShine\Laravel\Layouts\AppLayout;
+use App\MoonShine\Resources\MoonShineUserResource;
+use App\MoonShine\Resources\MoonShineUserRoleResource;
 use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
 
@@ -34,7 +36,11 @@ final class MoonShineLayout extends AppLayout
     protected function menu(): array
     {
         return [
-            ...parent::menu(),
+            MenuGroup::make(static fn () => __('moonshine::ui.resource.system'), [
+                MenuItem::make(MoonShineUserResource::class),
+                MenuItem::make(MoonShineUserRoleResource::class),
+            ]),
+
             MenuGroup::make('UI', [
                 MenuItem::make(Fields::class),
                 MenuItem::make(Components::class),
