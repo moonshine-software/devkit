@@ -18,8 +18,10 @@ use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Layout\Column;
 use MoonShine\UI\Components\Layout\Div;
 use MoonShine\UI\Components\Layout\Divider;
+use MoonShine\UI\Components\Layout\Flex;
 use MoonShine\UI\Components\Layout\Grid;
 use MoonShine\UI\Components\Layout\LineBreak;
+use MoonShine\UI\Fields\Fieldset;
 use MoonShine\UI\Fields\Hidden;
 use MoonShine\UI\Fields\Json;
 use MoonShine\UI\Fields\Number;
@@ -81,8 +83,6 @@ class JsonPage extends Page
             ->each(fn (FieldContract $field): mixed => $field->apply($this->fieldApply($field), $data));
 
         $fields->each(static fn (FieldContract $field): mixed => $field->afterApply($data));
-
-        debugbar()->info($data->getAttributes());
 
         return JsonResponse::make()
             ->html([
@@ -347,8 +347,13 @@ class JsonPage extends Page
                     Text::make('Value'),
 
                     Json::make('Inner')->fields([
-                        Text::make('One'),
-                        Text::make('Two'),
+                        Fieldset::make('fieldset', [
+                            Flex::make([
+                                Text::make('One'),
+                                Text::make('Two'),
+                            ])
+                        ]),
+
                         Select::make('Multiple')->options([1 => 1, 2 => 2, 3 => 3])->multiple(),
 
                         Json::make('KV')->keyValue(),
