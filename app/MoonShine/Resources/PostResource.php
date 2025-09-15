@@ -50,7 +50,12 @@ class PostResource extends ModelResource
             Slug::make('Slug')->from('name')->live(),
             BelongsTo::make('User')->nullable(),
             Textarea::make('Text'),
-            BelongsToMany::make('Categories'),
+            BelongsToMany::make('Categories')
+                ->fields([
+                    Text::make('Pivot', 'pivot_field')
+                ])
+                ->asyncSearch()
+            ,
             MorphToMany::make('Tags'),
 
 
