@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages\UI;
 
 use App\MoonShine\Resources\CarResource;
-use App\MoonShine\Resources\PostResource;
+use App\MoonShine\Resources\Post\PostResource;
 use MoonShine\Crud\JsonResponse;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\Support\AlpineJs;
@@ -21,7 +21,6 @@ use MoonShine\UI\Components\Collapse;
 use MoonShine\UI\Components\Heading;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Layout\Column;
-use MoonShine\UI\Components\Layout\Divider;
 use MoonShine\UI\Components\Layout\Grid;
 use MoonShine\UI\Components\Layout\LineBreak;
 use MoonShine\UI\Components\Link;
