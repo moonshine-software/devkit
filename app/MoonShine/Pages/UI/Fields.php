@@ -22,6 +22,7 @@ use MoonShine\UI\Fields\DateRange;
 use MoonShine\UI\Fields\Email;
 use MoonShine\UI\Fields\Enum;
 use MoonShine\UI\Fields\FieldContainer;
+use MoonShine\UI\Fields\Fieldset;
 use MoonShine\UI\Fields\File;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Image;
@@ -34,7 +35,6 @@ use MoonShine\UI\Fields\Preview;
 use MoonShine\UI\Fields\Range;
 use MoonShine\UI\Fields\RangeSlider;
 use MoonShine\UI\Fields\Select;
-use MoonShine\UI\Fields\StackFields;
 use MoonShine\UI\Fields\Switcher;
 use MoonShine\UI\Fields\Template;
 use MoonShine\UI\Fields\Text;
@@ -93,7 +93,7 @@ class Fields extends Page
                     Image::make('Image'),
                     Preview::make('Preview', formatted: fn() => fake()->text()),
                     Position::make('Position'),
-                    StackFields::make('StackFields')->fields([
+                    Fieldset::make('StackFields')->fields([
                         Text::make('Title 2'),
                         Preview::make('Preview 1', formatted: fn() => fake()->text()),
                         Preview::make('Preview 2', formatted: fn() => fake()->text()),
