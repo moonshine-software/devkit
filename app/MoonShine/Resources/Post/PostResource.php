@@ -11,7 +11,7 @@ use App\MoonShine\Resources\Post\Pages\PostIndexPage;
 use MoonShine\Laravel\Resources\ModelResource;
 
 /**
- * @extends ModelResource<Post>
+ * @extends ModelResource<Post, PostIndexPage, PostDetailPage, PostFormPage>
  */
 class PostResource extends ModelResource
 {

@@ -8,14 +8,12 @@ use App\MoonShine\Resources\Post\PostResource;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
+use MoonShine\Contracts\UI\FormBuilderContract;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Support\ListOf;
-use MoonShine\UI\Components\ActionButton;
-use MoonShine\UI\Components\Layout\LineBreak;
-use MoonShine\UI\Fields\Fieldset;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
@@ -58,9 +56,16 @@ class PostFormPage extends FormPage
         return parent::formButtons();
     }
 
+    protected function modifyFormComponent(FormBuilderContract $component): FormBuilderContract
+    {
+        return parent::modifyFormComponent($component)->withoutErrorToast();
+    }
+
     protected function rules(DataWrapperContract $item): array
     {
-        return [];
+        return [
+            'name' => ['required'],
+        ];
     }
 
     /**
