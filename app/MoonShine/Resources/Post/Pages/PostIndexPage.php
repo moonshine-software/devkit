@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Post\Pages;
 
+use App\Enums\ColorEnum;
 use App\MoonShine\Resources\CommentResource;
 use App\MoonShine\Resources\Post\PostResource;
 use MoonShine\Contracts\UI\Collection\TableRowsContract;
@@ -26,6 +27,7 @@ use MoonShine\UI\Components\Metrics\Wrapped\Metric;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\UI\Components\Table\TableRow;
 use MoonShine\UI\Components\Table\TableTd;
+use MoonShine\UI\Fields\Enum;
 use MoonShine\UI\Fields\Fieldset;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
@@ -61,6 +63,7 @@ class PostIndexPage extends IndexPage
             }),
 
             BelongsTo::make('User')->nullable(),
+            Enum::make('Enums')->attach(ColorEnum::class)->multiple(),
             Textarea::make('Text'),
         ];
     }

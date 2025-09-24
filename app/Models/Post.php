@@ -22,6 +22,7 @@ class Post extends Model
         'slug',
         'text',
         'data',
+        'enums',
         'user_id',
     ];
 
@@ -29,6 +30,7 @@ class Post extends Model
     {
         return [
             'data' => 'collection',
+            'enums' => 'collection',
         ];
     }
 

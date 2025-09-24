@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Post\Pages;
 
+use App\Enums\ColorEnum;
 use App\MoonShine\Resources\Post\PostResource;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
@@ -14,6 +15,7 @@ use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Support\ListOf;
+use MoonShine\UI\Fields\Enum;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
@@ -37,6 +39,7 @@ class PostFormPage extends FormPage
             Slug::make('Slug'),
             BelongsTo::make('User')->nullable(),
             Textarea::make('Text'),
+            Enum::make('Enums')->attach(ColorEnum::class)->multiple(),
             BelongsToMany::make('Categories')
                 //->deduplication(false)
                 ->fields([
@@ -54,11 +57,6 @@ class PostFormPage extends FormPage
     protected function formButtons(): ListOf
     {
         return parent::formButtons();
-    }
-
-    protected function modifyFormComponent(FormBuilderContract $component): FormBuilderContract
-    {
-        return parent::modifyFormComponent($component)->withoutErrorToast();
     }
 
     protected function rules(DataWrapperContract $item): array

@@ -7,6 +7,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * @see Post
+ */
 return new class extends Migration
 {
     /**
@@ -28,6 +31,7 @@ return new class extends Migration
             $table->string('slug');
             $table->text('text');
             $table->json('data')->nullable();
+            $table->json('enums')->nullable();
 
             $table->timestamps();
         });
