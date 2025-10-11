@@ -41,8 +41,6 @@ class MoonShineUserResource extends ModelResource
 
     protected bool $simplePaginate = true;
 
-    protected bool $columnSelection = true;
-
     protected bool $isAsync = false;
 
     public function getTitle(): string
@@ -67,7 +65,7 @@ class MoonShineUserResource extends ModelResource
                 resource: MoonShineUserRoleResource::class,
             )->badge(Color::PURPLE),
 
-            Text::make(__('moonshine::ui.resource.name'), 'name'),
+            Text::make(__('moonshine::ui.resource.name'), 'name')->columnSelection(),
 
             Image::make(__('moonshine::ui.resource.avatar'), 'avatar')->modifyRawValue(fn (
                 ?string $raw
