@@ -25,3 +25,4 @@ yarn-error.log
 /.vscode
 /.zed
 /open-admin-schemas
+.claude
