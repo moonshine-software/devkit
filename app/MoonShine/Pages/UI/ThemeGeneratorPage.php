@@ -132,7 +132,10 @@ class ThemeGeneratorPage extends Page
                             ActionButton::make('Success')->success()->badge('1'),
                             ActionButton::make('Warning')->warning()->badge('1'),
                             ActionButton::make('Error')->error()->badge('1'),
-                            ActionButton::make('Async', '/')->primary()->async()->badge('1'),
+                            ActionButton::make('Async', '/async-test')
+                                ->success()
+                                ->async()
+                                ->badge('1'),
                         ], justifyAlign: 'start')->wrap(),
                     ]),
 
