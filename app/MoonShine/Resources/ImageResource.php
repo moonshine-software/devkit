@@ -40,7 +40,7 @@ class ImageResource extends ModelResource
         return [
             ID::make()->sortable(),
             Url::make('Url'),
-            MorphTo::make('Imageable')->types([
+            MorphTo::make('Imageable', resource: ImageResource::class)->types([
                 Category::class => 'name',
                 Post::class => 'name',
                 Project::class => 'name',

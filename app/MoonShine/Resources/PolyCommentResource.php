@@ -34,7 +34,7 @@ class PolyCommentResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            MorphTo::make('Commentable')->types([
+            MorphTo::make('Commentable', resource: PolyCommentResource::class)->types([
                 Post::class => 'name',
                 Project::class => 'name',
             ]),

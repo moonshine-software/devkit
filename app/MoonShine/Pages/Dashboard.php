@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages;
 
+use App\MoonShine\Resources\Post\PostResource;
+use App\MoonShine\Resources\ProjectResource;
+use App\MoonShine\Resources\UserResource;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Support\Enums\Layer;
+use MoonShine\UI\Components\Tabs;
 
 class Dashboard extends Page
 {
@@ -29,6 +34,24 @@ class Dashboard extends Page
      */
     protected function components(): iterable
 	{
-		return [];
+		return [
+            Tabs::make([
+                Tabs\Tab::make('Users', [
+                    app(UserResource::class)->getIndexPage()?->getListComponent(),
+                ]),
+
+                Tabs\Tab::make('Posts', [
+                    ...app(PostResource::class)
+                        ->getIndexPage()
+                        ?->getLayerComponents(Layer::TOP),
+
+                    app(PostResource::class)->getIndexPage()?->getListComponent(),
+                ]),
+
+                Tabs\Tab::make('Projects', [
+                    app(ProjectResource::class)->getIndexPage()?->getListComponent(),
+                ]),
+            ])
+        ];
 	}
 }
