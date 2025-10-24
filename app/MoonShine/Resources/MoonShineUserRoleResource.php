@@ -45,7 +45,7 @@ class MoonShineUserRoleResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make(__('moonshine::ui.resource.role_name'), 'name'),
+            Text::make(__('moonshine::ui.resource.role_name'), 'name')->updateInPopover($this->getListComponentName()),
         ];
     }
 
