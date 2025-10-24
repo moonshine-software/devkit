@@ -1,31 +1,39 @@
 ## Installation
 
-1. Comment MoonShineServiceProvider in `bootstrap/providers.php`:
 
-```php
-return [
-    App\Providers\AppServiceProvider::class,
-    //App\Providers\MoonShineServiceProvider::class,
-];
-```
+1. Copy `.env.example` file:
 
-2. Installation command
+    ```shell
+    cp .env.example .env   
+    ```
 
-Without docker:
-```shell 
-make install-local
-```
-With docker:
-```shell 
-make install-docker
-```
+2. Comment `MoonShineServiceProvider` in `bootstrap/providers.php`:
 
-3. Uncomment MoonShineServiceProvider in `bootstrap/providers.php`
+    ```php
+    return [
+        App\Providers\AppServiceProvider::class,
+        //App\Providers\MoonShineServiceProvider::class,
+    ];
+    ```
 
-```php
-return [
-    App\Providers\AppServiceProvider::class,
-    App\Providers\MoonShineServiceProvider::class,
-];
-```
-4. Make MoonShine Great Again
+3. Installation command:
+
+    Without docker:
+    ```shell 
+    make install-local
+    ```
+    With docker:
+    ```shell 
+    make install-docker
+    ```
+
+4. Uncomment `MoonShineServiceProvider` in `bootstrap/providers.php`:
+
+    ```php
+    return [
+        App\Providers\AppServiceProvider::class,
+        App\Providers\MoonShineServiceProvider::class,
+    ];
+    ```
+
+5. Make MoonShine Great Again!
