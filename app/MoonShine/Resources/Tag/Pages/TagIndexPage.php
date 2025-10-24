@@ -3,20 +3,42 @@
 namespace App\MoonShine\Resources\Tag\Pages;
 
 use App\MoonShine\Resources\Tag\TagResource;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use MoonShine\Contracts\Core\DependencyInjection\CrudRequestContract;
 use MoonShine\Contracts\UI\ActionButtonContract;
 use MoonShine\Crud\JsonResponse;
+use MoonShine\Laravel\Fields\Relationships\MorphToMany;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
+use MoonShine\Laravel\QueryTags\QueryTag;
 use MoonShine\Support\Attributes\AsyncMethod;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Components\ActionButton;
+use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Text;
 
 /**
  * @extends IndexPage<TagResource>
  */
 class TagIndexPage extends IndexPage
 {
+    protected function fields(): iterable
+    {
+        return [
+            ID::make()->sortable(),
+            Text::make('Name'),
+            MorphToMany::make('Posts'),
+            MorphToMany::make('Projects'),
+        ];
+    }
+
+    protected function queryTags(): array
+    {
+        return [
+            QueryTag::make('Deleted', static fn(Builder $q) => $q->onlyTrashed()),
+        ];
+    }
+
     protected function buttons(): ListOf
     {
         return parent::buttons()->prepend(
