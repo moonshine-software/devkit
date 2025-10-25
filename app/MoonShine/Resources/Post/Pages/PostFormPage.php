@@ -12,6 +12,7 @@ use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
+use MoonShine\Laravel\Fields\Relationships\HasMany;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Support\ListOf;
@@ -40,6 +41,7 @@ class PostFormPage extends FormPage
             BelongsTo::make('User')->nullable(),
             Textarea::make('Text'),
             Enum::make('Enums')->attach(ColorEnum::class)->multiple(),
+            HasMany::make('Comments')->creatable(),
             BelongsToMany::make('Categories')
                 //->deduplication(false)
                 ->fields([
