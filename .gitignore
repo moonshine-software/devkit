@@ -6,7 +6,7 @@
 /public/vendor/moonshine
 /storage/*.key
 /storage/pail
-/moonshine
+/packages
 /vendor
 .env
 .env.backup

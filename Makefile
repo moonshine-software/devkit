@@ -10,11 +10,11 @@ path := $(APP_PATH)
 .PHONY: install-local install-docker fork build up docker-up info stop it it-app it-nginx npm-install npm-update npm-build npm-host
 
 install-local: fork
-	cd ./moonshine && \
-	composer install --dev && \
+	cd ./packages/moonshine && \
+	composer install && \
 	npm install && \
 	[ ! -f phpunit.xml.dist ] && cp phpunit-example.xml.dist phpunit.xml.dist && \
-	cd .. &&  \
+	cd ../.. &&  \
 	[ ! -f .env ] && cp .env.example .env && \
 	composer update && \
 	touch database/database.sqlite && \
@@ -27,8 +27,8 @@ up: docker-up info
 
 fork:
 	@read -p "Fork (git@github.com:moonshine-software/moonshine.git): " ARG; \
-	mkdir -p ./moonshine; \
-	git clone $$ARG ./moonshine;
+	mkdir -p ./packages/moonshine; \
+	git clone $$ARG ./packages/moonshine;
 #docker
 build:
 	$(DOCKER_COMPOSE) -f docker-compose.yml up --build -d $(c)

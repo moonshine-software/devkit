@@ -78,7 +78,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "moonshine",
+            "url": "packages/moonshine",
             "options": {
                 "versions": {
                     "moonshine/moonshine": "3.*.*-dev"
