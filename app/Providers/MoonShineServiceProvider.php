@@ -25,7 +25,7 @@ use App\MoonShine\Resources\PolyCommentResource;
 use App\MoonShine\Resources\Post\PostResource;
 use App\MoonShine\Resources\ProjectResource;
 use App\MoonShine\Resources\ShopResource;
-use App\MoonShine\Resources\TagResource;
+use App\MoonShine\Resources\Tag\TagResource;
 use App\MoonShine\Resources\UserResource;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\Contracts\Core\DependencyInjection\ConfiguratorContract;
