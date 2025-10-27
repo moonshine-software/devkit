@@ -20,7 +20,7 @@ use App\MoonShine\Resources\ImageResource;
 use App\MoonShine\Resources\MechanicResource;
 use App\MoonShine\Resources\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRoleResource;
-use App\MoonShine\Resources\OwnerResource;
+use App\MoonShine\Resources\Owner\OwnerResource;
 use App\MoonShine\Resources\PolyCommentResource;
 use App\MoonShine\Resources\Post\PostResource;
 use App\MoonShine\Resources\ProjectResource;
