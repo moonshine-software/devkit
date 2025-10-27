@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages\UI;
 
-use App\MoonShine\Resources\CarResource;
+use App\MoonShine\Resources\Car\CarResource;
 use App\MoonShine\Resources\Post\PostResource;
 use MoonShine\Crud\JsonResponse;
 use MoonShine\Laravel\Pages\Page;

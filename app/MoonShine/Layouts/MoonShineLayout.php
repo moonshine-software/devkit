@@ -11,7 +11,7 @@ use App\MoonShine\Pages\UI\JsonPage;
 use App\MoonShine\Pages\UI\Selects;
 use App\MoonShine\Pages\UI\ShowWhen;
 use App\MoonShine\Pages\UI\ThemeGeneratorPage;
-use App\MoonShine\Resources\CarResource;
+use App\MoonShine\Resources\Car\CarResource;
 use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\CommentResource;
 use App\MoonShine\Resources\DeploymentResource;
