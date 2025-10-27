@@ -17,7 +17,7 @@ use App\MoonShine\Resources\CommentResource;
 use App\MoonShine\Resources\DeploymentResource;
 use App\MoonShine\Resources\EnvironmentResource;
 use App\MoonShine\Resources\ImageResource;
-use App\MoonShine\Resources\MechanicResource;
+use App\MoonShine\Resources\Mechanic\MechanicResource;
 use App\MoonShine\Resources\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRoleResource;
 use App\MoonShine\Resources\Owner\OwnerResource;
