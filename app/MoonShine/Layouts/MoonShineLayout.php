@@ -24,6 +24,7 @@ use App\MoonShine\Resources\OwnerResource;
 use App\MoonShine\Resources\PolyCommentResource;
 use App\MoonShine\Resources\Post\PostResource;
 use App\MoonShine\Resources\ProjectResource;
+use App\MoonShine\Resources\Shop\ShopResource;
 use App\MoonShine\Resources\Tag\TagResource;
 use App\MoonShine\Resources\UserResource;
 use MoonShine\Laravel\Layouts\AppLayout;
@@ -65,6 +66,7 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make(MechanicResource::class),
                 MenuItem::make(CarResource::class),
                 MenuItem::make(OwnerResource::class),
+                MenuItem::make(ShopResource::class),
             ]),
 
             MenuGroup::make('Projects', [
