@@ -11,7 +11,7 @@ use App\MoonShine\Resources\Car\Pages\CarIndexPage;
 use MoonShine\Laravel\Resources\ModelResource;
 
 /**
- * @extends ModelResource<Car>
+ * @extends ModelResource<Car, CarIndexPage, CarDetailPage, CarFormPage>
  */
 class CarResource extends ModelResource
 {
