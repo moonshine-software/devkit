@@ -97,6 +97,7 @@ return [
     'locale' => 'en',
     'locale_key' => ChangeLocale::KEY,
     'locales' => [
-        // en
+        'en',
+        'ru',
     ],
 ];
