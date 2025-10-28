@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,6 +21,8 @@ class PolyCommentFactory extends Factory
         return [
             'user_id' => User::query()->inRandomOrder()->value('id'),
             'text' => fake()->text(),
+            'commentable_id' => Post::query()->inRandomOrder()->value('id'),
+            'commentable_type' => Post::class,
         ];
     }
 }
