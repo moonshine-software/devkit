@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -17,10 +18,11 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $name = fake()->words(2, true);
         return [
             'user_id' => User::query()->inRandomOrder()->value('id'),
-            'name' => ucfirst(fake()->words(2, true)),
-            'slug' => fake()->slug(),
+            'name' => ucfirst($name),
+            'slug' => Str::slug($name),
             'text' => fake()->text(),
         ];
     }

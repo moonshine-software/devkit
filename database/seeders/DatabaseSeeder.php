@@ -4,10 +4,12 @@ namespace Database\Seeders;
 
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Deployment;
 use App\Models\Environment;
 use App\Models\Mechanic;
 use App\Models\Owner;
+use App\Models\PolyComment;
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\Shop;
@@ -45,5 +47,8 @@ class DatabaseSeeder extends Seeder
         Deployment::factory(20)->create();
 
         Post::factory(50)->create();
+
+        Comment::factory(20)->create();
+        PolyComment::factory(5)->create();
     }
 }
