@@ -12,7 +12,7 @@ use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
 
 /**
- * @extends IndexPage<ModelResource>
+ * @extends IndexPage<CarResource>
  */
 class CarIndexPage extends IndexPage
 {
