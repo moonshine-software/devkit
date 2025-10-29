@@ -22,7 +22,7 @@ class CarDetailPage extends DetailPage
     protected function fields(): iterable
     {
         return [
-            ID::make()->sortable(),
+            ID::make(),
             Text::make('Name'),
             BelongsTo::make('Shop'),
             BelongsTo::make('Mechanic'),
