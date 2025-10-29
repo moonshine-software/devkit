@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Shop\Pages;
 
+use App\MoonShine\Resources\Shop\ShopResource;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
-use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
 
 /**
- * @extends IndexPage<ModelResource>
+ * @extends IndexPage<ShopResource>
  */
 class ShopIndexPage extends IndexPage
 {
