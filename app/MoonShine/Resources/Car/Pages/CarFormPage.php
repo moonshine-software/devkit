@@ -14,7 +14,7 @@ use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
 
 /**
- * @extends FormPage<ModelResource>
+ * @extends FormPage<CarResource>
  */
 class CarFormPage extends FormPage
 {
