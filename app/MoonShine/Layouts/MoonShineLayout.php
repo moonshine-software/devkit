@@ -27,18 +27,12 @@ use App\MoonShine\Resources\ProjectResource;
 use App\MoonShine\Resources\Shop\ShopResource;
 use App\MoonShine\Resources\Tag\TagResource;
 use App\MoonShine\Resources\UserResource;
-use MoonShine\ColorManager\Palettes\PurplePalette;
-use MoonShine\ColorManager\Palettes\RosePalette;
-use MoonShine\ColorManager\Palettes\SkyPalette;
-use MoonShine\ColorManager\Palettes\TealPalette;
 use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
 
 final class MoonShineLayout extends AppLayout
 {
-    protected ?string $palette = PurplePalette::class;
-
     protected function menu(): array
     {
         return [
