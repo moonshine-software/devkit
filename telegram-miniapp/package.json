@@ -1,0 +1,17 @@
+{
+    "$schema": "https://json.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite"
+    },
+    "devDependencies": {
+        "axios": "^1.12",
+        "concurrently": "^9",
+        "vite": "^7"
+    },
+    "dependencies": {
+        "@telegram-apps/sdk": "^3.11.8"
+    }
+}
