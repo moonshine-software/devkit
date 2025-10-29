@@ -11,19 +11,20 @@ use App\MoonShine\Pages\UI\JsonPage;
 use App\MoonShine\Pages\UI\Selects;
 use App\MoonShine\Pages\UI\ShowWhen;
 use App\MoonShine\Pages\UI\ThemeGeneratorPage;
-use App\MoonShine\Resources\CarResource;
+use App\MoonShine\Resources\Car\CarResource;
 use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\CommentResource;
 use App\MoonShine\Resources\DeploymentResource;
 use App\MoonShine\Resources\EnvironmentResource;
 use App\MoonShine\Resources\ImageResource;
-use App\MoonShine\Resources\MechanicResource;
+use App\MoonShine\Resources\Mechanic\MechanicResource;
 use App\MoonShine\Resources\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRoleResource;
-use App\MoonShine\Resources\OwnerResource;
+use App\MoonShine\Resources\Owner\OwnerResource;
 use App\MoonShine\Resources\PolyCommentResource;
 use App\MoonShine\Resources\Post\PostResource;
 use App\MoonShine\Resources\ProjectResource;
+use App\MoonShine\Resources\Shop\ShopResource;
 use App\MoonShine\Resources\Tag\TagResource;
 use App\MoonShine\Resources\UserResource;
 use MoonShine\Laravel\Layouts\AppLayout;
@@ -65,6 +66,7 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make(MechanicResource::class),
                 MenuItem::make(CarResource::class),
                 MenuItem::make(OwnerResource::class),
+                MenuItem::make(ShopResource::class),
             ]),
 
             MenuGroup::make('Projects', [

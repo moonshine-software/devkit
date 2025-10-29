@@ -4,30 +4,24 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Post\Pages;
 
-use App\Enums\ColorEnum;
 use App\MoonShine\Resources\Post\PostResource;
 use MoonShine\Contracts\UI\Collection\TableRowsContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
-use MoonShine\Laravel\QueryTags\QueryTag;
-use MoonShine\Support\ListOf;
 use MoonShine\UI\Collections\TableCells;
 use MoonShine\UI\Components\ActionButton;
 use MoonShine\UI\Components\Layout\LineBreak;
-use MoonShine\UI\Components\Metrics\Wrapped\Metric;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\UI\Components\Table\TableRow;
 use MoonShine\UI\Components\Table\TableTd;
-use MoonShine\UI\Fields\Enum;
 use MoonShine\UI\Fields\Fieldset;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
-use Throwable;
-
 
 /**
  * @extends IndexPage<PostResource>
@@ -42,7 +36,8 @@ class PostIndexPage extends IndexPage
     protected function fields(): iterable
     {
         return [
-            ID::make()->sortable(),
+            ID::make()
+                ->sortable(),
             Fieldset::make('Info', function (Fieldset $ctx) {
                 return [
                     Text::make('Name'),
@@ -56,8 +51,10 @@ class PostIndexPage extends IndexPage
                 ];
             }),
 
-            BelongsTo::make('User')->nullable(),
+            BelongsTo::make('User'),
             Textarea::make('Text'),
+            BelongsToMany::make('Categories')
+                ->inLine()
         ];
     }
 
@@ -82,11 +79,6 @@ class PostIndexPage extends IndexPage
         }))->columnSelection()->sticky()->stickyButtons();
     }
 
-    protected function buttons(): ListOf
-    {
-        return parent::buttons();
-    }
-
     /**
      * @return list<FieldContract>
      */
@@ -94,55 +86,6 @@ class PostIndexPage extends IndexPage
     {
         return [
             BelongsTo::make('User')->nullable(),
-        ];
-    }
-
-    /**
-     * @return list<QueryTag>
-     */
-    protected function queryTags(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return list<Metric>
-     */
-    protected function metrics(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return list<ComponentContract>
-     * @throws Throwable
-     */
-    protected function topLayer(): array
-    {
-        return [
-            ...parent::topLayer(),
-        ];
-    }
-
-    /**
-     * @return list<ComponentContract>
-     * @throws Throwable
-     */
-    protected function mainLayer(): array
-    {
-        return [
-            ...parent::mainLayer(),
-        ];
-    }
-
-    /**
-     * @return list<ComponentContract>
-     * @throws Throwable
-     */
-    protected function bottomLayer(): array
-    {
-        return [
-            ...parent::bottomLayer(),
         ];
     }
 }
