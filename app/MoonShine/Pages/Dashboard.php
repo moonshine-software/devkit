@@ -10,6 +10,10 @@ use App\MoonShine\Resources\UserResource;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Support\Enums\Layer;
+use MoonShine\UI\Components\Layout\Column;
+use MoonShine\UI\Components\Layout\Flex;
+use MoonShine\UI\Components\Layout\Grid;
+use MoonShine\UI\Components\Metrics\Wrapped\ValueMetric;
 use MoonShine\UI\Components\Tabs;
 
 class Dashboard extends Page
@@ -35,6 +39,15 @@ class Dashboard extends Page
     protected function components(): iterable
 	{
 		return [
+            Grid::make([
+                Column::make([
+                    ValueMetric::make('Metric')->value(100),
+                ])->columnSpan(3),
+                Column::make([
+                    ValueMetric::make('Metric')->value(100),
+                ])->columnSpan(3)
+            ]),
+
             Tabs::make([
                 Tabs\Tab::make('Users', [
                     app(UserResource::class)->getIndexPage()?->getListComponent(),
