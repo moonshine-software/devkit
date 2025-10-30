@@ -119,6 +119,7 @@ class Forms extends Page
                                     ->copy()
                                     ->eye()
                                     ->locked()
+                                    ->prefix('USD')
                                     ->suffix('$'),
                                 Number::make('Number')
                                     ->default(0)
