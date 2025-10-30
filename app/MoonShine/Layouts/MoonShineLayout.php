@@ -23,7 +23,7 @@ use App\MoonShine\Resources\MoonShineUserRoleResource;
 use App\MoonShine\Resources\Owner\OwnerResource;
 use App\MoonShine\Resources\PolyCommentResource;
 use App\MoonShine\Resources\Post\PostResource;
-use App\MoonShine\Resources\ProjectResource;
+use App\MoonShine\Resources\Project\ProjectResource;
 use App\MoonShine\Resources\Shop\ShopResource;
 use App\MoonShine\Resources\Tag\TagResource;
 use App\MoonShine\Resources\UserResource;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages;
 
 use App\MoonShine\Resources\Post\PostResource;
-use App\MoonShine\Resources\ProjectResource;
+use App\MoonShine\Resources\Project\ProjectResource;
 use App\MoonShine\Resources\UserResource;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\Contracts\UI\ComponentContract;
