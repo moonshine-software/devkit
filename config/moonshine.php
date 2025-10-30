@@ -78,8 +78,9 @@ return [
         'avatar' => 'avatar',
     ],
 
-    // Layout, pages, forms
+    // Layout, palette, pages, forms
     'layout' => MoonShineLayout::class,
+    'palette' => MoonShine\ColorManager\Palettes\PurplePalette::class,
 
     'forms' => [
         'login' => LoginForm::class,
