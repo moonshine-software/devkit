@@ -65,8 +65,10 @@ final class MoonShineLayout extends AppLayout
             MenuGroup::make('UI', [
                 MenuItem::make(Fields::class),
                 MenuItem::make(Components::class),
-                MenuItem::make(Selects::class),
-                MenuItem::make(Forms::class),
+                MenuGroup::make('Forms', [
+                    MenuItem::make(Forms::class),
+                    MenuItem::make(Selects::class),
+                ]),
                 MenuItem::make(JsonPage::class),
                 MenuItem::make(ShowWhen::class),
                 MenuItem::make(ThemeGeneratorPage::class),
