@@ -7,6 +7,8 @@ namespace App\MoonShine\Pages;
 use App\MoonShine\Resources\Post\PostResource;
 use App\MoonShine\Resources\Project\ProjectResource;
 use App\MoonShine\Resources\UserResource;
+use MoonShine\Apexcharts\Components\DonutChartMetric;
+use MoonShine\Apexcharts\Components\LineChartMetric;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Support\Enums\Layer;
@@ -42,10 +44,39 @@ class Dashboard extends Page
             Grid::make([
                 Column::make([
                     ValueMetric::make('Metric')->value(100),
-                ])->columnSpan(3),
+                ])->columnSpan(6),
                 Column::make([
                     ValueMetric::make('Metric')->value(100),
-                ])->columnSpan(3)
+                ])->columnSpan(6),
+                Column::make([
+                    DonutChartMetric::make('Подписчики')
+                        ->columnSpan(6)
+                        ->values(['CutCode' => 10000, 'Apple' => 9999]),
+                ])->columnSpan(6),
+                Column::make([
+                    LineChartMetric::make('Заказы')
+                        ->line([
+                            'Выручка 1' => [
+                                now()->format('Y-m-d') => 100,
+                                now()->addDay()->format('Y-m-d') => 200,
+                                now()->addDays(2)->format('Y-m-d') => 500,
+                            ],
+                        ])
+                        ->line([
+                            'Выручка 2' => [
+                                now()->format('Y-m-d') => 300,
+                                now()->addDay()->format('Y-m-d') => 400,
+                                now()->addDays(2)->format('Y-m-d') => 300,
+                            ],
+                        ], '#EC4176')
+                        ->line([
+                            'Выручка 3' => [
+                                now()->format('Y-m-d') => 400,
+                                now()->addDay()->format('Y-m-d') => 500,
+                                now()->addDays(2)->format('Y-m-d') => 300,
+                            ],
+                        ], '#1e96fc'),
+                ])->columnSpan(6),
             ]),
 
             Tabs::make([

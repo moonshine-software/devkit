@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
 use MoonShine\Advanced\Fields\RadioGroup;
 use MoonShine\Contracts\Core\DependencyInjection\CrudRequestContract;
+use MoonShine\EasyMde\Fields\Markdown;
 use MoonShine\Laravel\MoonShineRequest;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\Support\Attributes\AsyncMethod;
@@ -57,6 +58,7 @@ class Forms extends Page
             'text_2' => 'required',
             'number' => 'required|int|min:1',
             'textarea' => 'required',
+            'textarea_2' => 'required',
             'select' => 'required',
             'color' => 'required',
             'range.from' => 'required|int|min:5',
@@ -125,6 +127,9 @@ class Forms extends Page
                                     ->default(0)
                                     ->buttons(),
                                 Textarea::make('Textarea')
+                                    ->placeholder('Placeholder'),
+
+                                Markdown::make('Textarea 2')
                                     ->placeholder('Placeholder'),
                                 Select::make('Select')
                                     ->placeholder('Placeholder')
@@ -212,6 +217,9 @@ class Forms extends Page
                                 Textarea::make('Textarea')
                                     ->placeholder('Placeholder')
                                     ->disabled(),
+                                Markdown::make('Textarea 2')
+                                    ->placeholder('Placeholder')
+                                    ->disabled(),
                                 Select::make('Select')
                                     ->placeholder('Placeholder')
                                     ->options([
@@ -265,6 +273,9 @@ class Forms extends Page
                                     ->buttons()
                                     ->readonly(),
                                 Textarea::make('Textarea')
+                                    ->placeholder('Placeholder')
+                                    ->readonly(),
+                                Markdown::make('Textarea 2')
                                     ->placeholder('Placeholder')
                                     ->readonly(),
                                 Color::make('Color')
