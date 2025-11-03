@@ -21,6 +21,8 @@ class ProjectResource extends ModelResource
 
     protected string $column = 'name';
 
+    protected string $queryParamPrefix = 'pr_';
+
     protected function pages(): array
     {
         return [

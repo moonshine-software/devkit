@@ -21,6 +21,8 @@ class PostResource extends ModelResource
 
     protected string $column = 'name';
 
+    protected string $queryParamPrefix = 'p_';
+
     protected array $with = [
         'user',
         'categories',

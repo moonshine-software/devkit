@@ -24,6 +24,8 @@ class UserResource extends ModelResource
 
     protected string $column = 'email';
 
+    protected string $queryParamPrefix = 'u_';
+
     /**
      * @return list<FieldContract>
      */

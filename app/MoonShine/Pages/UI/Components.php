@@ -65,6 +65,10 @@ class Components extends Page
 	{
 		return [
             ActionButton::make('ActionButton')->icon('users'),
+            ActionButton::make('ActionButton')->success()->icon('users'),
+            ActionButton::make('ActionButton')->info()->icon('users'),
+            ActionButton::make('ActionButton')->warning()->icon('users'),
+            ActionButton::make('ActionButton')->error()->icon('users'),
             Popover::make('Popover', 'Popover'),
             Modal::make('Modal', 'Content')->open(),
             OffCanvas::make('OffCanvas', 'Content')->open(),
