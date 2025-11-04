@@ -26,7 +26,7 @@ use App\MoonShine\Resources\Post\PostResource;
 use App\MoonShine\Resources\Project\ProjectResource;
 use App\MoonShine\Resources\Shop\ShopResource;
 use App\MoonShine\Resources\Tag\TagResource;
-use App\MoonShine\Resources\UserResource;
+use App\MoonShine\Resources\User\UserResource;
 use MoonShine\ColorManager\ColorManager;
 use MoonShine\ColorManager\Palettes\PurplePalette;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;

@@ -6,14 +6,13 @@ namespace App\MoonShine\Pages;
 
 use App\MoonShine\Resources\Post\PostResource;
 use App\MoonShine\Resources\Project\ProjectResource;
-use App\MoonShine\Resources\UserResource;
+use App\MoonShine\Resources\User\UserResource;
 use MoonShine\Apexcharts\Components\DonutChartMetric;
 use MoonShine\Apexcharts\Components\LineChartMetric;
-use MoonShine\Laravel\Pages\Page;
 use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Laravel\Pages\Page;
 use MoonShine\Support\Enums\Layer;
 use MoonShine\UI\Components\Layout\Column;
-use MoonShine\UI\Components\Layout\Flex;
 use MoonShine\UI\Components\Layout\Grid;
 use MoonShine\UI\Components\Metrics\Wrapped\ValueMetric;
 use MoonShine\UI\Components\Tabs;
