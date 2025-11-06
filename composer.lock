@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4152ceaeb1a651ae56f3e1d3448443e8",
+    "content-hash": "cecd9328343da705de4538a8479e0a46",
     "packages": [
         {
             "name": "brick/math",
@@ -2206,7 +2206,7 @@
         },
         {
             "name": "moonshine/advanced",
-            "version": "1.0.9",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moonshine-software/advanced.git",
@@ -2232,6 +2232,7 @@
                 "phpunit/phpunit": "^11.0",
                 "rector/rector": "^1.0"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -2269,7 +2270,7 @@
         },
         {
             "name": "moonshine/apexcharts",
-            "version": "1.2.0",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moonshine-software/apexcharts.git",
@@ -2334,16 +2335,16 @@
         },
         {
             "name": "moonshine/easymde",
-            "version": "1.0.4",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moonshine-software/easymde.git",
-                "reference": "c6d60e0e835680fa47725eb9add27a20e3910b8e"
+                "reference": "7da98b0081d2187f411fe49dedd61d9f3f3624db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moonshine-software/easymde/zipball/c6d60e0e835680fa47725eb9add27a20e3910b8e",
-                "reference": "c6d60e0e835680fa47725eb9add27a20e3910b8e",
+                "url": "https://api.github.com/repos/moonshine-software/easymde/zipball/7da98b0081d2187f411fe49dedd61d9f3f3624db",
+                "reference": "7da98b0081d2187f411fe49dedd61d9f3f3624db",
                 "shasum": ""
             },
             "require": {
@@ -2395,7 +2396,7 @@
                 "issues": "https://github.com/moonshine-software/easymde/issues",
                 "source": "https://github.com/moonshine-software/easymde"
             },
-            "time": "2025-01-14T10:48:56+00:00"
+            "time": "2025-07-24T08:05:53+00:00"
         },
         {
             "name": "moonshine/moonshine",
@@ -2403,7 +2404,7 @@
             "dist": {
                 "type": "path",
                 "url": "moonshine",
-                "reference": "fdcd3dccba4bda121cecea77fe82e88ef44a248a"
+                "reference": "558d87dba6055d9f88849c416b36842946728540"
             },
             "require": {
                 "ext-json": "*",
@@ -9011,6 +9012,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "moonshine/advanced": 20,
+        "moonshine/apexcharts": 20,
+        "moonshine/easymde": 20,
         "moonshine/moonshine": 20
     },
     "prefer-stable": true,

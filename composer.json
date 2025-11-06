@@ -12,9 +12,9 @@
         "php": "^8.2",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
-        "moonshine/advanced": "^1.0",
-        "moonshine/apexcharts": "^1.2",
-        "moonshine/easymde": "^1.0",
+        "moonshine/advanced": "1.*.*-dev",
+        "moonshine/apexcharts": "2.*.*-dev",
+        "moonshine/easymde": "2.*.*-dev",
         "moonshine/moonshine": "4.*.*-dev",
         "moonshine/ru": "^1.0"
     },
