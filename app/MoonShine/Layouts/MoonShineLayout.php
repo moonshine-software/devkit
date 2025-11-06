@@ -15,7 +15,7 @@ use App\MoonShine\Resources\Car\CarResource;
 use App\MoonShine\Resources\Category\CategoryResource;
 use App\MoonShine\Resources\CommentResource;
 use App\MoonShine\Resources\Deployment\DeploymentResource;
-use App\MoonShine\Resources\EnvironmentResource;
+use App\MoonShine\Resources\Environment\EnvironmentResource;
 use App\MoonShine\Resources\ImageResource;
 use App\MoonShine\Resources\Mechanic\MechanicResource;
 use App\MoonShine\Resources\MoonShineUserResource;
@@ -50,8 +50,6 @@ final class MoonShineLayout extends AppLayout
     protected function colors(ColorManagerContract $colorManager): void
     {
         parent::colors($colorManager);
-
-        //
     }
 
     protected function menu(): array
