@@ -16,7 +16,8 @@
         "moonshine/apexcharts": "2.*.*-dev",
         "moonshine/easymde": "2.*.*-dev",
         "moonshine/moonshine": "4.*.*-dev",
-        "moonshine/ru": "^1.0"
+        "moonshine/ru": "^1.0",
+        "moonshine/tinymce": "2.*.*-dev"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",

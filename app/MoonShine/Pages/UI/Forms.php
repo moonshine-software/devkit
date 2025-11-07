@@ -13,6 +13,7 @@ use MoonShine\Laravel\MoonShineRequest;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\Support\Attributes\AsyncMethod;
 use MoonShine\Support\Enums\FormMethod;
+use MoonShine\TinyMce\Fields\TinyMce;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Layout\Column;
@@ -59,6 +60,7 @@ class Forms extends Page
             'number' => 'required|int|min:1',
             'textarea' => 'required',
             'textarea_2' => 'required',
+            'textarea_3' => 'required',
             'select' => 'required',
             'color' => 'required',
             'range.from' => 'required|int|min:5',
@@ -130,6 +132,9 @@ class Forms extends Page
                                     ->placeholder('Placeholder'),
 
                                 Markdown::make('Textarea 2')
+                                    ->placeholder('Placeholder'),
+
+                                TinyMce::make('Textarea 3')
                                     ->placeholder('Placeholder'),
                                 Select::make('Select')
                                     ->placeholder('Placeholder')
@@ -220,6 +225,9 @@ class Forms extends Page
                                 Markdown::make('Textarea 2')
                                     ->placeholder('Placeholder')
                                     ->disabled(),
+                                TinyMce::make('Textarea 3')
+                                    ->placeholder('Placeholder')
+                                    ->disabled(),
                                 Select::make('Select')
                                     ->placeholder('Placeholder')
                                     ->options([
@@ -276,6 +284,10 @@ class Forms extends Page
                                     ->placeholder('Placeholder')
                                     ->readonly(),
                                 Markdown::make('Textarea 2')
+                                    ->placeholder('Placeholder')
+                                    ->readonly(),
+
+                                TinyMce::make('Textarea 3')
                                     ->placeholder('Placeholder')
                                     ->readonly(),
                                 Color::make('Color')
