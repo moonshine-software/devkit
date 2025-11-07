@@ -26,9 +26,9 @@ class UserFormPage extends FormPageAlias
         return [
             Box::make([
                 ID::make(),
-                Text::make('name')
+                Text::make('Name')
                     ->required(),
-                Email::make('email')
+                Email::make('Email')
                     ->required(),
             ])
         ];

@@ -24,8 +24,8 @@ class UserIndexPage extends IndexPageAlias
     {
         return [
             ID::make()->sortable(),
-            Text::make('name'),
-            Text::make('email'),
+            Text::make('Name'),
+            Text::make('E-mail', 'email'),
         ];
     }
 }

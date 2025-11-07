@@ -22,8 +22,8 @@ class UserDetailPage extends DetailPage
     {
         return [
             ID::make(),
-            Text::make('name'),
-            Text::make('email'),
+            Text::make('Name'),
+            Text::make('E-mail', 'email'),
         ];
     }
 }
