@@ -9,10 +9,14 @@ use App\MoonShine\Resources\Category\Pages\CategoryDetailPage;
 use App\MoonShine\Resources\Category\Pages\CategoryFormPage;
 use App\MoonShine\Resources\Category\Pages\CategoryIndexPage;
 use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\MenuManager\Attributes\Group;
+use MoonShine\MenuManager\Attributes\Order;
 
 /**
  * @extends ModelResource<Category, CategoryIndexPage, CategoryFormPage, CategoryDetailPage>
  */
+#[Group('Posts')]
+#[Order(14)]
 class CategoryResource extends ModelResource
 {
     protected string $model = Category::class;

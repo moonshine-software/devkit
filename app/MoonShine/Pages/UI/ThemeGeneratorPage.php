@@ -14,6 +14,8 @@ use MoonShine\Crud\Contracts\Notifications\MoonShineNotificationContract;
 use MoonShine\Laravel\Components\Layout\Profile;
 use MoonShine\Laravel\Notifications\MoonShineNotification;
 use MoonShine\Laravel\Pages\Page;
+use MoonShine\MenuManager\Attributes\Group;
+use MoonShine\MenuManager\Attributes\Order;
 use MoonShine\Support\Attributes\AsyncMethod;
 use MoonShine\Support\Enums\Color as ColorEnum;
 use MoonShine\UI\Components\ActionButton;
@@ -66,6 +68,8 @@ use MoonShine\UI\Fields\Textarea;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 #[Layout(ThemeGeneratorLayout::class)]
+#[Group('UI')]
+#[Order(8)]
 class ThemeGeneratorPage extends Page
 {
     /**

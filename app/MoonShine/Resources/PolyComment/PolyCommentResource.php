@@ -10,10 +10,14 @@ use App\MoonShine\Resources\PolyComment\Pages\PolyCommentFormPage;
 use App\MoonShine\Resources\PolyComment\Pages\PolyCommentDetailPage;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\Contracts\Core\PageContract;
+use MoonShine\MenuManager\Attributes\Group;
+use MoonShine\MenuManager\Attributes\Order;
 
 /**
  * @extends ModelResource<PolyComment, PolyCommentIndexPage, PolyCommentFormPage, PolyCommentDetailPage>
  */
+#[Group('Comments')]
+#[Order(13)]
 class PolyCommentResource extends ModelResource
 {
     protected string $model = PolyComment::class;

@@ -10,10 +10,12 @@ use App\MoonShine\Resources\Tag\Pages\TagFormPage;
 use App\MoonShine\Resources\Tag\Pages\TagIndexPage;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\MenuManager\Attributes\Order;
 
 /**
  * @extends ModelResource<Tag>
  */
+#[Order(10)]
 class TagResource extends ModelResource
 {
     protected string $model = Tag::class;

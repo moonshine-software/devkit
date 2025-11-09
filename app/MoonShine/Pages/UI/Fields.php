@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages\UI;
 
 use App\Enums\ColorEnum;
+use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Crud\JsonResponse;
 use MoonShine\Laravel\Pages\Page;
-use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\MenuManager\Attributes\Group;
+use MoonShine\MenuManager\Attributes\Order;
 use MoonShine\Support\Attributes\AsyncMethod;
 use MoonShine\Support\DTOs\Select\Option;
 use MoonShine\Support\DTOs\Select\OptionProperty;
@@ -41,6 +43,8 @@ use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 use MoonShine\UI\Fields\Url;
 
+#[Group('UI')]
+#[Order(2)]
 class Fields extends Page
 {
     /**
@@ -151,7 +155,8 @@ class Fields extends Page
                         ]
                     ]),
 
-                    Select::make('Select async')->async($this->getRouter()->getEndpoints()->method('selectOptions')),
+                    Select::make('Select async')
+                        ->async($this->getRouter()->getEndpoints()->method('selectOptions')),
 
                     Enum::make('Enum')->attach(ColorEnum::class),
                 ]),

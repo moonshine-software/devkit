@@ -10,6 +10,8 @@ use MoonShine\Contracts\Core\DependencyInjection\CrudRequestContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Crud\JsonResponse;
 use MoonShine\Laravel\Pages\Page;
+use MoonShine\MenuManager\Attributes\Group;
+use MoonShine\MenuManager\Attributes\Order;
 use MoonShine\Support\Attributes\AsyncMethod;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Layout\Box;
@@ -28,6 +30,8 @@ use MoonShine\UI\Fields\Switcher;
 use MoonShine\UI\Fields\Text;
 use MoonShine\Laravel\Collections\Fields;
 
+#[Group('UI')]
+#[Order(6)]
 class JsonPage extends Page
 {
     public function getBreadcrumbs(): array

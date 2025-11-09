@@ -9,10 +9,14 @@ use App\MoonShine\Resources\Mechanic\Pages\MechanicDetailPage;
 use App\MoonShine\Resources\Mechanic\Pages\MechanicFormPage;
 use App\MoonShine\Resources\Mechanic\Pages\MechanicIndexPage;
 use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\MenuManager\Attributes\Group;
+use MoonShine\MenuManager\Attributes\Order;
 
 /**
  * @extends ModelResource<Mechanic, MechanicIndexPage, MechanicDetailPage, MechanicFormPage>
  */
+#[Group('Cars')]
+#[Order(16)]
 class MechanicResource extends ModelResource
 {
     protected string $model = Mechanic::class;

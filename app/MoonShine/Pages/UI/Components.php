@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages\UI;
 
-use MoonShine\Laravel\Pages\Page;
 use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Laravel\Pages\Page;
+use MoonShine\MenuManager\Attributes\Group;
+use MoonShine\MenuManager\Attributes\Order;
 use MoonShine\Support\Enums\Color as ColorEnum;
 use MoonShine\UI\Components\ActionButton;
 use MoonShine\UI\Components\Alert;
@@ -41,6 +43,8 @@ use MoonShine\UI\Components\Tabs;
 use MoonShine\UI\Components\Thumbnails;
 use MoonShine\UI\Components\Title;
 
+#[Group('UI')]
+#[Order(3)]
 class Components extends Page
 {
     /**

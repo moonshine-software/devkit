@@ -8,13 +8,14 @@ use App\Models\Image;
 use App\MoonShine\Resources\Image\Pages\ImageIndexPage;
 use App\MoonShine\Resources\Image\Pages\ImageFormPage;
 use App\MoonShine\Resources\Image\Pages\ImageDetailPage;
-
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\Contracts\Core\PageContract;
+use MoonShine\MenuManager\Attributes\Order;
 
 /**
  * @extends ModelResource<Image, ImageIndexPage, ImageFormPage, ImageDetailPage>
  */
+#[Order(11)]
 class ImageResource extends ModelResource
 {
     protected string $model = Image::class;

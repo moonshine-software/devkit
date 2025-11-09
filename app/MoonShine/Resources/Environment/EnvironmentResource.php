@@ -9,10 +9,14 @@ use App\MoonShine\Resources\Environment\Pages\EnvironmentDetailPage;
 use App\MoonShine\Resources\Environment\Pages\EnvironmentFormPage;
 use App\MoonShine\Resources\Environment\Pages\EnvironmentIndexPage;
 use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\MenuManager\Attributes\Group;
+use MoonShine\MenuManager\Attributes\Order;
 
 /**
  * @extends ModelResource<Environment, EnvironmentIndexPage, EnvironmentFormPage, EnvironmentDetailPage>
  */
+#[Group('Projects')]
+#[Order(22)]
 class EnvironmentResource extends ModelResource
 {
     protected string $model = Environment::class;
