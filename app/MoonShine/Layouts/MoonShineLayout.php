@@ -31,9 +31,23 @@ use MoonShine\ColorManager\ColorManager;
 use MoonShine\ColorManager\Palettes\PurplePalette;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
 use MoonShine\Contracts\ColorManager\PaletteContract;
+use MoonShine\Crud\Components\Fragment;
 use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
+use MoonShine\UI\Components\Layout\Body;
+use MoonShine\UI\Components\Layout\Burger;
+use MoonShine\UI\Components\Layout\Content;
+use MoonShine\UI\Components\Layout\Div;
+use MoonShine\UI\Components\Layout\Divider;
+use MoonShine\UI\Components\Layout\Flash;
+use MoonShine\UI\Components\Layout\Html;
+use MoonShine\UI\Components\Layout\Layout;
+use MoonShine\UI\Components\Layout\Menu;
+use MoonShine\UI\Components\Layout\MobileBar;
+use MoonShine\UI\Components\Layout\ThemeSwitcher;
+use MoonShine\UI\Components\Layout\Wrapper;
+use MoonShine\UI\Components\When;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -96,5 +110,69 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make(EnvironmentResource::class),
             ]),
         ];
+    }
+
+    public function build(): Layout
+    {
+        return Layout::make([
+            Html::make([
+                $this->getHeadComponent(),
+                Body::make([
+                    Wrapper::make([
+                        MobileBar::make([
+                            Fragment::make([
+                                $this->getLogoComponent()->minimized(),
+                            ])->class('menu-logo'),
+
+                            Fragment::make([
+                                Divider::make('Mobile bar'),
+                                Menu::make()->top(),
+                            ])->class('menu menu--horizontal'),
+
+                            Fragment::make([
+                                When::make(
+                                    fn (): bool => $this->isProfileEnabled(),
+                                    fn (): array
+                                        => [
+                                        $this->getProfileComponent(),
+                                    ],
+                                ),
+                                Div::make()->class('menu-divider menu-divider--vertical'),
+                                When::make(
+                                    fn (): bool => $this->hasThemes() && ! $this->isAlwaysDark(),
+                                    static fn (): array => [ThemeSwitcher::make()]
+                                ),
+                                Div::make([
+                                    Burger::make()->mobileBar(),
+                                ])->class('menu-burger'),
+                            ])->class('menu-actions'),
+                        ]),
+
+                        $this->getTopBarComponent(),
+                        $this->getSidebarComponent(),
+
+                        Div::make([
+                            Fragment::make([
+                                Flash::make(),
+
+                                $this->getHeaderComponent(),
+
+                                Content::make($this->getContentComponents()),
+
+                                $this->getFooterComponent(),
+                            ])->class(['layout-page', 'layout-page-simple' => $this->contentSimpled])->name(self::CONTENT_FRAGMENT_NAME),
+                        ])->class(['layout-main', 'layout-main-centered' => $this->contentCentered])->customAttributes(['id' => self::CONTENT_ID]),
+                    ]),
+                ]),
+            ])
+                ->customAttributes([
+                    'lang' => $this->getHeadLang(),
+                ])
+                ->withAlpineJs()
+                ->when(
+                    $this->hasThemes() || $this->isAlwaysDark(),
+                    fn (Html $html): Html => $html->withThemes($this->isAlwaysDark())
+                ),
+        ]);
     }
 }

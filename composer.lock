@@ -2339,12 +2339,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/moonshine-software/easymde.git",
-                "reference": "fa67f2befc31dc86ff0ebd4972ec5c6075a88329"
+                "reference": "79ebb31b3e03e8e077ad3cb93e936b30a3f49327"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moonshine-software/easymde/zipball/fa67f2befc31dc86ff0ebd4972ec5c6075a88329",
-                "reference": "fa67f2befc31dc86ff0ebd4972ec5c6075a88329",
+                "url": "https://api.github.com/repos/moonshine-software/easymde/zipball/79ebb31b3e03e8e077ad3cb93e936b30a3f49327",
+                "reference": "79ebb31b3e03e8e077ad3cb93e936b30a3f49327",
                 "shasum": ""
             },
             "require": {
@@ -2396,7 +2396,7 @@
                 "issues": "https://github.com/moonshine-software/easymde/issues",
                 "source": "https://github.com/moonshine-software/easymde"
             },
-            "time": "2025-11-06T20:10:01+00:00"
+            "time": "2025-11-08T12:56:10+00:00"
         },
         {
             "name": "moonshine/moonshine",
@@ -2404,7 +2404,7 @@
             "dist": {
                 "type": "path",
                 "url": "moonshine",
-                "reference": "f72e09020caf5e65d3b14caaa32c4242c1f37024"
+                "reference": "7e2c33ebf4f3bb82bd70ba5c13739c56ae1b015e"
             },
             "require": {
                 "ext-json": "*",
@@ -2634,12 +2634,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/moonshine-software/tinymce.git",
-                "reference": "6b0a5a23b47df5de7cac86d074ffd898ebdbcc8a"
+                "reference": "299e975860d5bb93b76ff741e8c711bfd0bade58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moonshine-software/tinymce/zipball/6b0a5a23b47df5de7cac86d074ffd898ebdbcc8a",
-                "reference": "6b0a5a23b47df5de7cac86d074ffd898ebdbcc8a",
+                "url": "https://api.github.com/repos/moonshine-software/tinymce/zipball/299e975860d5bb93b76ff741e8c711bfd0bade58",
+                "reference": "299e975860d5bb93b76ff741e8c711bfd0bade58",
                 "shasum": ""
             },
             "require": {
@@ -2690,7 +2690,7 @@
                 "issues": "https://github.com/moonshine-software/tinymce/issues",
                 "source": "https://github.com/moonshine-software/tinymce"
             },
-            "time": "2025-11-07T17:30:11+00:00"
+            "time": "2025-11-08T12:56:27+00:00"
         },
         {
             "name": "nesbot/carbon",
