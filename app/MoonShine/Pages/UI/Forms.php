@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages\UI;
 
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
 use MoonShine\Advanced\Fields\RadioGroup;
 use MoonShine\Contracts\Core\DependencyInjection\CrudRequestContract;
 use MoonShine\EasyMde\Fields\Markdown;
-use MoonShine\Laravel\MoonShineRequest;
 use MoonShine\Laravel\Pages\Page;
+use MoonShine\MenuManager\Attributes\Group;
+use MoonShine\MenuManager\Attributes\Order;
 use MoonShine\Support\Attributes\AsyncMethod;
-use MoonShine\Support\Enums\FormMethod;
 use MoonShine\TinyMce\Fields\TinyMce;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Layout\Column;
-use MoonShine\UI\Components\Layout\Flex;
 use MoonShine\UI\Components\Layout\Grid;
 use MoonShine\UI\Fields\Checkbox;
 use MoonShine\UI\Fields\Color;
@@ -25,13 +23,14 @@ use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\DateRange;
 use MoonShine\UI\Fields\File;
 use MoonShine\UI\Fields\Number;
-use MoonShine\UI\Fields\Range;
 use MoonShine\UI\Fields\RangeSlider;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Switcher;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 
+#[Group('UI')]
+#[Order(4)]
 class Forms extends Page
 {
     public function getBreadcrumbs(): array

@@ -9,10 +9,14 @@ use App\MoonShine\Resources\Post\Pages\PostDetailPage;
 use App\MoonShine\Resources\Post\Pages\PostFormPage;
 use App\MoonShine\Resources\Post\Pages\PostIndexPage;
 use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\MenuManager\Attributes\Group;
+use MoonShine\MenuManager\Attributes\Order;
 
 /**
  * @extends ModelResource<Post, PostIndexPage, PostDetailPage, PostFormPage>
  */
+#[Group('Posts')]
+#[Order(15)]
 class PostResource extends ModelResource
 {
     protected string $model = Post::class;

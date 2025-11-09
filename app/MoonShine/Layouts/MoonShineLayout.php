@@ -4,37 +4,12 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
-use App\MoonShine\Pages\UI\Components;
-use App\MoonShine\Pages\UI\Fields;
-use App\MoonShine\Pages\UI\Forms;
-use App\MoonShine\Pages\UI\JsonPage;
-use App\MoonShine\Pages\UI\Selects;
-use App\MoonShine\Pages\UI\ShowWhen;
-use App\MoonShine\Pages\UI\ThemeGeneratorPage;
-use App\MoonShine\Resources\Car\CarResource;
-use App\MoonShine\Resources\Category\CategoryResource;
-use App\MoonShine\Resources\Comment\CommentResource;
-use App\MoonShine\Resources\Deployment\DeploymentResource;
-use App\MoonShine\Resources\Environment\EnvironmentResource;
-use App\MoonShine\Resources\Image\ImageResource;
-use App\MoonShine\Resources\Mechanic\MechanicResource;
-use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
-use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
-use App\MoonShine\Resources\Owner\OwnerResource;
-use App\MoonShine\Resources\PolyComment\PolyCommentResource;
-use App\MoonShine\Resources\Post\PostResource;
-use App\MoonShine\Resources\Project\ProjectResource;
-use App\MoonShine\Resources\Shop\ShopResource;
-use App\MoonShine\Resources\Tag\TagResource;
-use App\MoonShine\Resources\User\UserResource;
 use MoonShine\ColorManager\ColorManager;
 use MoonShine\ColorManager\Palettes\PurplePalette;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
 use MoonShine\Contracts\ColorManager\PaletteContract;
 use MoonShine\Crud\Components\Fragment;
 use MoonShine\Laravel\Layouts\AppLayout;
-use MoonShine\MenuManager\MenuGroup;
-use MoonShine\MenuManager\MenuItem;
 use MoonShine\UI\Components\Layout\Body;
 use MoonShine\UI\Components\Layout\Burger;
 use MoonShine\UI\Components\Layout\Content;
@@ -68,6 +43,7 @@ final class MoonShineLayout extends AppLayout
 
     protected function menu(): array
     {
+        /*
         return [
             MenuGroup::make(static fn () => __('moonshine::ui.resource.system'), [
                 MenuItem::make(MoonShineUserResource::class),
@@ -110,6 +86,9 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make(EnvironmentResource::class),
             ]),
         ];
+        */
+
+        return $this->autoloadMenu();
     }
 
     public function build(): Layout

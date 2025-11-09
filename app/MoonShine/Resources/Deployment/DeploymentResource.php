@@ -9,10 +9,14 @@ use App\MoonShine\Resources\Deployment\Pages\DeploymentDetailPage;
 use App\MoonShine\Resources\Deployment\Pages\DeploymentFormPage;
 use App\MoonShine\Resources\Deployment\Pages\DeploymentIndexPage;
 use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\MenuManager\Attributes\Group;
+use MoonShine\MenuManager\Attributes\Order;
 
 /**
  * @extends ModelResource<Deployment, DeploymentIndexPage, DeploymentFormPage, DeploymentDetailPage>
  */
+#[Group('Projects')]
+#[Order(21)]
 class DeploymentResource extends ModelResource
 {
     protected string $model = Deployment::class;

@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages\UI;
 
-use MoonShine\Laravel\Http\Responses\MoonShineJsonResponse;
 use MoonShine\Laravel\Pages\Page;
-use MoonShine\Support\ToastEventParams;
+use MoonShine\MenuManager\Attributes\Group;
+use MoonShine\MenuManager\Attributes\Order;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\Json;
 use MoonShine\UI\Fields\Text;
 
+#[Group('UI')]
+#[Order(7)]
 final class ShowWhen extends Page
 {
     protected string $title = 'ShowWhen';

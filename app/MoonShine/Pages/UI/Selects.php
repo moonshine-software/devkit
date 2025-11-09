@@ -8,6 +8,8 @@ use App\MoonShine\Resources\Car\CarResource;
 use App\MoonShine\Resources\Post\PostResource;
 use MoonShine\Crud\JsonResponse;
 use MoonShine\Laravel\Pages\Page;
+use MoonShine\MenuManager\Attributes\Group;
+use MoonShine\MenuManager\Attributes\Order;
 use MoonShine\Support\AlpineJs;
 use MoonShine\Support\Attributes\AsyncMethod;
 use MoonShine\Support\DTOs\Select\Option;
@@ -27,6 +29,8 @@ use MoonShine\UI\Components\Link;
 use MoonShine\UI\Fields\Select;
 use Random\RandomException;
 
+#[Group('UI')]
+#[Order(5)]
 final class Selects extends Page
 {
     protected string $title = 'Selects';
