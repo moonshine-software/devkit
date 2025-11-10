@@ -119,11 +119,11 @@ class Components extends Page
             Tabs::make([
                 Tabs\Tab::make('Tab 1', [
                     Thumbnails::make(['https://cutcode.dev/images/platforms/youtube.png', 'https://cutcode.dev/images/platforms/youtube.png'])
-                ]),
+                ])->icon('user'),
                 Tabs\Tab::make('Tab 2', [
                     Title::make('Title'),
                     ThemeSwitcher::make(),
-                ])
+                ])->icon('rectangle-group')
             ]),
             LineBreak::make(),
             FlexibleRender::make('FlexibleRender'),
