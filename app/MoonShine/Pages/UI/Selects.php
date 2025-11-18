@@ -20,6 +20,7 @@ use MoonShine\Support\Enums\JsEvent;
 use MoonShine\Support\Enums\ToastType;
 use MoonShine\Support\EventParams\ToastEventParams;
 use MoonShine\UI\Components\Collapse;
+use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Heading;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Layout\Column;
@@ -58,7 +59,7 @@ final class Selects extends Page
         return new Options([
             new Option('France', '1'),
             new Option('Russia', '2', properties: new OptionProperty($this->getImage())),
-            new Option('Italy', '3'),
+            new Option('Italy', '3', selected: true),
             new Option('USA', '4'),
         ]);
     }
@@ -72,7 +73,7 @@ final class Selects extends Page
             ])),
 
             new OptionGroup('USA', new Options([
-                new Option('Los Angeles', '3'),
+                new Option('Los Angeles', '3', selected: true),
                 new Option('New York', '4'),
             ])),
         ]);
@@ -88,6 +89,30 @@ final class Selects extends Page
                 Link::make(app(CarResource::class)->getUrl(), 'AssociatedWith'),
                 LineBreak::make(),
                 Link::make(app(PostResource::class)->getUrl(), 'Reactivity'),
+            ]),
+
+            LineBreak::make(),
+
+            FormBuilder::make()->fields([
+                Select::make('Select (overrided by form builder)','select')->options($defaultOptions),
+                Select::make('Select multi (overrided by form builder)','select_multi')->multiple()->options($groupedOptions),
+                Select::make('Select multi array (overrided by form builder)','select_multi_array')->multiple()->options([
+                    1 => 1,
+                    2 => 2,
+                    3 => 3,
+                    4 => 4,
+                ]),
+                Select::make('Select array (overrided by form builder)','select_array')->options([
+                    1 => 1,
+                    2 => 2,
+                    3 => 3,
+                    4 => 4,
+                ]),
+            ])->fill([
+                'select' => 1,
+                'select_multi' => [2,4],
+                'select_multi_array' => [2,4],
+                'select_array' => 2,
             ]),
 
             LineBreak::make(),
