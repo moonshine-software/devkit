@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
+use MoonShine\AssetManager\InlineCss;
+use MoonShine\AssetManager\Raw;
 use MoonShine\ColorManager\ColorManager;
 use MoonShine\ColorManager\Palettes\NeutralPalette;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
@@ -30,6 +32,22 @@ final class MoonShineLayout extends AppLayout
      * @var null|class-string<PaletteContract>
      */
     protected ?string $palette = NeutralPalette::class;
+
+    protected function assets(): array
+    {
+        return [
+            ...parent::assets(),
+            // Mobile only
+            /*InlineCss::make(<<<CSS
+                :root {
+                    --spacing: 0.25rem;
+                    --text-xs: 15px;
+                    --text-sm: 15px;
+                    --ms-btn-icon-size:18px;
+                }
+            CSS),*/
+        ];
+    }
 
     /**
      * @param  ColorManager  $colorManager
