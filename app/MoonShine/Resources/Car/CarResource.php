@@ -25,6 +25,11 @@ class CarResource extends ModelResource
 
     protected string $column = 'name';
 
+    protected array $with = [
+        'mechanic',
+        'shop',
+    ];
+
     protected function pages(): array
     {
         return [

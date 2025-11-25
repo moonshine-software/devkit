@@ -24,6 +24,11 @@ class TagResource extends ModelResource
 
     protected string $column = 'name';
 
+    protected array $with = [
+        'posts',
+        'projects',
+    ];
+
     protected function pages(): array
     {
         return [

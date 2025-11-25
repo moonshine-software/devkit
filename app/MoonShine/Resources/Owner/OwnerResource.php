@@ -25,6 +25,10 @@ class OwnerResource extends ModelResource
 
     protected string $column = 'name';
 
+    protected array $with = [
+        'car',
+    ];
+
     protected function pages(): array
     {
         return [

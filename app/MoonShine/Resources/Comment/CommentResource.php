@@ -24,6 +24,11 @@ class CommentResource extends ModelResource
 
     protected string $title = 'Comments';
 
+    protected array $with = [
+        'post',
+        'user',
+    ];
+
     /**
      * @return list<class-string<PageContract>>
      */

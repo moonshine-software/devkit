@@ -27,6 +27,10 @@ class EnvironmentResource extends ModelResource
 
     protected bool $detailInModal = true;
 
+    protected array $with = [
+        'project',
+    ];
+
     protected function pages(): array
     {
         return [

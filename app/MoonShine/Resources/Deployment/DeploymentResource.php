@@ -25,6 +25,10 @@ class DeploymentResource extends ModelResource
 
     protected string $column = 'name';
 
+    protected array $with = [
+        'environment',
+    ];
+
     protected function pages(): array
     {
         return [

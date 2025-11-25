@@ -24,6 +24,11 @@ class PolyCommentResource extends ModelResource
 
     protected string $title = 'PolyComments';
 
+    protected array $with = [
+        'commentable',
+        'user',
+    ];
+
     /**
      * @return list<class-string<PageContract>>
      */

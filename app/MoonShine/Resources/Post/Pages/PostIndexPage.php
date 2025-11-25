@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Post\Pages;
 
+use App\MoonShine\Resources\Comment\CommentResource;
 use App\MoonShine\Resources\Post\PostResource;
 use MoonShine\Contracts\UI\Collection\TableRowsContract;
 use MoonShine\Contracts\UI\ComponentContract;
@@ -11,8 +12,11 @@ use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Crud\JsonResponse;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
+use MoonShine\Laravel\Fields\Relationships\HasMany;
+use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
+use MoonShine\MenuManager\MenuItem;
 use MoonShine\Support\AlpineJs;
 use MoonShine\Support\Attributes\AsyncMethod;
 use MoonShine\Support\Enums\JsEvent;
@@ -61,6 +65,8 @@ class PostIndexPage extends IndexPage
 
             BelongsTo::make('User'),
             Textarea::make('Text'),
+            RelationRepeater::make('Comment', 'comment', resource: CommentResource::class),
+            HasMany::make('Comments'),
             BelongsToMany::make('Categories')
                 ->inLine()
         ];

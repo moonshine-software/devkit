@@ -9,6 +9,7 @@ use App\MoonShine\Resources\Post\Pages\PostDetailPage;
 use App\MoonShine\Resources\Post\Pages\PostFormPage;
 use App\MoonShine\Resources\Post\Pages\PostIndexPage;
 use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\MenuManager\Attributes\Badge;
 use MoonShine\MenuManager\Attributes\Group;
 use MoonShine\MenuManager\Attributes\Order;
 
@@ -17,6 +18,7 @@ use MoonShine\MenuManager\Attributes\Order;
  */
 #[Group('Posts')]
 #[Order(15)]
+#[Badge('new')]
 class PostResource extends ModelResource
 {
     protected string $model = Post::class;
@@ -30,6 +32,12 @@ class PostResource extends ModelResource
     protected array $with = [
         'user',
         'categories',
+        'comment',
+        'comment.post',
+        'comment.user',
+        'comments',
+        'comments.post',
+        'comments.user',
         'image',
         'tags',
     ];

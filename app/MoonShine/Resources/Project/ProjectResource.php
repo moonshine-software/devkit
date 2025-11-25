@@ -27,6 +27,10 @@ class ProjectResource extends ModelResource
 
     protected string $queryParamPrefix = 'pr_';
 
+    protected array $with = [
+        'tags',
+    ];
+
     protected function pages(): array
     {
         return [
