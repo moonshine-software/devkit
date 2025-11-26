@@ -7,9 +7,11 @@ namespace App\MoonShine\Resources\PolyComment\Pages;
 use App\Models\Post;
 use App\Models\Project;
 use App\MoonShine\Resources\PolyComment\PolyCommentResource;
+use App\MoonShine\Resources\Tag\TagResource;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
 use MoonShine\Laravel\Fields\Relationships\MorphTo;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\UI\Fields\ID;
@@ -34,6 +36,7 @@ class PolyCommentFormPage extends FormPage
                 ]),
             BelongsTo::make('User'),
             Textarea::make('Text'),
+            BelongsToMany::make('Tags', 'tags')->selectMode()
         ];
     }
 }

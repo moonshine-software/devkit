@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\PolyComment;
 use App\Models\Tag;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -28,6 +29,23 @@ return new class extends Migration
 
             $table->morphs('taggable');
         });
+
+        Schema::create('poly_comment_tag', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignIdFor(PolyComment::class)
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->foreignIdFor(Tag::class)
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->timestamps();
+        });
+
     }
 
     /**

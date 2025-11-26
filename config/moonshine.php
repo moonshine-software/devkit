@@ -80,7 +80,7 @@ return [
 
     // Layout, palette, pages, forms
     'layout' => MoonShineLayout::class,
-    'palette' => MoonShine\ColorManager\Palettes\PurplePalette::class,
+    'palette' => MoonShine\ColorManager\Palettes\NeutralPalette::class,
 
     'forms' => [
         'login' => LoginForm::class,
