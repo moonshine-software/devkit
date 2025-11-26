@@ -51,6 +51,7 @@ final class MoonShineUserFormPage extends FormPage
                             formatted: static fn (MoonshineUserRole $model) => $model->name,
                             resource: MoonShineUserRoleResource::class,
                         )
+                            ->asyncSearch()
                             ->creatable()
                             ->valuesQuery(static fn (Builder $q) => $q->select(['id', 'name'])),
 

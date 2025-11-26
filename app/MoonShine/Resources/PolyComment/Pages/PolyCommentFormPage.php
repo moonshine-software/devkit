@@ -36,7 +36,7 @@ class PolyCommentFormPage extends FormPage
                 ]),
             BelongsTo::make('User'),
             Textarea::make('Text'),
-            BelongsToMany::make('Tags', 'tags')->selectMode()
+            BelongsToMany::make('Tags', 'tags')->selectMode()->asyncSearch()
         ];
     }
 }

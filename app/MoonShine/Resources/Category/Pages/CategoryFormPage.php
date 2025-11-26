@@ -6,6 +6,7 @@ namespace App\MoonShine\Resources\Category\Pages;
 
 use App\MoonShine\Resources\Category\CategoryResource;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use MoonShine\Laravel\Fields\Relationships\HasMany;
 use MoonShine\Laravel\Fields\Relationships\MorphOne;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Contracts\UI\ComponentContract;
@@ -29,6 +30,7 @@ class CategoryFormPage extends FormPage
                 ID::make(),
                 BelongsTo::make('Category')
                     ->nullable(),
+                HasMany::make('Children', 'children', resource: CategoryResource::class)->creatable(),
                 Text::make('Name')
                     ->required(),
                 MorphOne::make('Image'),
