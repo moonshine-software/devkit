@@ -28,7 +28,7 @@ class CategoryFormPage extends FormPage
         return [
             Box::make([
                 ID::make(),
-                BelongsTo::make('Category')
+                BelongsTo::make('Category', 'parent', resource: CategoryResource::class)
                     ->nullable(),
                 HasMany::make('Children', 'children', resource: CategoryResource::class)->creatable(),
                 Text::make('Name')

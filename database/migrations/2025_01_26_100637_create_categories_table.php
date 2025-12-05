@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table
-                ->foreignIdFor(Category::class)
+                ->foreignIdFor(Category::class, 'parent_id')
                 ->nullable()
                 ->constrained()
                 ->nullOnDelete()

@@ -22,6 +22,10 @@ class ImageResource extends ModelResource
 
     protected string $title = 'Images';
 
+    protected array $with = [
+        'imageable',
+    ];
+
     /**
      * @return list<class-string<PageContract>>
      */

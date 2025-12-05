@@ -26,7 +26,7 @@ class CategoryIndexPage extends IndexPage
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Category'),
+            BelongsTo::make('Category', 'parent', resource: CategoryResource::class),
             Text::make('Name'),
             MorphOne::make('Image'),
         ];

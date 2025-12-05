@@ -16,7 +16,7 @@ class Category extends Model
     use HasUuids;
 
     protected $fillable = [
-        'category_id',
+        'parent_id',
         'name',
     ];
 
@@ -25,13 +25,13 @@ class Category extends Model
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    public function category(): BelongsTo
+    public function parent(): BelongsTo
     {
-        return $this->belongsTo(self::class);
+        return $this->belongsTo(self::class, 'parent_id', 'id');
     }
 
     public function children(): HasMany
     {
-        return $this->hasMany(self::class);
+        return $this->hasMany(self::class, 'parent_id', 'id');
     }
 }

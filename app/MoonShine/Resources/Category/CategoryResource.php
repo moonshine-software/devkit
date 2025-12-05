@@ -26,7 +26,8 @@ class CategoryResource extends ModelResource
     protected string $column = 'name';
 
     protected array $with = [
-        'category',
+        'parent',
+        'children',
         'image',
     ];
 
