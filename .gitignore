@@ -3,7 +3,7 @@
 /public/build
 /public/hot
 /public/storage
-/public/vendor/moonshine
+/public/vendor/
 /storage/*.key
 /storage/pail
 /moonshine
