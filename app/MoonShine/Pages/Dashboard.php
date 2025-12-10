@@ -9,11 +9,12 @@ use App\MoonShine\Resources\Project\ProjectResource;
 use App\MoonShine\Resources\User\UserResource;
 use MoonShine\Apexcharts\Components\DonutChartMetric;
 use MoonShine\Apexcharts\Components\LineChartMetric;
+use MoonShine\Apexcharts\Components\RawChartMetric;
+use MoonShine\Apexcharts\Support\SeriesItem;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\MenuManager\Attributes\SkipMenu;
 use MoonShine\Support\Enums\Layer;
-use MoonShine\UI\Components\Layout\Column;
 use MoonShine\UI\Components\Layout\Grid;
 use MoonShine\UI\Components\Metrics\Wrapped\ValueMetric;
 use MoonShine\UI\Components\Tabs;
@@ -43,41 +44,58 @@ class Dashboard extends Page
 	{
 		return [
             Grid::make([
-                Column::make([
-                    ValueMetric::make('Metric')->value(100),
-                ])->columnSpan(6),
-                Column::make([
-                    ValueMetric::make('Metric')->value(100),
-                ])->columnSpan(6),
-                Column::make([
-                    DonutChartMetric::make('Подписчики')
-                        ->columnSpan(6)
-                        ->values(['CutCode' => 10000, 'Apple' => 9999]),
-                ])->columnSpan(6),
-                Column::make([
-                    LineChartMetric::make('Заказы')
-                        ->line([
-                            'Выручка 1' => [
-                                now()->format('Y-m-d') => 100,
-                                now()->addDay()->format('Y-m-d') => 200,
-                                now()->addDays(2)->format('Y-m-d') => 500,
+                ValueMetric::make('Metric')
+                    ->value(100)
+                    ->columnSpan(6),
+
+                ValueMetric::make('Metric')
+                    ->value(100)
+                    ->columnSpan(6),
+
+                DonutChartMetric::make('Подписчики')
+                    ->columnSpan(4)
+                    ->values(['CutCode' => 10000, 'Apple' => 9999]),
+
+                LineChartMetric::make('Заказы')
+                    ->columnSpan(4)
+                    ->series([
+                        SeriesItem::make('Выручка 1', [
+                            now()->format('Y-m-d') => 100,
+                            now()->addDay()->format('Y-m-d') => 200,
+                            now()->addDays(2)->format('Y-m-d') => 500,
+                            now()->addDays(3)->format('Y-m-d') => 700,
+                        ])->color('#EC4176'),
+                        SeriesItem::make('Выручка 2', [
+                            now()->format('Y-m-d') => 300,
+                            now()->addDay()->format('Y-m-d') => 400,
+                            now()->addDays(2)->format('Y-m-d') => 300,
+                            now()->addDays(3)->format('Y-m-d') => 800,
+                        ])->color('#85737E'),
+                        SeriesItem::make('Выручка 3', [
+                            now()->format('Y-m-d') => 400,
+                            now()->addDay()->format('Y-m-d') => 500,
+                            now()->addDays(2)->format('Y-m-d') => 400,
+                            now()->addDays(3)->format('Y-m-d') => 600,
+                        ])->color('#1e96fc'),
+                    ]),
+
+                RawChartMetric::make('Interactive Radar Chart')
+                    ->columnSpan(4)
+                    ->config([
+                        'chart' => [
+                            'type' => 'radar',
+                            'height' => 350,
+                        ],
+                        'series' => [
+                            [
+                                'name' => 'Current Year',
+                                'data' => [20, 90, 45, 75, 60],
                             ],
-                        ])
-                        ->line([
-                            'Выручка 2' => [
-                                now()->format('Y-m-d') => 300,
-                                now()->addDay()->format('Y-m-d') => 400,
-                                now()->addDays(2)->format('Y-m-d') => 300,
-                            ],
-                        ], '#EC4176')
-                        ->line([
-                            'Выручка 3' => [
-                                now()->format('Y-m-d') => 400,
-                                now()->addDay()->format('Y-m-d') => 500,
-                                now()->addDays(2)->format('Y-m-d') => 300,
-                            ],
-                        ], '#1e96fc'),
-                ])->columnSpan(6),
+                        ],
+                        'xaxis' => [
+                            'categories' => ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'],
+                        ],
+                    ])
             ]),
 
             Tabs::make([
