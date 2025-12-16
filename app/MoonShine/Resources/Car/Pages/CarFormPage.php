@@ -27,7 +27,7 @@ class CarFormPage extends FormPage
             Box::make([
                 ID::make(),
                 Text::make('Name'),
-                BelongsTo::make('Shop')->asyncSearch(),
+                BelongsTo::make('Shop')->creatable()->asyncSearch(),
                 BelongsTo::make('Mechanic')->associatedWith('shop_id'),
             ])
         ];

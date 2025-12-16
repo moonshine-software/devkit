@@ -66,7 +66,7 @@ class PostIndexPage extends IndexPage
             BelongsTo::make('User'),
             Textarea::make('Text'),
             RelationRepeater::make('Comment', 'comment', resource: CommentResource::class),
-            HasMany::make('Comments'),
+            HasMany::make('Comments')->relatedLink(),
             BelongsToMany::make('Categories')
                 ->inLine()
         ];

@@ -13,7 +13,7 @@ use MoonShine\Laravel\Exceptions\MoonShineNotFoundException;
 use MoonShine\Laravel\Http\Middleware\Authenticate;
 use MoonShine\Laravel\Http\Middleware\ChangeLocale;
 use App\MoonShine\Layouts\MoonShineLayout;
-use MoonShine\Laravel\Models\MoonshineUser;
+use MoonShine\Permissions\Models\MoonshineUser;
 use App\MoonShine\Pages\Dashboard;
 use MoonShine\Laravel\Pages\ErrorPage;
 use MoonShine\Laravel\Pages\LoginPage;

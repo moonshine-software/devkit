@@ -10,6 +10,7 @@ use App\MoonShine\Resources\MoonShineUser\Pages\MoonShineUserFormPage;
 use App\MoonShine\Resources\MoonShineUser\Pages\MoonShineUserIndexPage;
 use MoonShine\MenuManager\Attributes\Group;
 use MoonShine\MenuManager\Attributes\Order;
+use MoonShine\Permissions\Traits\WithPermissions;
 use MoonShine\Support\Attributes\Icon;
 use MoonShine\Support\Enums\Action;
 use MoonShine\Support\ListOf;
@@ -22,7 +23,9 @@ use MoonShine\Support\ListOf;
 #[Order(0)]
 class MoonShineUserResource extends ModelResource
 {
-    protected string $model = MoonshineUser::class;
+    use WithPermissions;
+
+    public string $model = \MoonShine\Permissions\Models\MoonshineUser::class;
 
     protected string $column = 'name';
 
