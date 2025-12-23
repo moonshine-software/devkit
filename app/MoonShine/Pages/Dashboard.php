@@ -46,15 +46,6 @@ class Dashboard extends Page
     protected function components(): iterable
 	{
 		return [
-            FormBuilder::make()
-                ->fields([
-                    Select::make('Section')->options([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5])->multiple(),
-                    Text::make('Title'),
-                    Select::make('Select')->options([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5])
-                        ->multiple()
-                        ->showWhen('section', 'in', [2])
-                    ,
-                ]),
             Grid::make([
                 ValueMetric::make('Metric')
                     ->value(100)
