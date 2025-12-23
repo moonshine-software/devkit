@@ -31,7 +31,10 @@ final class ShowWhen extends Page
                     ->fields([
                         Date::make('Date'),
 
-                        Text::make('Title', 'title')->showWhenDate('date', '>', '2025-01-01'),
+                        Text::make('Title', 'title')
+                            ->showWhenDate('date', '>', '2025-01-01')
+                            ->showWhenDate('date', '<', '2026-01-01')
+                        ,
 
                         Text::make('Sub Title', 'sub_title')
                             ->wrapName('somewrap')
@@ -40,17 +43,28 @@ final class ShowWhen extends Page
 
                         Text::make('Sub Title 2', 'sub_title_2')
                             ->wrapName('somewrap')
-                            ->showWhen('sub_title', 'test'),
+                            ->showWhen('somewrap.sub_title', 'test'),
 
                         DateRange::make('Date Range', 'date_range')->showWhen('title', 'test'),
-                        Range::make('Range', 'range')->showWhenDate('date_range', '>', '2025-01-01'),
-                        RangeSlider::make('Range slider', 'range_slider')->showWhen('range', [5, 10]),
+
+                        Range::make('Range', 'range')
+                            ->showWhenDate('date_range.from', '>', '2025-01-01')
+                            ->showWhenDate('date_range.to', '<', '2026-01-01')
+                        ,
+
+                        RangeSlider::make('Range slider', 'range_slider')
+                            ->fromTo('f', 't')
+                            ->showWhen('range.from', '>', 3)
+                            ->showWhen('range.to', '<', 5)
+                        ,
+
+                        Text::make('Text', 'text')->showWhen('range_slider.f', '>', 10),
+
 
                         Select::make('Section')
                             ->showWhen('title', 'test')
                             ->withoutWrapper()
                             ->multiple()
-                            ->setValue([2])
                             ->options([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 22 => 22])
                         ,
 
