@@ -18,7 +18,8 @@
         "moonshine/permissions": "3.*.*-dev",
         "moonshine/moonshine": "4.*.*-dev",
         "moonshine/ru": "^1.0",
-        "moonshine/tinymce": "2.*.*-dev"
+        "moonshine/tinymce": "2.*.*-dev",
+        "moonshine/import-export": "2.*.*-dev"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",

@@ -12,6 +12,7 @@ use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Json;
+use MoonShine\UI\Fields\Preview;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 
@@ -34,6 +35,9 @@ class CommentFormPage extends FormPage
                     ->required(),
                 Textarea::make('Text')
                     ->required(),
+
+                Preview::make('Image', formatted: fn() => 'https://cutcode.dev/images/platforms/tasks.png')->image(),
+
                 Json::make('Data')
                     ->fields([
                         Text::make('Title'),

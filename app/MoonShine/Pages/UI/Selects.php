@@ -19,6 +19,7 @@ use MoonShine\Support\DTOs\Select\Options;
 use MoonShine\Support\Enums\JsEvent;
 use MoonShine\Support\Enums\ToastType;
 use MoonShine\Support\EventParams\ToastEventParams;
+use MoonShine\UI\Components\ActionButton;
 use MoonShine\UI\Components\Collapse;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Heading;
@@ -92,6 +93,21 @@ final class Selects extends Page
             ]),
 
             LineBreak::make(),
+
+            LineBreak::make(),
+
+            FormBuilder::make()->name('reset-form')->fields([
+                Select::make('Select')->nullable()->options($defaultOptions),
+            ])->buttons([
+                ActionButton::make('Default reset')->setAttribute('type', 'reset'),
+
+                ActionButton::make('Event reset')->dispatchEvent([
+                    AlpineJs::event(
+                        JsEvent::FORM_RESET,
+                        'reset-form',
+                    )
+                ]),
+            ]),
 
             FormBuilder::make()->fields([
                 Select::make('Select (overrided by form builder)','select')->options($defaultOptions),
