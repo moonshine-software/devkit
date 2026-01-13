@@ -47,6 +47,15 @@ return [
             'report' => false,
         ],
 
+        'api' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => 'http://127.0.0.1:8001/storage',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
