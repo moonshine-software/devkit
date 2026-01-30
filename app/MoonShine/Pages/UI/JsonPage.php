@@ -210,7 +210,7 @@ class JsonPage extends Page
             Json::make('Data')
                 ->fields([
                     Text::make('Title'),
-                    Text::make('Value'),
+                    Text::make('Value')->showWhenRow('title', 'test'),
                 ])->removable(),
         ]);
     }

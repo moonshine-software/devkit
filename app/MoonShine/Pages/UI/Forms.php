@@ -5,6 +5,14 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages\UI;
 
 use Illuminate\Support\Facades\Validator;
+use MoonShine\Advanced\Components\LinkGroup\LinkGroup;
+use MoonShine\Advanced\Components\LinkGroup\LinkItem;
+use MoonShine\Advanced\Components\Stepper\Step;
+use MoonShine\Advanced\Components\Stepper\Stepper;
+use MoonShine\Advanced\Components\Tabs\AsyncTab;
+use MoonShine\Advanced\Components\Tabs\AsyncTabs;
+use MoonShine\Advanced\Fields\ButtonGroup;
+use MoonShine\Advanced\Fields\CheckboxList;
 use MoonShine\Advanced\Fields\RadioGroup;
 use MoonShine\Contracts\Core\DependencyInjection\CrudRequestContract;
 use MoonShine\EasyMde\Fields\Markdown;
@@ -14,6 +22,7 @@ use MoonShine\MenuManager\Attributes\Order;
 use MoonShine\Support\Attributes\AsyncMethod;
 use MoonShine\TinyMce\Fields\TinyMce;
 use MoonShine\UI\Components\FormBuilder;
+use MoonShine\UI\Components\Heading;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Layout\Column;
 use MoonShine\UI\Components\Layout\Grid;
@@ -108,6 +117,36 @@ class Forms extends Page
                                     ])
                                         ->columnSpan(6),
                                 ]),
+                                AsyncTabs::make([
+                                    AsyncTab::make('Tab 1', '/html'),
+                                    AsyncTab::make('Tab 2', '/html')->icon('users'),
+                                ]),
+                                Stepper::make([
+                                    Step::make([
+                                        Heading::make('Step 1 content')
+                                    ], 'Step 1', 'Some description'),
+
+                                    Step::make([
+                                        Heading::make('Step 2 content')
+                                    ], 'Step 2', 'Some description'),
+
+                                    Step::make([
+                                        Heading::make('Step 3 content')
+                                    ], 'Step 3', 'Some description'),
+                                ]),
+                                LinkGroup::make([
+                                    LinkItem::make('/documentation', 'Documentation', 'Some description')->icon('arrow-right'),
+                                    // ...
+                                ]),
+                                CheckboxList::make('Plan')->options([
+                                    1 => 'Basic',
+                                    2 => 'Standard',
+                                    3 => 'Pro',
+                                ])->inline(),
+                                ButtonGroup::make('ButtonGroup')->options([
+                                    1 => 'Option 1',
+                                    2 => 'Option 2',
+                                ])->setValue(2),
                                 RadioGroup::make('RadioGroup')->options([
                                     1 => 'Option 1',
                                     2 => 'Option 2',

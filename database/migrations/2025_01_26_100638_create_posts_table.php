@@ -49,7 +49,9 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->string('pivot_field')->nullable();
+            $table->string('image')->nullable();
+            $table->json('data')->nullable();
+            $table->string('subtitle')->nullable();
 
             $table->timestamps();
         });

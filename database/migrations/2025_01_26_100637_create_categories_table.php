@@ -22,6 +22,8 @@ return new class extends Migration
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
 
+            $table->integer('sorting')->default(999);
+
             $table->timestamps();
         });
     }
