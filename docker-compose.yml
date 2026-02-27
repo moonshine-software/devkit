@@ -26,6 +26,8 @@ services:
     container_name: ${COMPOSE_PROJECT_NAME}-php
     volumes:
       - ./:/var/www/app
+    environment:
+      XDEBUG_MODE: ${XDEBUG_MODE:-off}
 
   npm:
     image: node:23.6.1-alpine3.20
