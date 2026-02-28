@@ -25,7 +25,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-configure gd --with-jpeg --with-freetype
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
-RUN pecl install redis
+RUN pecl install redis xdebug
 
 COPY --from=composer:2.8.5 /usr/bin/composer /usr/bin/composer
 
