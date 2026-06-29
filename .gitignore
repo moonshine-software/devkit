@@ -27,3 +27,4 @@ yarn-error.log
 /open-admin-schemas
 .claude
 .guidelines
+.playwright-mcp

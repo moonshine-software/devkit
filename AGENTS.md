@@ -78,6 +78,7 @@ Use Playwright MCP for live checks:
 3. Open a resource/page URL directly when possible.
 4. Use Playwright network logs to verify async requests and response bodies.
 5. Check browser console warnings/errors after the interaction.
+6. Save all screenshots into the `.playwright-mcp` directory.
 
 ## Known Gotchas
 

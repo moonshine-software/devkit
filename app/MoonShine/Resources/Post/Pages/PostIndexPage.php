@@ -32,6 +32,7 @@ use MoonShine\UI\Components\Table\TableTd;
 use MoonShine\UI\Fields\Fieldset;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Number;
+use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 
@@ -52,7 +53,11 @@ class PostIndexPage extends IndexPage
             Fieldset::make('Info', function (Fieldset $ctx) {
                 return [
                     Number::make('Stars', formatted: fn() => 3)->stars(),
-                    Text::make('Name')->updateInPopover($this->getListComponentName()),
+                    Select::make('Name')->options([
+                        'First post' => 'First post',
+                        'Second post' => 'Second post',
+                        'Third post' => 'Third post',
+                    ])->updateInPopover($this->getListComponentName()),
                     Slug::make('Slug'),
                     LineBreak::make(),
                     ActionButton::make('More information')
