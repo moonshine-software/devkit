@@ -12,6 +12,7 @@ use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\MenuManager\Attributes\Badge;
 use MoonShine\MenuManager\Attributes\Group;
 use MoonShine\MenuManager\Attributes\Order;
+use MoonShine\Support\Enums\PageType;
 
 /**
  * @extends ModelResource<Post, PostIndexPage, PostDetailPage, PostFormPage>
@@ -28,6 +29,9 @@ class PostResource extends ModelResource
     protected string $column = 'name';
 
     protected string $queryParamPrefix = 'p_';
+    protected bool $saveQueryState = true;
+
+    protected ?PageType $redirectAfterSave = PageType::INDEX;
 
     protected array $with = [
         'user',

@@ -11,7 +11,6 @@
     "require": {
         "php": "^8.3",
         "laravel/framework": "^13.0",
-        "laravel/tinker": "^2.",
         "lee-to/moonshine-tree-resource": "^4.0",
         "moonshine/advanced": "1.*.*-dev",
         "moonshine/apexcharts": "3.*.*-dev",
