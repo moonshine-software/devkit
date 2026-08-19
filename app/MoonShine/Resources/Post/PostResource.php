@@ -26,12 +26,15 @@ class PostResource extends ModelResource
 
     protected string $title = 'Posts';
 
-    protected string $column = 'name';
+    protected string $column = 'enum_string';
 
     protected string $queryParamPrefix = 'p_';
+
     protected bool $saveQueryState = true;
 
     protected ?PageType $redirectAfterSave = PageType::INDEX;
+
+    protected string $sortColumn = 'enum_string';
 
     protected array $with = [
         'user',

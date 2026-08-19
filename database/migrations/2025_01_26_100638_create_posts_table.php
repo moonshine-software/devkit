@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\ColorEnum;
+use App\Enums\PostEnum;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -29,6 +31,8 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('slug');
+            $table->string('enum_string')->default(PostEnum::BLUE);
+            $table->tinyInteger('enum_int')->default(ColorEnum::BLUE);
             $table->text('text');
             $table->json('data')->nullable();
             $table->json('enums')->nullable();
