@@ -15,7 +15,7 @@ use MoonShine\MenuManager\Attributes\Order;
 use MoonShine\Support\Enums\PageType;
 
 /**
- * @extends ModelResource<Post, PostIndexPage, PostDetailPage, PostFormPage>
+ * @extends ModelResource<Post, PostIndexPage, PostFormPage, PostDetailPage>
  */
 #[Group('Posts')]
 #[Order(15)]

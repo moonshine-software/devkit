@@ -25,6 +25,7 @@ use MoonShine\Core\Exceptions\ResourceException;
 use MoonShine\Crud\Attributes\DestroyHandler;
 use MoonShine\Crud\Attributes\MassDestroyHandler;
 use MoonShine\Crud\Attributes\SaveHandler;
+use MoonShine\Crud\Contracts\HasQueryTagsContract;
 use MoonShine\Crud\QueryTags\QueryTag;
 use MoonShine\Crud\Resources\CrudResource;
 use MoonShine\Laravel\Collections\Fields;
@@ -92,9 +93,11 @@ abstract class AbstractRestResource extends CrudResource
     {
         $data = $this->getCore()->getRequest()->getAll()->toArray();
 
-        if ($this->hasQueryTags()) {
+        $page = $this->getIndexPage();
+
+        if ($page instanceof HasQueryTagsContract && $page->hasQueryTags()) {
             /** @var ?QueryTag $tag */
-            $tag = Collection::make($this->getQueryTags())
+            $tag = Collection::make($page->getQueryTags())
                 ->first(
                     static fn (QueryTag $tag): bool => $tag->isActive(),
                 );

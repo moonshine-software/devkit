@@ -274,8 +274,7 @@ class JsonPage extends Page
                 ->fields([
                     Text::make('Title'),
                     Text::make('Value'),
-                ])
-                ->emptyMessage('No demo rows'),
+                ]),
         ]);
     }
 
@@ -318,21 +317,21 @@ class JsonPage extends Page
                     Text::make('Title'),
                     Text::make('Value'),
                 ])
-                ->creatable(limit: 2, showButtonText: false),
+                ->creatable(limit: 2),
 
             Json::make('Text only', 'text_only')
                 ->fields([
                     Text::make('Title'),
                     Text::make('Value'),
                 ])
-                ->creatable(showButtonIcon: false),
+                ->creatable(),
 
             Json::make('Hidden add button', 'hidden_add_button')
                 ->fields([
                     Text::make('Title'),
                     Text::make('Value'),
                 ])
-                ->creatable(hideButton: true),
+                ->creatable(),
         ]);
     }
 
@@ -348,8 +347,7 @@ class JsonPage extends Page
                     ]),
                     Number::make('Stock')->nullable(),
                     Switcher::make('Active'),
-                ])
-                ->table(),
+                ]),
         ]);
     }
 
@@ -386,17 +384,14 @@ class JsonPage extends Page
                             Number::make('Retail price'),
                             Switcher::make('Tax included'),
                         ])
-                        ->object()
-                        ->table(),
+                        ->object(),
 
                     Json::make('Links')
                         ->fields([
                             Text::make('Label'),
                             Text::make('Url'),
-                        ])
-                        ->table(),
-                ])
-                ->table(),
+                        ]),
+                ]),
         ]);
     }
 

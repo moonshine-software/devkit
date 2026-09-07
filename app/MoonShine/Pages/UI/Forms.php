@@ -20,18 +20,21 @@ use MoonShine\Laravel\Pages\Page;
 use MoonShine\MenuManager\Attributes\Group;
 use MoonShine\MenuManager\Attributes\Order;
 use MoonShine\Support\Attributes\AsyncMethod;
+use MoonShine\Support\Enums\Color as ColorEnum;
 use MoonShine\TinyMce\Fields\TinyMce;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Heading;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Layout\Column;
 use MoonShine\UI\Components\Layout\Grid;
+use MoonShine\UI\Components\Snippet;
 use MoonShine\UI\Fields\Checkbox;
 use MoonShine\UI\Fields\Color;
 use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\DateRange;
 use MoonShine\UI\Fields\File;
 use MoonShine\UI\Fields\Number;
+use MoonShine\UI\Fields\Preview;
 use MoonShine\UI\Fields\RangeSlider;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Switcher;
@@ -96,6 +99,12 @@ class Forms extends Page
                             ->errorsAbove(false)
                             ->fields([
                                 Grid::make([
+                                    Column::make([
+                                        Snippet::make('Snippet 1'),
+                                        Snippet::make('Snippet 2', ColorEnum::GREEN),
+                                    ])
+                                        ->columnSpan(6),
+
                                     Column::make([
                                         Checkbox::make('Checkbox', 'checkbox_1'),
                                     ])
