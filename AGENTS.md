@@ -43,6 +43,14 @@
 - For local integration testing of an external package, use a Composer path repository with mirroring (`symlink: false`). Pest Arch resolves real paths and otherwise scans symlinked packages outside `vendor` as MoonShine source, causing unrelated architecture failures.
 - Testbench can retain published `App\MoonShine` forms in `moonshine/app` and references in `moonshine/vendor/orchestra/testbench-core/laravel/config/moonshine.php`. A stack trace through those files tests the published copy; refresh it from current source or use a fresh Testbench installation before attributing failures to the package.
 
+## Blade Views And Performance
+
+- Rule from the maintainer: no PHP logic in Blade. Compute values on the backend in `viewData()` or `prepareViewData()`; views only output prepared variables and use simple `@if`/`@foreach`.
+- `prepareViewData(array $data)` (WithViewRenderer, PR #2085) is for values derived from the final attributes. Blade component tags call `withAttributes()` after the view is resolved, so the hook runs again from there and must not change the component. Attribute bags computed in `viewData()` lose tag attributes such as `x-show` on `<x-moonshine::icon>`.
+- When a class view stops nesting a Blade component, reproduce its attributes exactly: drop the `@props` names of both views from the bag, escape `:attr` values with `BladeCompiler::sanitizeComponentAttribute()`, and keep the attribute order. Verify by comparing rendered HTML before/after with whitespace and generated ids normalized.
+- Benchmark MoonShine changes in-process with interleaved A/B rounds against a baseline worktree; single runs vary by 10–20% on this machine. Raw HTML size is misleading: the 737 KB Posts table response is 22 KB gzipped, and evaluating TomSelect/Sortable/tippy takes under 1 ms (checked 2026-10-26).
+- Another session may run Pest against `moonshine_tests` at the same time. Worktrees for separate checks can use their own database (for example `moonshine_tests_perf`) in the ignored `phpunit.xml.dist`.
+
 ## Updating Assets
 
 After changing MoonShine UI assets, publish fresh assets into the devkit app.
