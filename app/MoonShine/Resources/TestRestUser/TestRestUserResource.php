@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\TestRestUser;
 
-
 use App\MoonShine\Resources\TestRestUser\Pages\TestRestUserDetailPage;
 use App\MoonShine\Resources\TestRestUser\Pages\TestRestUserFormPage;
 use App\MoonShine\Resources\TestRestUser\Pages\TestRestUserIndexPage;
 use App\MoonShine\RestApi\AbstractRestResource;
 use Closure;
+use Illuminate\Container\Attributes\Config;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
+use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
 use MoonShine\MenuManager\Attributes\Group;
 
 /**
@@ -24,6 +25,13 @@ final class TestRestUserResource extends AbstractRestResource
 
     protected string $column = 'name';
 
+    public function __construct(
+        CoreContract $core,
+        #[Config('services.rest_users.url')] private readonly string $apiUrl,
+    ) {
+        parent::__construct($core);
+    }
+
     protected function pages(): array
     {
         return [
@@ -35,17 +43,17 @@ final class TestRestUserResource extends AbstractRestResource
 
     public function baseUrl(): string
     {
-        return 'http://127.0.0.1:8001/api';
+        return $this->apiUrl;
     }
 
     public function listEndpoint(): Closure
     {
-        return static fn(array $query): string => '/users' . ($query !== [] ? '?' .http_build_query($query) : '');
+        return static fn (array $query): string => '/users'.($query !== [] ? '?'.http_build_query($query) : '');
     }
 
     public function itemEndpoint(): Closure
     {
-        return static fn(int|string|null $key, array $query): string => "/users/$key";
+        return static fn (int|string|null $key, array $query): string => "/users/$key";
     }
 
     protected function modifyHttpClient(): Factory|PendingRequest

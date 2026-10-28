@@ -87,7 +87,7 @@ test('HasMany opens the child creation form in a modal', async ({page}) => {
     await page.goto('/admin/resource/post-resource/post-form-page/1')
     const [response] = await Promise.all([
         page.waitForResponse(response => response.url().includes('/has-many/form/')),
-        page.locator('main a[href*="/has-many/form/"]').click(),
+        page.locator('main a[href*="/has-many/form/"]:not([href*="_key="])').click(),
     ])
     expect(response.status()).toBe(200)
     const modal = page.locator('.modal:visible')

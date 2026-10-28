@@ -2,6 +2,7 @@ import {defineConfig, devices} from '@playwright/test'
 import path from 'node:path'
 
 const port = process.env.E2E_PORT ?? '8099'
+const restPort = process.env.E2E_REST_PORT ?? String(Number(port) + 1)
 
 // The suite runs its own server against a separate SQLite database rebuilt before every run,
 // so the development database is never touched.
@@ -17,6 +18,7 @@ export default defineConfig({
     reporter: [['list'], ['html', {open: 'never'}]],
     use: {
         baseURL: `http://127.0.0.1:${port}`,
+        timezoneId: 'UTC',
         trace: 'retain-on-failure',
         screenshot: 'only-on-failure',
     },
@@ -28,7 +30,12 @@ export default defineConfig({
             dependencies: ['setup'],
         },
     ],
-    webServer: {
+    webServer: [{
+        command: 'node e2e/rest-api.mjs',
+        url: `http://127.0.0.1:${restPort}/health`,
+        env: {E2E_REST_PORT: restPort},
+        reuseExistingServer: false,
+    }, {
         // Playwright starts the server before globalSetup, so the database is prepared here.
         // --no-reload passes DB_DATABASE through to the PHP server and enables several workers.
         command: [
@@ -41,8 +48,9 @@ export default defineConfig({
             `php artisan serve --host=127.0.0.1 --port=${port} --no-reload`,
         ].join(' && '),
         url: `http://127.0.0.1:${port}/admin/login`,
-        env: {DB_CONNECTION: 'sqlite', DB_DATABASE: database, PHP_CLI_SERVER_WORKERS: '4'},
+        env: {DB_CONNECTION: 'sqlite', DB_DATABASE: database, PHP_CLI_SERVER_WORKERS: '4', APP_TIMEZONE: 'UTC',
+            DEBUGBAR_ENABLED: 'false', REST_USERS_API_URL: `http://127.0.0.1:${restPort}/api`},
         reuseExistingServer: false,
         timeout: 180_000,
-    },
+    }],
 })

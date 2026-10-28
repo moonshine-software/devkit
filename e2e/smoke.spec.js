@@ -1,8 +1,5 @@
 import {expect, test} from './fixtures.js'
 
-// Needs the separate REST API backend on 127.0.0.1:8001.
-const skipped = ['test-rest-user-resource']
-
 test('menu pages render', async ({page}) => {
     // Visits every menu page in one test.
     test.setTimeout(120_000)
@@ -11,15 +8,15 @@ test('menu pages render', async ({page}) => {
 
     const urls = [...new Set(await page.$$eval('a[href]', links => links.map(link => link.href)))]
         .filter(url => /\/admin\/(resource\/[^/]+\/[^/?]+-index-page|page\/[^/?#]+)$/.test(url))
-        .filter(url => !skipped.some(name => url.includes(name)))
 
     expect(urls.length).toBeGreaterThan(10)
 
     for (const url of urls) {
         await test.step(url, async () => {
-            const response = await page.goto(url, {waitUntil: 'load'})
+            const response = await page.goto(url, {waitUntil: 'domcontentloaded'})
 
             expect(response?.status(), url).toBe(200)
+            await expect(page.locator('main h1').first()).toBeVisible()
         })
     }
 })
