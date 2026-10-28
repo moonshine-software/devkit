@@ -57,3 +57,30 @@ test('component structure contains states, not prepared view data', async ({page
         expect(body, key).not.toContain(`"${key}":`)
     }
 })
+
+for (const variant of ['native', 'button']) {
+    test(`custom ${variant} link labels preserve escaping and explicit slots`, async ({page}) => {
+        await page.goto('/admin/page/components', {waitUntil: 'domcontentloaded'})
+
+        const escaped = page.locator(`[data-e2e="custom-link-${variant}-escaped"]`)
+        await expect(escaped).toBeVisible()
+        await expect(escaped).toHaveText('<b>New & label</b>')
+        await expect(escaped.locator('b')).toHaveCount(0)
+
+        const trusted = page.locator(`[data-e2e="custom-link-${variant}-trusted"]`)
+        await expect(trusted).toHaveText('New & label')
+        await expect(trusted.locator('b')).toHaveText('New & label')
+
+        const prepared = page.locator(`[data-e2e="custom-link-${variant}-prepared"]`)
+        await expect(prepared).toHaveText('Prepared & label')
+        await expect(prepared.locator('em')).toHaveText('Prepared & label')
+
+        const slot = page.locator(`[data-e2e="custom-link-${variant}-slot"]`)
+        await expect(slot).toHaveText('Explicit & slot')
+        await expect(slot.locator('strong')).toHaveText('Explicit & slot')
+
+        const blade = page.locator('[data-e2e="custom-link-blade-slot"]')
+        await expect(blade).toHaveText('Blade & slot')
+        await expect(blade.locator('strong')).toHaveText('Blade & slot')
+    })
+}
