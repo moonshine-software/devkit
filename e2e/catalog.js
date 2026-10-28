@@ -7,6 +7,7 @@ export const resources = [
     ['environment', 'name'], ['image', 'url'], ['mechanic', 'name'],
     ['moon-shine-user-role', 'name', false], ['moon-shine-user', 'name', false],
     ['owner', 'name'], ['poly-comment', 'text'], ['post', 'name'], ['project', 'name'],
+    ['refresh-after-apply', 'name'],
     ['shop', 'name'], ['tag', 'name'], ['test-rest-user', 'name'], ['user', 'name'],
 ].map(([key, field, detail = true]) => ({key, field, detail}))
 

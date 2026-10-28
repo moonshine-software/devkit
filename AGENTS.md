@@ -20,7 +20,7 @@
 - `./moonshine` and its worktrees are the main monorepo when origin is `moonshine-software/moonshine`; the presence of `src/UI/README.md` with a split-repository notice does not make this checkout a split. The manual commit/push restriction below applies to the separate package repositories, not the main monorepo.
 - The split repositories are read-only for manual development: only explicitly requested branch creation is allowed; never make manual commits or pushes there. Code reaches them through the main repository's split workflow.
 - The release workflow expects the subtree commit to already exist in each split repository.
-- The tests, mutation, PHPStan, and JS-test workflows currently skip same-repository PRs and scheduled runs through their job-level `if`. A skipped check is not a successful validation; run checks locally or correct the workflow condition before relying on PR CI.
+- The tests, PHPStan, and JS-test workflows currently skip same-repository PRs and scheduled runs through their job-level `if`. A skipped check is not a successful validation; run checks locally or correct the workflow condition before relying on PR CI. The mutation workflow runs for all declared events; run it locally with `composer test:mutation` from `./moonshine` using PCOV or Xdebug coverage.
 - After advancing main `5.x` from `4.x`, synchronize open 5.x PR branches too and verify GitHub mergeability. Dependency/Rector PRs may conflict with upstream enum handling and npm updates; preserve both source changes and rebuild distributed assets instead of resolving minified bundles by hand.
 
 ## PHP Tests
