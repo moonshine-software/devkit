@@ -139,6 +139,13 @@ Use Playwright MCP for live checks:
 - To test a worktree branch, use a devkit copy whose `moonshine` symlink points at the worktree (git cannot check out a branch already used by a worktree), copy `playwright.config.js`, `e2e/`, the seeder and the published `lang/` directory, symlink `node_modules`, and publish assets in the copy. `moonshine/ru` replaces the `moonshine` translation namespace, so without the app’s published English translations the UI displays raw keys and text-based E2E locators fail.
 - If Post detail/form pages return 500 about missing `category_post` columns, the local database predates an edited migration; run `php artisan migrate:fresh --seed`.
 
+## Octane Long-Running Test
+
+- `composer test:octane` runs `tests/Feature/OctaneMemoryTest.php` (PHPUnit group `octane`): Octane's `FakeWorker` serves admin pages through the real worker loop (sandbox clone per request, Octane listeners, `RequestHandled`) against its own `database/octane-memory.sqlite`. It fails when memory grows by more than `OCTANE_MEMORY_LIMIT_KB` (512) over `OCTANE_MEMORY_ROUNDS` (40) rounds after warm-up, and when sort state or the admin session leaks into the next request. An injected 4 KB-per-request static leak failed it with +2.5 MB.
+- Run it with OPcache (`-d opcache.enable_cli=1`, done by the Composer script). Without OPcache, PHP recompiles included Blade views and memory grows linearly by ~2 KB per request on 5.x as well; with OPcache it stays within a few KB over 480 requests. The memory test skips itself without OPcache.
+- The test sets `LARAVEL_OCTANE=1` like a real Octane server: Laravel's exception-renderer query listener only resets per request when it is present.
+- To run it against a devkit copy, copy `tests/` and `phpunit.xml`, refresh the copy's `bootstrap/cache/packages.php` (otherwise the `octane` binding is missing) and pass `--bootstrap autoload.php`.
+
 ## Known Gotchas
 
 - Documentation deployment in `moonshine-software/doc` uses repository Actions Variables `DEPLOY_PATH` (directory containing artisan) and `PHP_BINARY`; both 4.x and 5.x workflows trigger on pushes to either version and pass `github.ref_name` to `documentation:download --ver`. Keep one shared `documentation-deploy` concurrency group across branches with `cancel-in-progress: false`: the server command calls `cache:clear`, and simultaneous version deployments fail with FilesystemIterator missing-directory errors.

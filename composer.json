@@ -25,6 +25,7 @@
         "barryvdh/laravel-debugbar": "^4",
         "dev-lnk/moonshine-builder": "^3.1",
         "fakerphp/faker": "^1.23",
+        "laravel/octane": "^2.22",
         "laravel/pail": "^1.1",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
@@ -63,6 +64,10 @@
         "dev": [
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
+        ],
+        "test:octane": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php -d opcache.enable_cli=1 vendor/bin/phpunit --group=octane"
         ]
     },
     "extra": {
