@@ -137,15 +137,6 @@ test('post pivot field persists after saving the form', async ({page}) => {
             && response.request().method() === 'POST'),
         page.getByRole('button', {name: 'Save', exact: true}).click(),
     ])
-    if (response.status() === 500) {
-        // Reject unrelated server errors before marking this known failure.
-        expect(await response.text()).toContain('pivot_field')
-    } else {
-        expect(response.status()).toBe(200)
-    }
-
-    // The checked-in migration and Post::categories()->withPivot() omit this form field.
-    test.fail(true, 'Known devkit mismatch: category_post.pivot_field is absent from the migration and relation')
     expect(response.status()).toBe(200)
     await page.goto(url)
     await expect(pivot).toHaveValue('E2E pivot roundtrip')

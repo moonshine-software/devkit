@@ -38,7 +38,7 @@ test('resource detail and form pages render', async ({page}) => {
 
 test('modal and off-canvas open', async ({page}) => {
     for (const name of ['Modal', 'OffCanvas']) {
-        await page.goto('/admin/page/theme-generator-page')
+        await page.goto('/admin/page/theme-generator-page', {waitUntil: 'domcontentloaded'})
         await page.getByRole('link', {name, exact: true}).or(page.getByRole('button', {name, exact: true})).first().click()
 
         const overlay = page.locator(':is(.modal, .offcanvas):visible', {hasText: 'Content'}).first()

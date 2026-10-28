@@ -2,6 +2,19 @@ import {expect, test} from './fixtures.js'
 
 const background = locator => locator.evaluate(element => getComputedStyle(element).backgroundColor)
 
+test('custom view iterators survive serialization and rendering', async ({page}) => {
+    await page.goto('/admin/page/components', {waitUntil: 'domcontentloaded'})
+
+    const card = page.locator('[data-e2e="iterator-card"]')
+    await expect(card.locator('th')).toHaveText('<b>Name</b>:')
+    await expect(card.locator('td')).toHaveText('Alice')
+    await expect(card.locator('th b')).toHaveCount(0)
+
+    const footer = page.locator('[data-e2e="iterator-footer"]')
+    await expect(footer.locator('a')).toHaveText('<b>Iterator help</b>')
+    await expect(footer.locator('a b')).toHaveCount(0)
+})
+
 test('icon Blade tag renders its slot', async ({page}) => {
     await page.goto('/admin/page/components')
 

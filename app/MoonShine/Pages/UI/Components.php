@@ -29,6 +29,7 @@ use MoonShine\UI\Components\Layout\Burger;
 use MoonShine\UI\Components\Layout\Column;
 use MoonShine\UI\Components\Layout\Divider;
 use MoonShine\UI\Components\Layout\Flex;
+use MoonShine\UI\Components\Layout\Footer;
 use MoonShine\UI\Components\Layout\Grid;
 use MoonShine\UI\Components\Layout\LineBreak;
 use MoonShine\UI\Components\Layout\ThemeSwitcher;
@@ -136,6 +137,24 @@ class Components extends Page
             LineBreak::make(),
             FlexibleRender::make('FlexibleRender'),
             LineBreak::make(),
+            Box::make('Custom view iterators', [
+                Card::make()->customView('moonshine::components.card', [
+                    'values' => (static function (): \Generator {
+                        yield '<b>Name</b>' => 'Alice';
+                    })(),
+                ])->customAttributes(['data-e2e' => 'iterator-card']),
+                FlexibleRender::make(static function (): string {
+                    $footer = Footer::make()->customView('moonshine::components.layout.footer', [
+                        'menu' => (static function (): \Generator {
+                            yield '/help' => '<b>Iterator help</b>';
+                        })(),
+                    ])->customAttributes(['data-e2e' => 'iterator-footer']);
+
+                    $footer->toArray();
+
+                    return (string) $footer;
+                }),
+            ]),
             Box::make([
                 Card::make(
                     title: fake()->sentence(3),

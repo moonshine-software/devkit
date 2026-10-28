@@ -27,11 +27,20 @@ test('sorting toggles the order of the post rows', async ({page}) => {
     const rows = table.locator(':scope > tbody > tr[data-row-key]')
     await expect(rows.first()).toHaveAttribute('data-row-key', '1')
 
-    await table.getByRole('link', {name: 'ID', exact: true}).click()
+    const sort = async value => {
+        const [response] = await Promise.all([
+            page.waitForResponse(response => response.url().includes('/component/post-index-page/')
+                && new URL(response.url()).searchParams.get('p_sort') === value),
+            table.getByRole('link', {name: 'ID', exact: true}).click(),
+        ])
+        expect(response.status()).toBe(200)
+    }
+
+    await sort('-id')
     await expect(page).toHaveURL(/p_sort=-id/)
     await expect(rows.first()).toHaveAttribute('data-row-key', '50')
 
-    await table.getByRole('link', {name: 'ID', exact: true}).click()
+    await sort('id')
     await expect(page).toHaveURL(/p_sort=id/)
     await expect(rows.first()).toHaveAttribute('data-row-key', '1')
 })
@@ -72,9 +81,10 @@ test('filter reset clears saved query state', async ({page}) => {
         page.locator('.offcanvas:visible').getByRole('link', {name: 'Reset', exact: true}).click(),
     ])
     expect(response.status()).toBe(200)
+    expect(new URL(response.url()).searchParams.get('p_reset')).toBe('1')
+    await expect(rows).toHaveCount(25)
 
-    // Also reproduced on baseline 5.x: Reset omits p_reset and ResourceQuery restores the saved filter.
-    test.fail(true, 'Known 5.x bug: async Reset retains the saved filter when saveQueryState is enabled')
+    await page.goto('/admin/resource/post-resource/post-index-page')
     await expect(rows).toHaveCount(25)
 })
 

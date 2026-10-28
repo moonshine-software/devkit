@@ -56,6 +56,7 @@ class Post extends Model
             'image',
             'data',
             'subtitle',
+            'pivot_field',
         ]);
     }
 
