@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages\UI;
 
+use Illuminate\Support\Facades\Blade;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\MenuManager\Attributes\Group;
@@ -108,6 +109,13 @@ class Components extends Page
                     Icon::make('users'),
                     Rating::make(5),
                     Spinner::make(),
+                    // Blade tags whose slot and props must reach the rendered element (covered by e2e/components.spec.js).
+                    FlexibleRender::make(static fn (): string => Blade::render(
+                        '<x-moonshine::icon icon="" data-e2e="slot-icon"><svg data-e2e="slot-icon-svg" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></x-moonshine::icon>'
+                        . '<x-moonshine::action-button label="Filled tag" url="#" filled data-e2e="filled-tag" />'
+                        . '<x-moonshine::action-button label="Plain tag" url="#" data-e2e="plain-tag" />'
+                    )),
+                    ActionButton::make('Filled attribute', '#')->customAttributes(['filled' => true, 'data-e2e' => 'filled-attribute']),
                 ])->columnSpan(6),
                 Column::make([
                     Link::make('#', 'Link'),
