@@ -11,6 +11,7 @@ export default defineConfig({
     testDir: './e2e',
     fullyParallel: false,
     workers: 1,
+    outputDir: '.playwright-mcp/e2e-results',
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 1 : 0,
     reporter: [['list'], ['html', {open: 'never'}]],
@@ -33,6 +34,8 @@ export default defineConfig({
         command: [
             `touch ${database}`,
             'php artisan config:clear',
+            'php artisan vendor:publish --tag=moonshine-assets --force',
+            'php artisan vendor:publish --provider="Leeto\\MoonShineTree\\Providers\\MoonShineTreeServiceProvider" --force',
             'php artisan migrate:fresh --seed --force',
             'php artisan db:seed --class=E2eSeeder --force',
             `php artisan serve --host=127.0.0.1 --port=${port} --no-reload`,

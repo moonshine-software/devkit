@@ -24,11 +24,15 @@ test('menu pages render', async ({page}) => {
     }
 })
 
-test('post detail and form pages render', async ({page}) => {
-    for (const url of ['/admin/resource/post-resource/post-detail-page/1', '/admin/resource/post-resource/post-form-page/1']) {
-        const response = await page.goto(url)
+test('resource detail and form pages render', async ({page}) => {
+    for (const resource of ['post', 'comment', 'user', 'project']) {
+        for (const type of ['detail', 'form']) {
+            const url = `/admin/resource/${resource}-resource/${resource}-${type}-page/1`
+            const response = await page.goto(url)
 
-        expect(response?.status(), url).toBe(200)
+            expect(response?.status(), url).toBe(200)
+            await expect(page.locator('main h1')).toBeVisible()
+        }
     }
 })
 
@@ -37,14 +41,19 @@ test('modal and off-canvas open', async ({page}) => {
         await page.goto('/admin/page/theme-generator-page')
         await page.getByRole('link', {name, exact: true}).or(page.getByRole('button', {name, exact: true})).first().click()
 
-        await expect(page.locator(':is(.modal, .offcanvas):visible', {hasText: 'Content'}).first()).toBeVisible()
+        const overlay = page.locator(':is(.modal, .offcanvas):visible', {hasText: 'Content'}).first()
+        await expect(overlay).toBeVisible()
+        await page.keyboard.press('Escape')
+        await expect(overlay).toBeHidden()
     }
 })
 
-test('input prefix and suffix render', async ({page}) => {
+test('input decorations and disabled/readonly states render', async ({page}) => {
     await page.goto('/admin/page/forms')
 
     const decorations = await page.locator('.expansion').allTextContents()
 
     expect(decorations.map(text => text.trim())).toEqual(expect.arrayContaining(['USD', '$']))
+    await expect(page.locator('form[data-component="disabled"] input[type="text"]').first()).toBeDisabled()
+    await expect(page.locator('form[data-component="readonly"] input[type="text"]').first()).toHaveJSProperty('readOnly', true)
 })
