@@ -28,3 +28,7 @@ yarn-error.log
 .claude
 .guidelines
 .playwright-mcp
+/test-results
+/playwright-report
+/blob-report
+/playwright/.auth
