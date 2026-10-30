@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages\UI;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\HtmlString;
+use Illuminate\View\ComponentSlot;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\MenuManager\Attributes\Group;
@@ -137,6 +139,47 @@ class Components extends Page
             LineBreak::make(),
             FlexibleRender::make('FlexibleRender'),
             LineBreak::make(),
+            Box::make('Custom link labels', [
+                FlexibleRender::make(static function (): string {
+                    $links = [];
+
+                    foreach (['native', 'button'] as $variant) {
+                        $cases = [
+                            'escaped' => ['label' => '<b>New & label</b>'],
+                            'trusted' => ['label' => '<b>New & label</b>'],
+                            'prepared' => ['labelHtml' => new HtmlString('<em>Prepared & label</em>')],
+                            'slot' => [
+                                'label' => 'Discarded label',
+                                'slot' => new ComponentSlot('<strong>Explicit & slot</strong>'),
+                            ],
+                        ];
+
+                        foreach ($cases as $case => $data) {
+                            $link = Link::make(href: '#', label: 'Old label')
+                                ->customView(view: "moonshine::components.link-{$variant}", data: $data)
+                                ->customAttributes(['data-e2e' => "custom-link-{$variant}-{$case}"]);
+
+                            if ($variant === 'button') {
+                                $link->button();
+                            }
+
+                            if ($case === 'trusted') {
+                                $link->unescapeLabel();
+                            }
+
+                            $links[] = (string) $link;
+                        }
+                    }
+
+                    $links[] = Blade::render(
+                        '<x-moonshine::link href="#" label="Discarded label" data-e2e="custom-link-blade-slot">'
+                        . '<strong>Blade &amp; slot</strong>'
+                        . '</x-moonshine::link>',
+                    );
+
+                    return implode('', $links);
+                }),
+            ]),
             Box::make('Custom view iterators', [
                 Card::make()->customView('moonshine::components.card', [
                     'values' => (static function (): \Generator {
