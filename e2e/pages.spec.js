@@ -49,7 +49,7 @@ for (const {key, field, detail} of resources) {
             await expect(page.locator('main')).toContainText(key === 'test-rest-user'
                 ? 'E2E API user 1'
                 : String(inventory().resources[`${key}-resource`].record))
-            await expect(page.locator('main a[href*="-form-page/"]').first()).toBeVisible()
+            await expect(page.locator(`main a[href$="${resourcePage(key, 'form-page')}"]`).first()).toBeVisible()
         })
     }
 }
