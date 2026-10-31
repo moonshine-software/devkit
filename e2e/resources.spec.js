@@ -135,6 +135,8 @@ test('post pivot field persists after saving the form', async ({page}) => {
     const [response] = await Promise.all([
         page.waitForResponse(response => response.url().includes('/post-resource/crud/1')
             && response.request().method() === 'POST'),
+        // Saving redirects to the index page; navigating before that aborts one of the two loads.
+        page.waitForURL(/\/post-index-page/),
         page.getByRole('button', {name: 'Save', exact: true}).click(),
     ])
     expect(response.status()).toBe(200)
