@@ -40,8 +40,10 @@ export default defineConfig({
         // --no-reload passes DB_DATABASE through to the PHP server and enables several workers.
         // `php artisan optimize` caches resource discovery outside the config cache; clear it so
         // a stale local cache cannot hide resources. optimize:clear needs the database cache store.
+        // Resource discovery also reads Composer's classmap, which misses classes added since the last dump.
         command: [
             `touch ${database}`,
+            'composer dump-autoload --quiet',
             'php artisan config:clear',
             'php artisan route:clear',
             'php artisan moonshine:optimize-clear',
