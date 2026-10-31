@@ -88,6 +88,34 @@ test('filter reset clears saved query state', async ({page}) => {
     await expect(rows).toHaveCount(25)
 })
 
+test('a filter applied while the table is loading is not lost', async ({page}) => {
+    await page.goto('/admin/resource/post-resource/post-index-page?p_reset=1')
+    await expect(listTable(page, 'post').locator(':scope > tbody > tr[data-row-key]')).toHaveCount(25)
+
+    // The sort response has to arrive first: it replaces the table root the filter request belongs to.
+    await page.route(/\/component\/post-index-page\//, async route => {
+        const isFiltered = route.request().url().includes('filter')
+        await new Promise(resolve => setTimeout(resolve, isFiltered ? 4000 : 2000))
+        await route.continue()
+    })
+    await listTable(page, 'post').getByRole('link', {name: 'ID', exact: true}).click()
+
+    await page.getByRole('link', {name: /^Filters/}).click()
+    const drawer = page.locator('.offcanvas:visible')
+    const select = drawer.locator('select')
+    const userId = await select.locator('option', {hasText: EDITABLE_USER_EMAIL}).getAttribute('value')
+    await chooseOption(page, select, userId)
+
+    const filtered = page.waitForResponse(response => response.url().includes('/component/post-index-page/')
+        && response.url().includes('filter'))
+    await drawer.getByRole('button', {name: 'Search', exact: true}).click()
+    await filtered
+
+    const rows = listTable(page, 'post').locator(':scope > tbody > tr[data-row-key]')
+    await expect(rows).toHaveCount(1)
+    await expect(rows.first()).toHaveAttribute('data-row-key', '1')
+})
+
 test('popover saves a field, refreshes its row and persists the value', async ({page}) => {
     const openPopover = async () => {
         await page.goto('/admin/resource/post-resource/post-index-page?p_reset=1&p_sort=id')
