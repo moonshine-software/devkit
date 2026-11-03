@@ -126,6 +126,23 @@ test('HasMany async modal edits the existing child and refreshes the correct row
     await expect(page.locator('main')).toContainText('E2E edited child comment')
 })
 
+// Creating through the MorphOne child form validates with a Precognition request (204) and then submits natively:
+// the save answers with a redirect that reloads the page. Navigating before that reload aborts one of the two loads.
+const createAndReload = async (page, form, path) => {
+    const isSave = (response, precognition) => response.url().includes(path)
+        && response.request().method() === 'POST'
+        && (response.request().headers().precognition === 'true') === precognition
+    const [validated, saved] = await Promise.all([
+        page.waitForResponse(response => isSave(response, true)),
+        page.waitForResponse(response => isSave(response, false)),
+        page.waitForResponse(response => response.request().isNavigationRequest()
+            && response.request().redirectedFrom()?.method() === 'POST'),
+        form.getByRole('button', {name: 'Save', exact: true}).click(),
+    ])
+    expect(validated.status()).toBe(204)
+    expect(saved.status()).toBe(302)
+}
+
 test('MorphOne child form creates and updates its image with both parent morph columns', async ({page}) => {
     const url = '/admin/resource/project-resource/project-form-page/1'
     await page.goto(url, {waitUntil: 'domcontentloaded'})
@@ -134,15 +151,12 @@ test('MorphOne child form creates and updates its image with both parent morph c
     await expect(form.locator('input[name="imageable_type"]')).toHaveValue('App\\Models\\Project')
     await expect(form.locator('input[name="imageable_id"]')).toHaveValue('1')
     await form.locator('input[name="url"]').fill(imageUrl)
-    const [created] = await Promise.all([
-        page.waitForResponse(response => response.url().includes('/image-resource/crud') && response.request().method() === 'POST'),
-        form.getByRole('button', {name: 'Save', exact: true}).click(),
-    ])
-    expect(created.status()).toBe(204)
-    await page.goto(url, {waitUntil: 'domcontentloaded'})
+    await createAndReload(page, form, '/image-resource/crud')
+    await expect(page).toHaveURL(new RegExp(`${url}$`))
     await expect(form.locator('input[name="url"]')).toHaveValue(imageUrl)
     const id = await form.locator('input[name="id"]').inputValue()
     await form.locator('input[name="url"]').fill(`${imageUrl}?e2e=updated`)
+    // Updating the existing child is an async request without a redirect.
     await saveResource(page, 'image', id, form)
     await page.goto(`/admin/resource/image-resource/image-form-page/${id}`, {waitUntil: 'domcontentloaded'})
     await expect(page.locator('main input[name="url"]')).toHaveValue(`${imageUrl}?e2e=updated`)
