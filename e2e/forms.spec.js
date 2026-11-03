@@ -94,6 +94,29 @@ test('async validation displays server errors beside the fields', async ({page})
     await expect(form.getByText(body.errors.text_1[0], {exact: true})).toBeVisible()
 })
 
+test('an async form re-enables its submit button when the request fails without a response', async ({page}) => {
+    await page.goto('/admin/page/forms')
+    const form = page.locator('main form[data-component="default"]').first()
+    const submit = form.getByRole('button', {name: 'Click me', exact: true})
+    const isFormMethod = url => url.pathname.includes('/method/forms')
+    // The select is required, so the browser would not submit the form without a value.
+    await chooseOption(page, form.locator('select'), 'value 1')
+
+    await page.route(isFormMethod, route => route.abort('internetdisconnected'))
+    await submit.click()
+    await expect(page.getByText('Unknown Error')).toBeVisible()
+    await expect(submit).toBeEnabled()
+
+    // Once the network is back, the same form submits again.
+    await page.unroute(isFormMethod)
+    const [response] = await Promise.all([
+        page.waitForResponse(response => response.url().includes('/method/forms')
+            && response.request().method() === 'POST'),
+        submit.click(),
+    ])
+    expect(response.status()).toBe(422)
+})
+
 test('stepper switches the visible content', async ({page}) => {
     await page.goto('/admin/page/forms')
     const form = page.locator('main form[data-component="default"]').first()
