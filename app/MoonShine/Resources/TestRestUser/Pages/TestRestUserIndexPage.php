@@ -20,7 +20,11 @@ class TestRestUserIndexPage extends IndexPage
     {
         return [
             ID::make()->sortable(),
-            Preview::make('Avatar', 'avatar_url')->image(),
+            Preview::make(
+                'Avatar',
+                'avatar_url',
+                formatted: static fn ($data) => data_get($data, 'avatar_url') ?: asset('vendor/moonshine/avatar.jpg'),
+            )->image(),
             Text::make('Name'),
             Text::make('Role', formatted: fn($data) => $data->role['name']),
             Text::make('Phone'),

@@ -10,7 +10,7 @@ let users = Array.from({length: 30}, (_, index) => ({
     role_id: index % 3 + 1,
     role: roles[index % 3],
     avatar: null,
-    avatar_url: '',
+    avatar_url: index === 1 ? '/vendor/moonshine/logo-small.svg' : '',
 }))
 
 http.createServer(async (request, response) => {

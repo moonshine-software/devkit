@@ -28,16 +28,19 @@ test('notifications are marked as read through their CSRF protected forms', asyn
     await expect(page.locator('.notifications-item')).toHaveCount(0)
 })
 
-test('a form posted with an invalid CSRF token is rejected', async ({page}) => {
+test('a form without origin metadata rejects an invalid CSRF token', async ({page}) => {
     await notify(page)
     const form = page.locator('.notifications-item').first().locator('form.notifications-remove')
-    await form.locator('input[name="_token"]').evaluate(input => input.value = 'invalid-token')
-
-    const [response] = await Promise.all([
-        page.waitForResponse(response => response.request().method() === 'POST'),
-        form.locator('button').click(),
-    ])
+    const count = await page.locator('.notifications-item').count()
+    // Laravel 13 trusts same-origin browser requests; API requests omit Sec-Fetch-Site and share the session.
+    const response = await page.request.post(await form.getAttribute('action'), {
+        form: {_token: 'invalid-token'},
+        maxRedirects: 0,
+    })
     expect(response.status()).toBe(419)
+    await page.reload()
+    await page.locator('.notifications-trigger').click()
+    await expect(page.locator('.notifications-item')).toHaveCount(count)
 })
 
 test.describe('without a session', () => {

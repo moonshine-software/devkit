@@ -52,7 +52,7 @@ final class Selects extends Page
 
     private function getImage(): string
     {
-        return 'https://devkit.moonshine.test/vendor/moonshine/avatar.jpg';
+        return asset('vendor/moonshine/avatar.jpg');
     }
 
     private function getDefaultOptions(): Options

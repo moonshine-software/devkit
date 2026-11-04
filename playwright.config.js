@@ -12,6 +12,9 @@ export default defineConfig({
     testDir: './e2e',
     fullyParallel: false,
     workers: 1,
+    // Relationship previews in the seeded Posts list can take over five seconds.
+    timeout: 60_000,
+    expect: {timeout: 10_000},
     outputDir: '.playwright-mcp/e2e-results',
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 1 : 0,
