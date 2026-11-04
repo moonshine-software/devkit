@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\Deployment;
+use App\Models\Environment;
 use App\Models\Mechanic;
 use App\Models\PolyComment;
 use App\Models\Post;
@@ -50,12 +52,15 @@ class E2eSeeder extends Seeder
 
         $post->categories()->attach($attached);
 
-        $post->comments()->create([
-            'user_id' => $user->getKey(),
-            'text' => 'E2E child comment',
-            'imageable_type' => Post::class,
-            'imageable_id' => $post->getKey(),
-        ]);
+        // Two children, so sorting the relation table changes its order.
+        foreach (['E2E child comment', 'E2E second child comment'] as $text) {
+            $post->comments()->create([
+                'user_id' => $user->getKey(),
+                'text' => $text,
+                'imageable_type' => Post::class,
+                'imageable_id' => $post->getKey(),
+            ]);
+        }
         $post->image()->create(['url' => '/vendor/moonshine/avatar.jpg']);
         PolyComment::query()->firstOrFail()->update([
             'text' => 'E2E morph comment',
@@ -76,7 +81,14 @@ class E2eSeeder extends Seeder
             'mechanic_id' => 1,
         ]);
 
-        Project::query()->orderBy('id')->firstOrFail()->update(['name' => 'E2E project']);
+        $project = Project::query()->orderBy('id')->firstOrFail();
+        $project->update(['name' => 'E2E project']);
+
+        // Environments and deployments are spread randomly; give the project two deployments to sort.
+        $environment = Environment::query()->create(['name' => 'E2E environment', 'project_id' => $project->getKey()]);
+        foreach (['E2E first deployment', 'E2E second deployment'] as $name) {
+            Deployment::query()->create(['name' => $name, 'environment_id' => $environment->getKey()]);
+        }
         Tag::query()->create(['name' => 'E2E relation tag']);
 
         $resources = moonshine()->getResources()->mapWithKeys(function ($resource): array {
