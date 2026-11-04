@@ -15,6 +15,7 @@ use MoonShine\Advanced\Fields\ButtonGroup;
 use MoonShine\Advanced\Fields\CheckboxList;
 use MoonShine\Advanced\Fields\RadioGroup;
 use MoonShine\Contracts\Core\DependencyInjection\CrudRequestContract;
+use MoonShine\Contracts\Core\DependencyInjection\FieldsContract;
 use MoonShine\EasyMde\Fields\Markdown;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\MenuManager\Attributes\Group;
@@ -348,6 +349,41 @@ class Forms extends Page
                                     ->readonly(),
                                 DateRange::make('DateRang')
                                     ->readonly(),
+                            ])
+                            ->hideSubmit(),
+                    ]),
+                ])
+                    ->columnSpan(4),
+
+                Column::make([
+                    Box::make('Reactive', [
+                        FormBuilder::make()
+                            ->name('reactive')
+                            ->fields([
+                                Number::make('Price', 'price')->reactive(),
+                                Number::make('Quantity', 'quantity')->reactive(),
+                                // Computed on the server from the other reactive values
+                                Number::make('Total', 'total')
+                                    ->reactive(static fn (FieldsContract $fields, mixed $value, Number $ctx, array $values): FieldsContract => tap(
+                                        $fields,
+                                        static fn () => $ctx->setValue((int) ($values['price'] ?? 0) * (int) ($values['quantity'] ?? 0)),
+                                    ))
+                                    ->readonly(),
+                                Select::make('Country', 'country')
+                                    ->options(['france' => 'France', 'italy' => 'Italy'])
+                                    ->nullable()
+                                    ->reactive(),
+                                // The options are rebuilt on the server for the chosen country
+                                Select::make('City', 'city')
+                                    ->nullable()
+                                    ->reactive(static fn (FieldsContract $fields, mixed $value, Select $ctx, array $values): FieldsContract => tap(
+                                        $fields,
+                                        static fn () => $ctx->options(match ($values['country'] ?? null) {
+                                            'france' => ['paris' => 'Paris', 'lyon' => 'Lyon'],
+                                            'italy' => ['rome' => 'Rome', 'milan' => 'Milan'],
+                                            default => [],
+                                        }),
+                                    )),
                             ])
                             ->hideSubmit(),
                     ]),
