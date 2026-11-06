@@ -33,7 +33,7 @@ class PolyCommentFormPage extends FormPage
                 ->types([
                     Post::class => 'name',
                     Project::class => 'name',
-                ]),
+                ])->required(),
             BelongsTo::make('User'),
             Textarea::make('Text'),
             BelongsToMany::make('Tags', 'tags')->selectMode()->asyncSearch()

@@ -1,4 +1,4 @@
-import {chooseOption, expect, selectControl, test} from './fixtures.js'
+import {chooseOption, expect, selectCombobox, selectControl, test} from './fixtures.js'
 
 const saveResource = async (page, resource, id, form = page.locator(`main form[data-component="${resource}-resource"]`).first(), status = 200) => {
     const [response] = await Promise.all([
@@ -12,16 +12,43 @@ test('MorphTo switches its async search type, clears the old key and persists th
     const url = '/admin/resource/poly-comment-resource/poly-comment-form-page/1'
     const type = page.locator('main select[name="commentable_type"]')
     const target = page.locator('main select[name="commentable_id"]')
-    const selectTarget = async (model, label) => {
-        await chooseOption(page, type, `App\\Models\\${model}`)
+    const optionsResponse = model => page.waitForResponse(response => {
+        const url = new URL(response.url())
+        return url.pathname.includes('/async-search/')
+            && url.searchParams.get('_relation') === 'commentable'
+            && url.searchParams.get('commentable_type') === `App\\Models\\${model}`
+    })
+    const selectTarget = async (model, label, previousLabel) => {
+        const [response] = await Promise.all([
+            optionsResponse(model),
+            chooseOption(page, type, `App\\Models\\${model}`),
+        ])
+        expect(response.status()).toBe(200)
         await expect(target).toHaveValue('')
+        await expect(selectControl(target).locator('.item')).toHaveCount(0)
+        await selectControl(target).click()
+        await expect(dropdown.locator('.option[data-value="1"]')).toContainText(label)
+        await expect(dropdown).not.toContainText(previousLabel)
         await chooseOption(page, target, '1')
         await expect(selectControl(target)).toContainText(label)
     }
     await page.goto(url, {waitUntil: 'domcontentloaded'})
     await expect(type).toHaveValue('App\\Models\\Post')
+    await expect(selectCombobox(target)).toBeAttached()
+    const dropdown = page.locator(`[id=${JSON.stringify(await selectCombobox(target).getAttribute('aria-controls'))}]`)
     try {
-        await selectTarget('Project', 'E2E project')
+        const [response] = await Promise.all([
+            optionsResponse('Post'),
+            selectControl(target).click(),
+        ])
+        expect(response.status()).toBe(200)
+        await expect(dropdown).toContainText('First post')
+        await expect(dropdown).not.toContainText('E2E project')
+        const postOption = dropdown.locator('.option[data-value="2"]')
+        const postLabel = (await postOption.innerText()).trim()
+        await postOption.click()
+        await expect(target).toHaveValue('2')
+        await selectTarget('Project', 'E2E project', postLabel)
         await saveResource(page, 'poly-comment', 1)
         await page.goto(url, {waitUntil: 'domcontentloaded'})
         await expect(type).toHaveValue('App\\Models\\Project')
@@ -29,9 +56,34 @@ test('MorphTo switches its async search type, clears the old key and persists th
         await expect(selectControl(target)).toContainText('E2E project')
     } finally {
         await page.goto(url, {waitUntil: 'domcontentloaded'})
-        await selectTarget('Post', 'First post')
+        if (await type.inputValue() !== 'App\\Models\\Post') {
+            await selectTarget('Post', 'First post', 'E2E project')
+        }
         await saveResource(page, 'poly-comment', 1)
     }
+})
+
+test('required MorphTo blocks saving an existing item after changing type without selecting a target', async ({page}) => {
+    const url = '/admin/resource/poly-comment-resource/poly-comment-form-page/1'
+    await page.goto(url, {waitUntil: 'domcontentloaded'})
+    const type = page.locator('main select[name="commentable_type"]')
+    const target = page.locator('main select[name="commentable_id"]')
+    const form = target.locator('xpath=ancestor::form')
+    await expect(target).toHaveValue('1')
+    await chooseOption(page, type, 'App\\Models\\Project')
+    await expect(target).toHaveValue('')
+    const saves = []
+    page.on('request', request => {
+        if (request.method() === 'POST' && request.url().includes('/poly-comment-resource/crud/1')) {
+            saves.push(request.url())
+        }
+    })
+    await form.getByRole('button', {name: 'Save', exact: true}).click()
+    await expect.poll(() => target.evaluate(el => el.validity.valueMissing)).toBe(true)
+    expect(saves).toEqual([])
+    await page.goto(url, {waitUntil: 'domcontentloaded'})
+    await expect(type).toHaveValue('App\\Models\\Post')
+    await expect(target).toHaveValue('1')
 })
 
 test('async multi relation select can attach and detach a tag after reload', async ({page}) => {
