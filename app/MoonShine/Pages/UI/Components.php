@@ -7,11 +7,17 @@ namespace App\MoonShine\Pages\UI;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\HtmlString;
 use Illuminate\View\ComponentSlot;
+use MoonShine\Contracts\Core\DependencyInjection\CrudRequestContract;
 use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Crud\Components\Fragment;
+use MoonShine\Crud\JsonResponse;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\MenuManager\Attributes\Group;
 use MoonShine\MenuManager\Attributes\Order;
+use MoonShine\Support\AlpineJs;
+use MoonShine\Support\Attributes\AsyncMethod;
 use MoonShine\Support\Enums\Color as ColorEnum;
+use MoonShine\Support\Enums\JsEvent;
 use MoonShine\UI\Components\ActionButton;
 use MoonShine\UI\Components\Alert;
 use MoonShine\UI\Components\Badge;
@@ -24,6 +30,7 @@ use MoonShine\UI\Components\Color;
 use MoonShine\UI\Components\Dropdown;
 use MoonShine\UI\Components\Files;
 use MoonShine\UI\Components\FlexibleRender;
+use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Heading;
 use MoonShine\UI\Components\Icon;
 use MoonShine\UI\Components\Layout\Box;
@@ -46,11 +53,55 @@ use MoonShine\UI\Components\Spinner;
 use MoonShine\UI\Components\Tabs;
 use MoonShine\UI\Components\Thumbnails;
 use MoonShine\UI\Components\Title;
+use MoonShine\UI\Enums\HtmlMode;
+use MoonShine\UI\Fields\Text;
 
 #[Group('UI')]
 #[Order(3)]
 class Components extends Page
 {
+    private const string FRAGMENT = 'loading-example';
+
+    #[AsyncMethod]
+    public function refreshExampleFragment(): JsonResponse
+    {
+        return JsonResponse::make()->events([
+            AlpineJs::event(JsEvent::FRAGMENT_UPDATED, self::FRAGMENT),
+        ]);
+    }
+
+    #[AsyncMethod]
+    public function replaceExampleFragment(): JsonResponse
+    {
+        return JsonResponse::make()->htmlData(
+            (string) $this->exampleFragment('Replaced fragment'),
+            '#' . self::FRAGMENT,
+            HtmlMode::OUTER_HTML,
+        );
+    }
+
+    #[AsyncMethod]
+    public function submitExampleFragment(CrudRequestContract $request): JsonResponse
+    {
+        validator($request->all(), ['message' => ['required', 'string']])->validate();
+
+        return JsonResponse::make()->htmlData('Submitted fragment', '#' . self::FRAGMENT);
+    }
+
+    private function exampleFragment(string $content): Fragment
+    {
+        return Fragment::make([
+            FlexibleRender::make($content),
+            ActionButton::make('Fragment action', '#')->onClick(
+                static fn (): string => '$el.textContent = "Activated"',
+                'prevent',
+            ),
+        ])->name(self::FRAGMENT)
+            ->nowOn($this)
+            ->customAttributes(['id' => self::FRAGMENT])
+            ->withLoader();
+    }
+
     /**
      * @return array<string, string>
      */
@@ -72,6 +123,26 @@ class Components extends Page
     protected function components(): iterable
 	{
 		return [
+            Box::make('Fragment loading', [
+                ActionButton::make('Refresh fragment')->dispatchEvent(
+                    AlpineJs::event(JsEvent::FRAGMENT_UPDATED, self::FRAGMENT),
+                ),
+                ActionButton::make('Replace fragment')
+                    ->method('replaceExampleFragment')
+                    ->withFragmentLoader(self::FRAGMENT),
+                ActionButton::make('Refresh fragment via request')
+                    ->method('refreshExampleFragment')
+                    ->withFragmentLoader(self::FRAGMENT),
+                FormBuilder::make()
+                    ->fields([Text::make('Message', 'message')])
+                    ->submit('Submit fragment')
+                    ->asyncMethod('submitExampleFragment')
+                    ->withFragmentLoader(self::FRAGMENT),
+                $this->exampleFragment(request()->query('_fragment-load') === self::FRAGMENT
+                    ? 'Refreshed fragment'
+                    : 'Original fragment')
+                    ->updateOnLoad(static fn (): bool => request()->boolean('load-fragment')),
+            ]),
             ActionButton::make('ActionButton')->icon('users'),
             ActionButton::make('ActionButton')->success()->icon('users'),
             ActionButton::make('ActionButton')->info()->icon('users'),
